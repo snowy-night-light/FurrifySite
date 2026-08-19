@@ -1,0 +1,37 @@
+@let size = this.size();
+@let color = this.color();
+
+<label class="input" [ngClass]="{
+                'input-xs': size === 'xs',
+                'input-sm': size === 'sm',
+                'input-md': size === 'md',
+                'input-lg': size === 'lg',
+                'input-xl': size === 'xl',
+                'input-neutral': color === 'neutral',
+                'input-primary': color === 'primary',
+                'input-secondary': color === 'secondary',
+                'input-accent': color === 'accent',
+                'input-info': color === 'info',
+                'input-success': color === 'success',
+                'input-warning': color === 'warning',
+                'input-error': color === 'error',
+                'input-ghost': color === 'transparent',
+           }">
+    @let iconClass = this.iconClass();
+
+    @if (iconClass && iconClass.length > 0) {
+        <i [classList]="['h-[1em]', 'opacity-50', ...iconClass]"></i>
+    }
+
+    <input [name]="name()" [type]="type()" [placeholder]="placeholder()" [autocomplete]="autocomplete()"
+           [attr.list]="datasetId()" [disabled]="disabled()"/>
+    @let datalist = this.datalist();
+
+    @if (datalist) {
+        <datalist [id]="datasetId()">
+            @for (datasetItem of datalist; track datasetItem) {
+                <option [value]="datasetItem"></option>
+            }
+        </datalist>
+    }
+</label>
