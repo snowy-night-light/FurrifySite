@@ -37,7 +37,7 @@
     "prettier": "^3.8.1",
     "sass": "^1.102.0",
     "tailwindcss": "^4.3.3",
-    "typescript": "~6.0.2",
+    "typescript": "~7.0.2",
     "vitest": "^4.0.8"
   },
   "allowScripts": {
