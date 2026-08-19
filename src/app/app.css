@@ -1,0 +1,11 @@
+.router-container {
+  min-height: calc(100vh - 65px);
+  display: flex;
+  flex-direction: column;
+}
+
+.router-container ::ng-deep > *:not(router-outlet) {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}

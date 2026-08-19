@@ -1,0 +1,9 @@
+@let type = this.type();
+
+<label [ngClass]="{
+    'floating-label': type === 'float',
+    'flex flex-col gap-1': type === 'static',
+}">
+    <span [class.label-text]="type === 'static'">{{ text() }}</span>
+    <ng-content></ng-content>
+</label>

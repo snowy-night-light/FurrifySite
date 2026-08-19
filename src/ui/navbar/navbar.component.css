@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+}
+
+.logo-img {
+  filter: invert(0);
+  transition: filter 0.3s ease-in-out;
+}
+
+@media (prefers-color-scheme: light) {
+  .logo-img {
+    filter: invert(1);
+  }
+}
+
+:host:has(.theme-controller[value="light"]:checked) .logo-img {
+  filter: invert(1);
+}
