@@ -42,7 +42,7 @@ jobs:
           cache: 'npm'
 
       - name: Run Cypress
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
           start: npm start
           wait-on: 'http://localhost:4200'
