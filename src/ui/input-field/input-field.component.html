@@ -1,7 +1,7 @@
 @let size = this.size();
 @let color = this.color();
 
-<label class="input" [ngClass]="{
+<label class="input input-bordered flex items-center gap-2 w-full" [ngClass]="{
                 'input-xs': size === 'xs',
                 'input-sm': size === 'sm',
                 'input-md': size === 'md',
@@ -14,17 +14,18 @@
                 'input-info': color === 'info',
                 'input-success': color === 'success',
                 'input-warning': color === 'warning',
-                'input-error': color === 'error',
                 'input-ghost': color === 'transparent',
+                'input-error': (color === 'error') || invalid(),
            }">
     @let iconClass = this.iconClass();
 
     @if (iconClass && iconClass.length > 0) {
-        <i [classList]="['h-[1em]', 'opacity-50', ...iconClass]"></i>
+        <i [class]="['opacity-50', ...iconClass].join(' ')"></i>
     }
 
-    <input [name]="name()" [type]="type()" [placeholder]="placeholder()" [autocomplete]="autocomplete()"
-           [attr.list]="datasetId()" [disabled]="disabled()"/>
+    <input class="grow" [type]="type()" [placeholder]="placeholder()" [autocomplete]="autocomplete()"
+           [attr.list]="datasetId()" [disabled]="disabled()"
+           [value]="value()" (input)="onInput($event)" (blur)="onBlur()"/>
     @let datalist = this.datalist();
 
     @if (datalist) {
@@ -35,3 +36,8 @@
         </datalist>
     }
 </label>
+
+@let validationFeedback = this.validationFeedback();
+@if (validationFeedback) {
+    <ui-validation-feedback [feedback]="validationFeedback"></ui-validation-feedback>
+}
