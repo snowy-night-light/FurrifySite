@@ -10,19 +10,19 @@
 import { HttpClient, HttpContext, HttpContextToken, HttpEvent, HttpHeaders, HttpParams, HttpResponse } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { BASE_PATH_DEFAULT, CLIENT_CONTEXT_TOKEN_DEFAULT } from "../tokens";
+import { BASE_PATH_STORAGE, CLIENT_CONTEXT_TOKEN_STORAGE } from "../tokens";
 import { HttpParamsBuilder } from "../utils/http-params-builder";
 import { Pageable, RequestOptions, PagedModelArtistDTO, CreateArtistRequest, ArtistDTO, PatchArtistRequest } from "../models";
 
 @Injectable({ providedIn: "root" })
 export class ArtistV1RestControllerService {
     private readonly httpClient: HttpClient = inject(HttpClient);
-    private readonly basePath: string = inject(BASE_PATH_DEFAULT);
-    private readonly clientContextToken: HttpContextToken<string> = CLIENT_CONTEXT_TOKEN_DEFAULT;
+    private readonly basePath: string = inject(BASE_PATH_STORAGE);
+    private readonly clientContextToken: HttpContextToken<string> = CLIENT_CONTEXT_TOKEN_STORAGE;
 
     private createContextWithClientId(existingContext?: HttpContext): HttpContext {
         const context = existingContext || new HttpContext();
-        return context.set(this.clientContextToken, 'default');
+        return context.set(this.clientContextToken, 'Storage');
     }
 
     artistV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelArtistDTO>;

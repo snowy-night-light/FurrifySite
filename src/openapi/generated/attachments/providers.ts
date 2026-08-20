@@ -9,12 +9,12 @@
 */
 import { EnvironmentProviders, Provider, makeEnvironmentProviders } from "@angular/core";
 import { HTTP_INTERCEPTORS, HttpInterceptor } from "@angular/common/http";
-import { BASE_PATH_DEFAULT, HTTP_INTERCEPTORS_DEFAULT } from "./tokens";
-import { DefaultBaseInterceptor } from "./utils/base-interceptor";
+import { BASE_PATH_ATTACHMENTS, HTTP_INTERCEPTORS_ATTACHMENTS } from "./tokens";
+import { AttachmentsBaseInterceptor } from "./utils/base-interceptor";
 import { DateInterceptor } from "./utils/date-transformer";
 
-/** Configuration options for default client */
-export interface DefaultConfig {
+/** Configuration options for Attachments client */
+export interface AttachmentsConfig {
     /** Base API URL */
     basePath: string;
     /** Enable automatic date transformation (default: true) */
@@ -26,16 +26,16 @@ export interface DefaultConfig {
     dateTransformRegex?: RegExp;
 }
 
-/** Provides configuration for default client */
+/** Provides configuration for Attachments client */
 /** */
 /** @example */
 /** ```typescript */
 /** // In your app.config.ts */
-/** import { provideDefaultClient } from './api/providers'; */
+/** import { provideAttachmentsClient } from './api/providers'; */
 /** */
 /** export const appConfig: ApplicationConfig = { */
 /**   providers: [ */
-/**     provideDefaultClient({ */
+/**     provideAttachmentsClient({ */
 /**       basePath: 'https://api.example.com', */
 /**       interceptors: [AuthInterceptor, LoggingInterceptor] // Classes, not instances */
 /**     }), */
@@ -43,18 +43,18 @@ export interface DefaultConfig {
 /**   ] */
 /** }; */
 /** ``` */
-export function provideDefaultClient(config: DefaultConfig): EnvironmentProviders {
+export function provideAttachmentsClient(config: AttachmentsConfig): EnvironmentProviders {
 
     const providers: Provider[] = [
         // Base path token for this client
         {
-            provide: BASE_PATH_DEFAULT,
+            provide: BASE_PATH_ATTACHMENTS,
             useValue: config.basePath
         },
         // Base interceptor that handles client-specific interceptors
         {
             provide: HTTP_INTERCEPTORS,
-            useClass: DefaultBaseInterceptor,
+            useClass: AttachmentsBaseInterceptor,
             multi: true
         }
     ];
@@ -69,28 +69,22 @@ export function provideDefaultClient(config: DefaultConfig): EnvironmentProvider
         }
 
         providers.push({
-            provide: HTTP_INTERCEPTORS_DEFAULT,
+            provide: HTTP_INTERCEPTORS_ATTACHMENTS,
             useValue: interceptorInstances
         });
     } else if (config.enableDateTransform !== false) {
         // Only date interceptor enabled
         providers.push({
-            provide: HTTP_INTERCEPTORS_DEFAULT,
+            provide: HTTP_INTERCEPTORS_ATTACHMENTS,
             useValue: [new DateInterceptor(config.dateTransformRegex)]
         });
     } else {
         // No interceptors
         providers.push({
-            provide: HTTP_INTERCEPTORS_DEFAULT,
+            provide: HTTP_INTERCEPTORS_ATTACHMENTS,
             useValue: []
         });
     }
 
     return makeEnvironmentProviders(providers);
-}
-
-/** @deprecated Use provideDefaultClient instead for better clarity */
-/** Provides configuration for the default client */
-export function provideNgOpenapi(config: DefaultConfig): EnvironmentProviders {
-    return provideDefaultClient(config);
 }

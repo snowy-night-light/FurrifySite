@@ -8,7 +8,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "cypress:open": "npm start & cypress open",
-    "cypress:run": "npm start & cypress run"
+    "cypress:run": "npm start & cypress run",
+    "generate:api:attachments": "ng-openapi -c src/openapi/config/furrify-attachments-openapi.config.ts",
+    "generate:api:storage": "ng-openapi -c src/openapi/config/furrify-storage-openapi.config.ts",
+    "generate:api": "npm run generate:api:attachments && npm run generate:api:storage"
   },
   "private": true,
   "packageManager": "npm@12.0.2",
