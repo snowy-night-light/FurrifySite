@@ -1,35 +1,22 @@
-import { Component, signal } from '@angular/core';
-import {InputFieldComponent} from '../../../ui/input-field/input-field.component';
-import {LabelComponent} from '../../../ui/label.component/label.component';
-import {email, form, FormField, required} from '@angular/forms/signals';
-
-export interface LoginData {
-  email: string;
-  password: string;
-}
+import { Component, inject } from '@angular/core';
+import Keycloak from 'keycloak-js';
+import {NgOptimizedImage} from '@angular/common';
+import {TranslatePipe} from '@ngx-translate/core';
+import {AuthService} from '../../../shared/service/auth.service';
 
 @Component({
   selector: 'app-auth-login',
     imports: [
-        InputFieldComponent,
-        LabelComponent,
-        FormField,
+        NgOptimizedImage,
+        TranslatePipe
     ],
   templateUrl: './auth-login.component.html',
   styleUrl: './auth-login.component.css',
 })
 export class AuthLoginComponent {
+  private readonly authService = inject(AuthService);
 
-  loginModel = signal<LoginData>({ email: '', password: '' });
-
-  loginForm = form(this.loginModel, (schemaPath) => {
-    required(schemaPath.email, {message: 'Email is required'});
-    email(schemaPath.email, {message: 'Enter a valid email address'});
-    required(schemaPath.password, {message: 'Password is required'});
-  });
-
-    onSubmit(event: SubmitEvent) {
-    console.log(this.loginForm().value());
-    event.preventDefault();
+  login() {
+    this.authService.login();
   }
 }

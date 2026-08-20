@@ -1,25 +1,11 @@
 <div class="text-center mb-8">
-  <h2 class="text-3xl font-bold">Sign In</h2>
-  <p class="text-base-content/70 mt-2">Log in to your account to continue</p>
+  <h2 class="text-3xl font-bold">{{ 'auth.login.signIn' | translate }}</h2>
+  <p class="text-base-content/70 mt-2">{{ 'auth.login.loginToContinue' | translate }}</p>
 </div>
 
-<form (submit)="onSubmit($event)" class="space-y-5">
-  <!-- Email Input -->
-  <div class="form-control">
-    <ui-label text="Email Address">
-      <ui-input-field [formField]="loginForm.email" type="email" placeholder="user@example.com" [iconClass]="['bi', 'bi-envelope']"></ui-input-field>
-    </ui-label>
-  </div>
-
-  <!-- Password Input -->
-  <div class="form-control">
-    <ui-label text="Password">
-      <ui-input-field [formField]="loginForm.password" type="password" placeholder="••••••••" [iconClass]="['bi', 'bi-shield-lock']"></ui-input-field>
-    </ui-label>
-  </div>
-
-  <!-- Login Button -->
-  <div class="form-control mt-8">
-    <button type="submit" [disabled]="loginForm().invalid()" class="btn btn-primary w-full">Sign In</button>
-  </div>
-</form>
+<div class="mt-8">
+  <button type="button" class="btn btn-primary w-full" (click)="login()">
+    <img ngSrc="favicon.png" width="24" height="24" alt="FurrifyAuth" class="h-6 w-auto shrink-0 mr-2" />
+    {{ 'auth.login.continueWithPurifyAuth' | translate }}
+  </button>
+</div>
