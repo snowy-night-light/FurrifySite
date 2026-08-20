@@ -1,5 +1,8 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideHttpClient } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import {
@@ -11,13 +14,21 @@ import {
 
 import { environment } from '../environments/environment';
 
+
 const urlCondition = createInterceptorCondition<IncludeBearerTokenCondition>({
   urlPattern: /^(https?:\/\/(localhost:8080|.*\.furrify\.site))(\/.*)?$/i,
   bearerPrefix: 'Bearer'
 });
 
+
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(),
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({ prefix: '/translations/', suffix: '.json' }),
+      fallbackLang: 'en-US',
+      lang: 'en-US'
+    }),
     provideKeycloak({
       config: {
         url: environment.keycloakUrl,

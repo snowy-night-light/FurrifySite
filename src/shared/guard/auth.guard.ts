@@ -32,3 +32,21 @@ const isAccessAllowed = async (
 };
 
 export const canActivateAuthRole = createAuthGuard<CanActivateFn>(isAccessAllowed);
+
+const isNoAuthAccessAllowed = async (
+  route: ActivatedRouteSnapshot,
+  _: RouterStateSnapshot,
+  authData: AuthGuardData
+): Promise<boolean | UrlTree> => {
+  const { authenticated } = authData;
+  const router = inject(Router);
+
+  if (authenticated) {
+    const fallbackUrl = route.data['redirect'] || '/';
+    return router.parseUrl(fallbackUrl);
+  }
+
+  return true;
+};
+
+export const canActivateNoAuth = createAuthGuard<CanActivateFn>(isNoAuthAccessAllowed);

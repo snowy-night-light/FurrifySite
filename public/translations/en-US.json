@@ -1,0 +1,16 @@
+{
+    "auth": {
+        "welcomeBack": "Welcome back!",
+        "welcomeBackDescription": "Sign in to access your dashboard, manage your collection, and connect with your favourite creators content.",
+        "login": {
+            "signIn": "Sign In",
+            "loginToContinue": "Log in to your account to continue",
+            "continueWithPurifyAuth": "Continue with FurrifyAuth"
+        }
+    },
+    "ui": {
+        "navbar": {
+            "logout": "Logout"
+        }
+    }
+}

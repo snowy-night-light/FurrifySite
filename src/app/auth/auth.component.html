@@ -3,11 +3,10 @@
         <div class="absolute inset-0 bg-linear-to-br from-primary/80 to-neutral/90 mix-blend-multiply"></div>
 
         <div class="z-10 text-primary-content text-center p-12 max-w-lg">
-            <img ngSrc="furrify-horizontal-transparent.png" width="256" height="85" alt="FurrifySite Logo"
-                 class="w-64 mx-auto mb-8"/>
-            <h1 class="text-4xl font-bold mb-4">Welcome back!</h1>
-            <p class="text-lg opacity-90">Sign in to access your dashboard, manage your projects, and connect with the
-                community.</p>
+            <img ngSrc="furrify-vertical-transparent.png" width="195" height="146" alt="FurrifySite Logo"
+                 class="w-[195px] h-auto mx-auto mb-8"/>
+            <h1 class="text-4xl font-bold mb-4">{{ 'auth.welcomeBack' | translate }}</h1>
+            <p class="text-lg opacity-90">{{ 'auth.welcomeBackDescription' | translate }}</p>
         </div>
     </div>
 

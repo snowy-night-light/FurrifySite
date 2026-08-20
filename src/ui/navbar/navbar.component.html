@@ -1,20 +1,53 @@
 <div class="navbar bg-base-100 shadow-sm">
-  <div class="navbar-start">
+    <div class="navbar-start">
 
-  </div>
-  <div class="navbar-center">
-      <a class="btn btn-ghost px-4 py-2 h-auto border-0 rounded-xl" [routerLink]="['/']">
-        <img alt="furrify logo" class="logo-img" ngSrc="furrify-horizontal-transparent.png" width="160" height="33"
-             priority="high"/>
-      </a>
-  </div>
-  <div class="navbar-end">
-    <label class="btn btn-ghost btn-circle swap swap-rotate text-2xl">
-      <input type="checkbox" class="theme-controller" value="light" />
+    </div>
+    <div class="navbar-center">
+        <a class="btn btn-ghost px-4 py-2 h-auto border-0 rounded-xl" [routerLink]="['/']">
+            <img alt="furrify logo" class="logo-img" ngSrc="furrify-horizontal-transparent.png" width="160" height="33"
+                 priority="high"/>
+        </a>
+    </div>
+    <div class="navbar-end gap-2">
+        <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle text-xl">
+                <i class="bi bi-translate"></i>
+            </div>
+            <ul tabindex="0" class="dropdown-content menu bg-base-200 rounded-box z-10 w-40 p-2 shadow-lg font-medium">
+                @for (lang of languages; track lang.languageCode; ) {
+                    <li><a tabindex="0" (keyup.enter)="onLanguageChange(lang.languageCode)" (click)="onLanguageChange(lang.languageCode)" class="flex items-center gap-2"><span
+                        class="text-lg">{{ lang.unicodeFlag }}</span> <span>{{ lang.name }}</span></a></li>
+                }
+            </ul>
+        </div>
 
-      <i class="bi bi-sun-fill swap-off"></i>
+        <label class="btn btn-ghost btn-circle swap swap-rotate text-2xl">
+            <input type="checkbox" class="theme-controller" value="light"/>
 
-      <i class="bi bi-moon-fill swap-on"></i>
-    </label>
-  </div>
+            <i class="bi bi-sun-fill swap-off"></i>
+
+            <i class="bi bi-moon-fill swap-on"></i>
+        </label>
+
+        @if (authService.isAuthenticated()) {
+            <div class="dropdown dropdown-end">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" [class.placeholder]="!authService.avatarUrl()">
+                    @if (authService.avatarUrl()) {
+                        <div class="w-10 rounded-full">
+                            <img [ngSrc]="authService.avatarUrl()!" width="40" height="40" alt="User Avatar" />
+                        </div>
+                    } @else {
+                        <div class="bg-primary text-primary-content w-10 rounded-full flex items-center justify-center">
+                            <span class="text-xl uppercase font-bold">{{ authService.username()?.charAt(0) }}</span>
+                        </div>
+                    }
+                </div>
+                <ul
+                    tabindex="0"
+                    class="menu dropdown-content bg-base-200 rounded-box z-10 mt-3 w-52 p-2 shadow-lg font-medium">
+                    <li><a tabindex="0" (keyup.enter)="authService.logout()" (click)="authService.logout()">{{ 'ui.navbar.logout' | translate }}</a></li>
+                </ul>
+            </div>
+        }
+    </div>
 </div>
