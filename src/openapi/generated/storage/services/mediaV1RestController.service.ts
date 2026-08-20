@@ -25,10 +25,10 @@ export class MediaV1RestControllerService {
         return context.set(this.clientContextToken, 'Storage');
     }
 
-    mediaV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelMediaDTO>;
-    mediaV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelMediaDTO>>;
-    mediaV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelMediaDTO>>;
-    mediaV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getAllPaged5(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelMediaDTO>;
+    getAllPaged5(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelMediaDTO>>;
+    getAllPaged5(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelMediaDTO>>;
+    getAllPaged5(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/media`;
 
         let params = new HttpParams();
@@ -60,10 +60,10 @@ export class MediaV1RestControllerService {
         });
     }
 
-    mediaV1RestControllerSave(createMediaRequest: CreateMediaRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<MediaDTO>;
-    mediaV1RestControllerSave(createMediaRequest: CreateMediaRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<MediaDTO>>;
-    mediaV1RestControllerSave(createMediaRequest: CreateMediaRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<MediaDTO>>;
-    mediaV1RestControllerSave(createMediaRequest: CreateMediaRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    save5(createMediaRequest: CreateMediaRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<MediaDTO>;
+    save5(createMediaRequest: CreateMediaRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<MediaDTO>>;
+    save5(createMediaRequest: CreateMediaRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<MediaDTO>>;
+    save5(createMediaRequest: CreateMediaRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/media`;
 
         let headers: HttpHeaders;
@@ -92,10 +92,10 @@ export class MediaV1RestControllerService {
         });
     }
 
-    mediaV1RestControllerGetById(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<MediaDTO>;
-    mediaV1RestControllerGetById(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<MediaDTO>>;
-    mediaV1RestControllerGetById(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<MediaDTO>>;
-    mediaV1RestControllerGetById(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getById5(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<MediaDTO>;
+    getById5(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<MediaDTO>>;
+    getById5(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<MediaDTO>>;
+    getById5(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/media/${id}`;
 
         let headers: HttpHeaders;
@@ -118,10 +118,10 @@ export class MediaV1RestControllerService {
         });
     }
 
-    mediaV1RestControllerPatch(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<MediaDTO>;
-    mediaV1RestControllerPatch(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<MediaDTO>>;
-    mediaV1RestControllerPatch(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<MediaDTO>>;
-    mediaV1RestControllerPatch(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    patch5(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<MediaDTO>;
+    patch5(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<MediaDTO>>;
+    patch5(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<MediaDTO>>;
+    patch5(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/media/${id}`;
 
         let headers: HttpHeaders;
@@ -150,10 +150,10 @@ export class MediaV1RestControllerService {
         });
     }
 
-    mediaV1RestControllerDelete(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
-    mediaV1RestControllerDelete(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
-    mediaV1RestControllerDelete(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
-    mediaV1RestControllerDelete(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    delete5(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
+    delete5(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
+    delete5(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
+    delete5(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/media/${id}`;
 
         let headers: HttpHeaders;

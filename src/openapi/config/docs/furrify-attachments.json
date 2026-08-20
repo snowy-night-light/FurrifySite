@@ -21,7 +21,7 @@
         "tags": [
           "attachment-file-v-1-rest-controller"
         ],
-        "operationId": "attachment-file-v-1-rest-controller_getAllPaged",
+        "operationId": "getAllPaged",
         "parameters": [
           {
             "name": "spec",
@@ -57,7 +57,7 @@
         "tags": [
           "attachment-file-v-1-rest-controller"
         ],
-        "operationId": "attachment-file-v-1-rest-controller_save",
+        "operationId": "save",
         "requestBody": {
           "content": {
             "application/json": {
@@ -87,7 +87,7 @@
         "tags": [
           "attachment-file-v-1-rest-controller"
         ],
-        "operationId": "attachment-file-v-1-rest-controller_getById",
+        "operationId": "getById",
         "parameters": [
           {
             "name": "id",
@@ -116,7 +116,7 @@
         "tags": [
           "attachment-file-v-1-rest-controller"
         ],
-        "operationId": "attachment-file-v-1-rest-controller_delete",
+        "operationId": "delete",
         "parameters": [
           {
             "name": "id",
@@ -138,7 +138,7 @@
         "tags": [
           "attachment-file-v-1-rest-controller"
         ],
-        "operationId": "attachment-file-v-1-rest-controller_patch",
+        "operationId": "patch",
         "parameters": [
           {
             "name": "id",
@@ -236,12 +236,7 @@
             "$ref": "#/components/schemas/MimeType"
           },
           "uploadStatus": {
-            "type": "string",
-            "enum": [
-              "NOT_UPLOADED",
-              "CORRUPTED",
-              "UPLOADED"
-            ]
+            "$ref": "#/components/schemas/FileUploadStatus"
           },
           "fileSize": {
             "type": "integer",
@@ -264,15 +259,26 @@
         "type": "object",
         "properties": {
           "type": {
-            "type": "string",
-            "enum": [
-              "SHA256"
-            ]
+            "$ref": "#/components/schemas/AttachmentFileHashType"
           },
           "hash": {
             "type": "string"
           }
         }
+      },
+      "AttachmentFileHashType": {
+        "type": "string",
+        "enum": [
+          "SHA256"
+        ]
+      },
+      "FileUploadStatus": {
+        "type": "string",
+        "enum": [
+          "NOT_UPLOADED",
+          "CORRUPTED",
+          "UPLOADED"
+        ]
       },
       "MimeType": {
         "type": "object",

@@ -25,10 +25,10 @@ export class SourceV1RestControllerService {
         return context.set(this.clientContextToken, 'Storage');
     }
 
-    sourceV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelSourceDTO>;
-    sourceV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelSourceDTO>>;
-    sourceV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelSourceDTO>>;
-    sourceV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getAllPaged3(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelSourceDTO>;
+    getAllPaged3(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelSourceDTO>>;
+    getAllPaged3(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelSourceDTO>>;
+    getAllPaged3(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/sources`;
 
         let params = new HttpParams();
@@ -60,10 +60,10 @@ export class SourceV1RestControllerService {
         });
     }
 
-    sourceV1RestControllerSave(createSourceRequest: CreateSourceRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<SourceDTO>;
-    sourceV1RestControllerSave(createSourceRequest: CreateSourceRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<SourceDTO>>;
-    sourceV1RestControllerSave(createSourceRequest: CreateSourceRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<SourceDTO>>;
-    sourceV1RestControllerSave(createSourceRequest: CreateSourceRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    save3(createSourceRequest: CreateSourceRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<SourceDTO>;
+    save3(createSourceRequest: CreateSourceRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<SourceDTO>>;
+    save3(createSourceRequest: CreateSourceRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<SourceDTO>>;
+    save3(createSourceRequest: CreateSourceRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/sources`;
 
         let headers: HttpHeaders;
@@ -92,10 +92,10 @@ export class SourceV1RestControllerService {
         });
     }
 
-    sourceV1RestControllerGetById(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<SourceDTO>;
-    sourceV1RestControllerGetById(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<SourceDTO>>;
-    sourceV1RestControllerGetById(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<SourceDTO>>;
-    sourceV1RestControllerGetById(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getById3(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<SourceDTO>;
+    getById3(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<SourceDTO>>;
+    getById3(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<SourceDTO>>;
+    getById3(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/sources/${id}`;
 
         let headers: HttpHeaders;
@@ -118,10 +118,10 @@ export class SourceV1RestControllerService {
         });
     }
 
-    sourceV1RestControllerPatch(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<SourceDTO>;
-    sourceV1RestControllerPatch(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<SourceDTO>>;
-    sourceV1RestControllerPatch(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<SourceDTO>>;
-    sourceV1RestControllerPatch(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    patch3(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<SourceDTO>;
+    patch3(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<SourceDTO>>;
+    patch3(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<SourceDTO>>;
+    patch3(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/sources/${id}`;
 
         let headers: HttpHeaders;
@@ -150,10 +150,10 @@ export class SourceV1RestControllerService {
         });
     }
 
-    sourceV1RestControllerDelete(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
-    sourceV1RestControllerDelete(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
-    sourceV1RestControllerDelete(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
-    sourceV1RestControllerDelete(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    delete3(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
+    delete3(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
+    delete3(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
+    delete3(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/sources/${id}`;
 
         let headers: HttpHeaders;
