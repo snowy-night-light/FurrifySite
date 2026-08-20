@@ -13,6 +13,7 @@ describe('LabelComponent', () => {
 
         fixture = TestBed.createComponent(LabelComponent);
         component = fixture.componentInstance;
+        fixture.componentRef.setInput('text', 'Test Label');
         await fixture.whenStable();
     });
 

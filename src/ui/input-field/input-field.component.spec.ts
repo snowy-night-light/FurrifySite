@@ -13,6 +13,7 @@ describe('InputFieldComponentTs', () => {
 
     fixture = TestBed.createComponent(InputFieldComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('type', 'text');
     await fixture.whenStable();
   });
 
