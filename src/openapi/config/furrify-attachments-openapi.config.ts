@@ -1,8 +1,8 @@
 import { GeneratorConfig } from "ng-openapi";
 
 const config: GeneratorConfig = {
-    input: "./docs/furrify-storage.json",
-    output: "../generated/storage",
+    input: "./docs/furrify-attachments.json",
+    output: "../generated/attachments",
     options: {
         dateType: "Date",
         enumStyle: "enum",
