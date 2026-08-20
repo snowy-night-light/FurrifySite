@@ -35,10 +35,10 @@ export const appConfig: ApplicationConfig = {
             lang: 'en-US'
         }),
         provideStorageClient({
-            basePath: environment.gatewayUrl,
+            basePath: environment.gatewayUrl + '/storage',
         }),
         provideAttachmentsClient({
-            basePath: environment.gatewayUrl,
+            basePath: environment.gatewayUrl + '/attachments',
         }),
         provideKeycloak({
             config: {

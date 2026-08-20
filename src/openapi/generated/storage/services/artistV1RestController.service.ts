@@ -25,10 +25,10 @@ export class ArtistV1RestControllerService {
         return context.set(this.clientContextToken, 'Storage');
     }
 
-    artistV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelArtistDTO>;
-    artistV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelArtistDTO>>;
-    artistV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelArtistDTO>>;
-    artistV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getAllPaged6(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelArtistDTO>;
+    getAllPaged6(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelArtistDTO>>;
+    getAllPaged6(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelArtistDTO>>;
+    getAllPaged6(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/artists`;
 
         let params = new HttpParams();
@@ -60,10 +60,10 @@ export class ArtistV1RestControllerService {
         });
     }
 
-    artistV1RestControllerSave(createArtistRequest: CreateArtistRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<ArtistDTO>;
-    artistV1RestControllerSave(createArtistRequest: CreateArtistRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<ArtistDTO>>;
-    artistV1RestControllerSave(createArtistRequest: CreateArtistRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<ArtistDTO>>;
-    artistV1RestControllerSave(createArtistRequest: CreateArtistRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    save6(createArtistRequest: CreateArtistRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<ArtistDTO>;
+    save6(createArtistRequest: CreateArtistRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<ArtistDTO>>;
+    save6(createArtistRequest: CreateArtistRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<ArtistDTO>>;
+    save6(createArtistRequest: CreateArtistRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/artists`;
 
         let headers: HttpHeaders;
@@ -92,10 +92,10 @@ export class ArtistV1RestControllerService {
         });
     }
 
-    artistV1RestControllerGetById(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<ArtistDTO>;
-    artistV1RestControllerGetById(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<ArtistDTO>>;
-    artistV1RestControllerGetById(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<ArtistDTO>>;
-    artistV1RestControllerGetById(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getById6(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<ArtistDTO>;
+    getById6(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<ArtistDTO>>;
+    getById6(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<ArtistDTO>>;
+    getById6(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/artists/${id}`;
 
         let headers: HttpHeaders;
@@ -118,10 +118,10 @@ export class ArtistV1RestControllerService {
         });
     }
 
-    artistV1RestControllerPatch(id: string, patchArtistRequest: PatchArtistRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<ArtistDTO>;
-    artistV1RestControllerPatch(id: string, patchArtistRequest: PatchArtistRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<ArtistDTO>>;
-    artistV1RestControllerPatch(id: string, patchArtistRequest: PatchArtistRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<ArtistDTO>>;
-    artistV1RestControllerPatch(id: string, patchArtistRequest: PatchArtistRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    patch6(id: string, patchArtistRequest: PatchArtistRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<ArtistDTO>;
+    patch6(id: string, patchArtistRequest: PatchArtistRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<ArtistDTO>>;
+    patch6(id: string, patchArtistRequest: PatchArtistRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<ArtistDTO>>;
+    patch6(id: string, patchArtistRequest: PatchArtistRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/artists/${id}`;
 
         let headers: HttpHeaders;
@@ -150,10 +150,10 @@ export class ArtistV1RestControllerService {
         });
     }
 
-    artistV1RestControllerDelete(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
-    artistV1RestControllerDelete(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
-    artistV1RestControllerDelete(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
-    artistV1RestControllerDelete(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    delete6(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
+    delete6(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
+    delete6(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
+    delete6(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/artists/${id}`;
 
         let headers: HttpHeaders;

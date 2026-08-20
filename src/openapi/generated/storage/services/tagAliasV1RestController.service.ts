@@ -25,10 +25,10 @@ export class TagAliasV1RestControllerService {
         return context.set(this.clientContextToken, 'Storage');
     }
 
-    tagAliasV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelTagAliasDTO>;
-    tagAliasV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelTagAliasDTO>>;
-    tagAliasV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelTagAliasDTO>>;
-    tagAliasV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getAllPaged2(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelTagAliasDTO>;
+    getAllPaged2(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelTagAliasDTO>>;
+    getAllPaged2(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelTagAliasDTO>>;
+    getAllPaged2(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/tags/aliases`;
 
         let params = new HttpParams();
@@ -60,10 +60,10 @@ export class TagAliasV1RestControllerService {
         });
     }
 
-    tagAliasV1RestControllerSave(createTagAliasRequest: CreateTagAliasRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<TagAliasDTO>;
-    tagAliasV1RestControllerSave(createTagAliasRequest: CreateTagAliasRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagAliasDTO>>;
-    tagAliasV1RestControllerSave(createTagAliasRequest: CreateTagAliasRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagAliasDTO>>;
-    tagAliasV1RestControllerSave(createTagAliasRequest: CreateTagAliasRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    save2(createTagAliasRequest: CreateTagAliasRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<TagAliasDTO>;
+    save2(createTagAliasRequest: CreateTagAliasRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagAliasDTO>>;
+    save2(createTagAliasRequest: CreateTagAliasRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagAliasDTO>>;
+    save2(createTagAliasRequest: CreateTagAliasRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/tags/aliases`;
 
         let headers: HttpHeaders;
@@ -92,10 +92,10 @@ export class TagAliasV1RestControllerService {
         });
     }
 
-    tagAliasV1RestControllerGetById(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<TagAliasDTO>;
-    tagAliasV1RestControllerGetById(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<TagAliasDTO>>;
-    tagAliasV1RestControllerGetById(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<TagAliasDTO>>;
-    tagAliasV1RestControllerGetById(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getById2(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<TagAliasDTO>;
+    getById2(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<TagAliasDTO>>;
+    getById2(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<TagAliasDTO>>;
+    getById2(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/tags/aliases/${id}`;
 
         let headers: HttpHeaders;
@@ -118,10 +118,10 @@ export class TagAliasV1RestControllerService {
         });
     }
 
-    tagAliasV1RestControllerPatch(id: string, patchTagAliasRequest: PatchTagAliasRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<TagAliasDTO>;
-    tagAliasV1RestControllerPatch(id: string, patchTagAliasRequest: PatchTagAliasRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagAliasDTO>>;
-    tagAliasV1RestControllerPatch(id: string, patchTagAliasRequest: PatchTagAliasRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagAliasDTO>>;
-    tagAliasV1RestControllerPatch(id: string, patchTagAliasRequest: PatchTagAliasRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    patch2(id: string, patchTagAliasRequest: PatchTagAliasRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<TagAliasDTO>;
+    patch2(id: string, patchTagAliasRequest: PatchTagAliasRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagAliasDTO>>;
+    patch2(id: string, patchTagAliasRequest: PatchTagAliasRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagAliasDTO>>;
+    patch2(id: string, patchTagAliasRequest: PatchTagAliasRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/tags/aliases/${id}`;
 
         let headers: HttpHeaders;
@@ -150,10 +150,10 @@ export class TagAliasV1RestControllerService {
         });
     }
 
-    tagAliasV1RestControllerDelete(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
-    tagAliasV1RestControllerDelete(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
-    tagAliasV1RestControllerDelete(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
-    tagAliasV1RestControllerDelete(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    delete2(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
+    delete2(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
+    delete2(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
+    delete2(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/tags/aliases/${id}`;
 
         let headers: HttpHeaders;

@@ -21,7 +21,7 @@
         "tags": [
           "tag-v-1-rest-controller"
         ],
-        "operationId": "tag-v-1-rest-controller_getAllPaged",
+        "operationId": "getAllPaged",
         "parameters": [
           {
             "name": "spec",
@@ -57,7 +57,7 @@
         "tags": [
           "tag-v-1-rest-controller"
         ],
-        "operationId": "tag-v-1-rest-controller_save",
+        "operationId": "save",
         "requestBody": {
           "content": {
             "application/json": {
@@ -87,7 +87,7 @@
         "tags": [
           "tag-category-v-1-rest-controller"
         ],
-        "operationId": "tag-category-v-1-rest-controller_getAllPaged",
+        "operationId": "getAllPaged_1",
         "parameters": [
           {
             "name": "spec",
@@ -123,7 +123,7 @@
         "tags": [
           "tag-category-v-1-rest-controller"
         ],
-        "operationId": "tag-category-v-1-rest-controller_save",
+        "operationId": "save_1",
         "requestBody": {
           "content": {
             "application/json": {
@@ -153,7 +153,7 @@
         "tags": [
           "tag-alias-v-1-rest-controller"
         ],
-        "operationId": "tag-alias-v-1-rest-controller_getAllPaged",
+        "operationId": "getAllPaged_2",
         "parameters": [
           {
             "name": "spec",
@@ -189,7 +189,7 @@
         "tags": [
           "tag-alias-v-1-rest-controller"
         ],
-        "operationId": "tag-alias-v-1-rest-controller_save",
+        "operationId": "save_2",
         "requestBody": {
           "content": {
             "application/json": {
@@ -219,7 +219,7 @@
         "tags": [
           "source-v-1-rest-controller"
         ],
-        "operationId": "source-v-1-rest-controller_getAllPaged",
+        "operationId": "getAllPaged_3",
         "parameters": [
           {
             "name": "spec",
@@ -255,7 +255,7 @@
         "tags": [
           "source-v-1-rest-controller"
         ],
-        "operationId": "source-v-1-rest-controller_save",
+        "operationId": "save_3",
         "requestBody": {
           "content": {
             "application/json": {
@@ -285,7 +285,7 @@
         "tags": [
           "post-v-1-rest-controller"
         ],
-        "operationId": "post-v-1-rest-controller_getAllPaged",
+        "operationId": "getAllPaged_4",
         "parameters": [
           {
             "name": "spec",
@@ -321,7 +321,7 @@
         "tags": [
           "post-v-1-rest-controller"
         ],
-        "operationId": "post-v-1-rest-controller_save",
+        "operationId": "save_4",
         "requestBody": {
           "content": {
             "application/json": {
@@ -351,7 +351,7 @@
         "tags": [
           "media-v-1-rest-controller"
         ],
-        "operationId": "media-v-1-rest-controller_getAllPaged",
+        "operationId": "getAllPaged_5",
         "parameters": [
           {
             "name": "spec",
@@ -387,7 +387,7 @@
         "tags": [
           "media-v-1-rest-controller"
         ],
-        "operationId": "media-v-1-rest-controller_save",
+        "operationId": "save_5",
         "requestBody": {
           "content": {
             "application/json": {
@@ -417,7 +417,7 @@
         "tags": [
           "artist-v-1-rest-controller"
         ],
-        "operationId": "artist-v-1-rest-controller_getAllPaged",
+        "operationId": "getAllPaged_6",
         "parameters": [
           {
             "name": "spec",
@@ -453,7 +453,7 @@
         "tags": [
           "artist-v-1-rest-controller"
         ],
-        "operationId": "artist-v-1-rest-controller_save",
+        "operationId": "save_6",
         "requestBody": {
           "content": {
             "application/json": {
@@ -483,7 +483,7 @@
         "tags": [
           "tag-v-1-rest-controller"
         ],
-        "operationId": "tag-v-1-rest-controller_getById",
+        "operationId": "getById",
         "parameters": [
           {
             "name": "id",
@@ -512,7 +512,7 @@
         "tags": [
           "tag-v-1-rest-controller"
         ],
-        "operationId": "tag-v-1-rest-controller_delete",
+        "operationId": "delete",
         "parameters": [
           {
             "name": "id",
@@ -534,7 +534,7 @@
         "tags": [
           "tag-v-1-rest-controller"
         ],
-        "operationId": "tag-v-1-rest-controller_patch",
+        "operationId": "patch",
         "parameters": [
           {
             "name": "id",
@@ -575,7 +575,7 @@
         "tags": [
           "tag-category-v-1-rest-controller"
         ],
-        "operationId": "tag-category-v-1-rest-controller_getById",
+        "operationId": "getById_1",
         "parameters": [
           {
             "name": "id",
@@ -604,7 +604,7 @@
         "tags": [
           "tag-category-v-1-rest-controller"
         ],
-        "operationId": "tag-category-v-1-rest-controller_delete",
+        "operationId": "delete_1",
         "parameters": [
           {
             "name": "id",
@@ -626,7 +626,7 @@
         "tags": [
           "tag-category-v-1-rest-controller"
         ],
-        "operationId": "tag-category-v-1-rest-controller_patch",
+        "operationId": "patch_1",
         "parameters": [
           {
             "name": "id",
@@ -667,7 +667,7 @@
         "tags": [
           "tag-alias-v-1-rest-controller"
         ],
-        "operationId": "tag-alias-v-1-rest-controller_getById",
+        "operationId": "getById_2",
         "parameters": [
           {
             "name": "id",
@@ -696,7 +696,7 @@
         "tags": [
           "tag-alias-v-1-rest-controller"
         ],
-        "operationId": "tag-alias-v-1-rest-controller_delete",
+        "operationId": "delete_2",
         "parameters": [
           {
             "name": "id",
@@ -718,7 +718,7 @@
         "tags": [
           "tag-alias-v-1-rest-controller"
         ],
-        "operationId": "tag-alias-v-1-rest-controller_patch",
+        "operationId": "patch_2",
         "parameters": [
           {
             "name": "id",
@@ -759,7 +759,7 @@
         "tags": [
           "source-v-1-rest-controller"
         ],
-        "operationId": "source-v-1-rest-controller_getById",
+        "operationId": "getById_3",
         "parameters": [
           {
             "name": "id",
@@ -788,7 +788,7 @@
         "tags": [
           "source-v-1-rest-controller"
         ],
-        "operationId": "source-v-1-rest-controller_delete",
+        "operationId": "delete_3",
         "parameters": [
           {
             "name": "id",
@@ -810,7 +810,7 @@
         "tags": [
           "source-v-1-rest-controller"
         ],
-        "operationId": "source-v-1-rest-controller_patch",
+        "operationId": "patch_3",
         "parameters": [
           {
             "name": "id",
@@ -851,7 +851,7 @@
         "tags": [
           "post-v-1-rest-controller"
         ],
-        "operationId": "post-v-1-rest-controller_getById",
+        "operationId": "getById_4",
         "parameters": [
           {
             "name": "id",
@@ -880,7 +880,7 @@
         "tags": [
           "post-v-1-rest-controller"
         ],
-        "operationId": "post-v-1-rest-controller_delete",
+        "operationId": "delete_4",
         "parameters": [
           {
             "name": "id",
@@ -902,7 +902,7 @@
         "tags": [
           "post-v-1-rest-controller"
         ],
-        "operationId": "post-v-1-rest-controller_patch",
+        "operationId": "patch_4",
         "parameters": [
           {
             "name": "id",
@@ -943,7 +943,7 @@
         "tags": [
           "media-v-1-rest-controller"
         ],
-        "operationId": "media-v-1-rest-controller_getById",
+        "operationId": "getById_5",
         "parameters": [
           {
             "name": "id",
@@ -972,7 +972,7 @@
         "tags": [
           "media-v-1-rest-controller"
         ],
-        "operationId": "media-v-1-rest-controller_delete",
+        "operationId": "delete_5",
         "parameters": [
           {
             "name": "id",
@@ -994,7 +994,7 @@
         "tags": [
           "media-v-1-rest-controller"
         ],
-        "operationId": "media-v-1-rest-controller_patch",
+        "operationId": "patch_5",
         "parameters": [
           {
             "name": "id",
@@ -1035,7 +1035,7 @@
         "tags": [
           "artist-v-1-rest-controller"
         ],
-        "operationId": "artist-v-1-rest-controller_getById",
+        "operationId": "getById_6",
         "parameters": [
           {
             "name": "id",
@@ -1064,7 +1064,7 @@
         "tags": [
           "artist-v-1-rest-controller"
         ],
-        "operationId": "artist-v-1-rest-controller_delete",
+        "operationId": "delete_6",
         "parameters": [
           {
             "name": "id",
@@ -1086,7 +1086,7 @@
         "tags": [
           "artist-v-1-rest-controller"
         ],
-        "operationId": "artist-v-1-rest-controller_patch",
+        "operationId": "patch_6",
         "parameters": [
           {
             "name": "id",

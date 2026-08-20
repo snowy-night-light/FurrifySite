@@ -13,9 +13,10 @@ import { Observable } from "rxjs";
 import { BASE_PATH_STORAGE, CLIENT_CONTEXT_TOKEN_STORAGE } from "../tokens";
 import { HttpParamsBuilder } from "../utils/http-params-builder";
 import { Pageable, RequestOptions, PagedModelTagDTO, CreateTagRequest, TagDTO, PatchTagRequest } from "../models";
+import { PagedRestService } from "../../../base/paged-rest-service.interface";
 
 @Injectable({ providedIn: "root" })
-export class TagV1RestControllerService {
+export class TagV1RestControllerService implements PagedRestService<TagDTO, CreateTagRequest, PatchTagRequest> {
     private readonly httpClient: HttpClient = inject(HttpClient);
     private readonly basePath: string = inject(BASE_PATH_STORAGE);
     private readonly clientContextToken: HttpContextToken<string> = CLIENT_CONTEXT_TOKEN_STORAGE;
@@ -25,10 +26,10 @@ export class TagV1RestControllerService {
         return context.set(this.clientContextToken, 'Storage');
     }
 
-    tagV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelTagDTO>;
-    tagV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelTagDTO>>;
-    tagV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelTagDTO>>;
-    tagV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelTagDTO>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelTagDTO>>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelTagDTO>>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/tags`;
 
         let params = new HttpParams();
@@ -60,10 +61,10 @@ export class TagV1RestControllerService {
         });
     }
 
-    tagV1RestControllerSave(createTagRequest: CreateTagRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<TagDTO>;
-    tagV1RestControllerSave(createTagRequest: CreateTagRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagDTO>>;
-    tagV1RestControllerSave(createTagRequest: CreateTagRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagDTO>>;
-    tagV1RestControllerSave(createTagRequest: CreateTagRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    save(createTagRequest: CreateTagRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<TagDTO>;
+    save(createTagRequest: CreateTagRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagDTO>>;
+    save(createTagRequest: CreateTagRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagDTO>>;
+    save(createTagRequest: CreateTagRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/tags`;
 
         let headers: HttpHeaders;
@@ -92,10 +93,10 @@ export class TagV1RestControllerService {
         });
     }
 
-    tagV1RestControllerGetById(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<TagDTO>;
-    tagV1RestControllerGetById(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<TagDTO>>;
-    tagV1RestControllerGetById(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<TagDTO>>;
-    tagV1RestControllerGetById(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getById(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<TagDTO>;
+    getById(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<TagDTO>>;
+    getById(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<TagDTO>>;
+    getById(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/tags/${id}`;
 
         let headers: HttpHeaders;
@@ -118,10 +119,10 @@ export class TagV1RestControllerService {
         });
     }
 
-    tagV1RestControllerPatch(id: string, patchTagRequest: PatchTagRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<TagDTO>;
-    tagV1RestControllerPatch(id: string, patchTagRequest: PatchTagRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagDTO>>;
-    tagV1RestControllerPatch(id: string, patchTagRequest: PatchTagRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagDTO>>;
-    tagV1RestControllerPatch(id: string, patchTagRequest: PatchTagRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    patch(id: string, patchTagRequest: PatchTagRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<TagDTO>;
+    patch(id: string, patchTagRequest: PatchTagRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagDTO>>;
+    patch(id: string, patchTagRequest: PatchTagRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagDTO>>;
+    patch(id: string, patchTagRequest: PatchTagRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/tags/${id}`;
 
         let headers: HttpHeaders;
@@ -150,10 +151,10 @@ export class TagV1RestControllerService {
         });
     }
 
-    tagV1RestControllerDelete(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
-    tagV1RestControllerDelete(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
-    tagV1RestControllerDelete(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
-    tagV1RestControllerDelete(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    delete(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
+    delete(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
+    delete(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
+    delete(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/tags/${id}`;
 
         let headers: HttpHeaders;

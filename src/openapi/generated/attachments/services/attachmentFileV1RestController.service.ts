@@ -13,9 +13,10 @@ import { Observable } from "rxjs";
 import { BASE_PATH_ATTACHMENTS, CLIENT_CONTEXT_TOKEN_ATTACHMENTS } from "../tokens";
 import { HttpParamsBuilder } from "../utils/http-params-builder";
 import { Pageable, RequestOptions, PagedModelAttachmentFileDTO, CreateAttachmentFileRequest, AttachmentFileDTO, PatchAttachmentFileRequest } from "../models";
+import { PagedRestService } from "../../../base/paged-rest-service.interface";
 
 @Injectable({ providedIn: "root" })
-export class AttachmentFileV1RestControllerService {
+export class AttachmentFileV1RestControllerService implements PagedRestService<AttachmentFileDTO, CreateAttachmentFileRequest, PatchAttachmentFileRequest> {
     private readonly httpClient: HttpClient = inject(HttpClient);
     private readonly basePath: string = inject(BASE_PATH_ATTACHMENTS);
     private readonly clientContextToken: HttpContextToken<string> = CLIENT_CONTEXT_TOKEN_ATTACHMENTS;
@@ -25,10 +26,10 @@ export class AttachmentFileV1RestControllerService {
         return context.set(this.clientContextToken, 'Attachments');
     }
 
-    attachmentFileV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelAttachmentFileDTO>;
-    attachmentFileV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelAttachmentFileDTO>>;
-    attachmentFileV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelAttachmentFileDTO>>;
-    attachmentFileV1RestControllerGetAllPaged(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelAttachmentFileDTO>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelAttachmentFileDTO>>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelAttachmentFileDTO>>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/files`;
 
         let params = new HttpParams();
@@ -60,10 +61,10 @@ export class AttachmentFileV1RestControllerService {
         });
     }
 
-    attachmentFileV1RestControllerSave(requestBody: CreateAttachmentFileRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<AttachmentFileDTO>;
-    attachmentFileV1RestControllerSave(requestBody: CreateAttachmentFileRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<AttachmentFileDTO>>;
-    attachmentFileV1RestControllerSave(requestBody: CreateAttachmentFileRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<AttachmentFileDTO>>;
-    attachmentFileV1RestControllerSave(requestBody: CreateAttachmentFileRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    save(requestBody: CreateAttachmentFileRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<AttachmentFileDTO>;
+    save(requestBody: CreateAttachmentFileRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<AttachmentFileDTO>>;
+    save(requestBody: CreateAttachmentFileRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<AttachmentFileDTO>>;
+    save(requestBody: CreateAttachmentFileRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/files`;
 
         let headers: HttpHeaders;
@@ -92,10 +93,10 @@ export class AttachmentFileV1RestControllerService {
         });
     }
 
-    attachmentFileV1RestControllerGetById(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<AttachmentFileDTO>;
-    attachmentFileV1RestControllerGetById(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<AttachmentFileDTO>>;
-    attachmentFileV1RestControllerGetById(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<AttachmentFileDTO>>;
-    attachmentFileV1RestControllerGetById(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getById(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<AttachmentFileDTO>;
+    getById(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<AttachmentFileDTO>>;
+    getById(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<AttachmentFileDTO>>;
+    getById(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/files/${id}`;
 
         let headers: HttpHeaders;
@@ -118,10 +119,10 @@ export class AttachmentFileV1RestControllerService {
         });
     }
 
-    attachmentFileV1RestControllerPatch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<AttachmentFileDTO>;
-    attachmentFileV1RestControllerPatch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<AttachmentFileDTO>>;
-    attachmentFileV1RestControllerPatch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<AttachmentFileDTO>>;
-    attachmentFileV1RestControllerPatch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    patch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<AttachmentFileDTO>;
+    patch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<AttachmentFileDTO>>;
+    patch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<AttachmentFileDTO>>;
+    patch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/files/${id}`;
 
         let headers: HttpHeaders;
@@ -150,10 +151,10 @@ export class AttachmentFileV1RestControllerService {
         });
     }
 
-    attachmentFileV1RestControllerDelete(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
-    attachmentFileV1RestControllerDelete(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
-    attachmentFileV1RestControllerDelete(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
-    attachmentFileV1RestControllerDelete(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    delete(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
+    delete(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
+    delete(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
+    delete(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/storage/files/${id}`;
 
         let headers: HttpHeaders;
