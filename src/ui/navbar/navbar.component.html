@@ -1,6 +1,17 @@
 <div class="navbar bg-base-100 shadow-sm">
     <div class="navbar-start">
-
+        @if (authService.isAuthenticated()) {
+            <ul class="menu menu-horizontal px-1">
+                @for (item of navItems; track item.route) {
+                    <li>
+                        <a [routerLink]="item.route" routerLinkActive="bg-primary text-primary-content font-bold shadow-sm" [routerLinkActiveOptions]="{exact: true}" class="font-medium text-base gap-2">
+                            <i [class]="item.iconClassList.join(' ')"></i>
+                            {{ item.name }}
+                        </a>
+                    </li>
+                }
+            </ul>
+        }
     </div>
     <div class="navbar-center">
         <a class="btn btn-ghost px-4 py-2 h-auto border-0 rounded-xl" [routerLink]="['/']">
@@ -31,10 +42,12 @@
 
         @if (authService.isAuthenticated()) {
             <div class="dropdown dropdown-end">
-                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" [class.placeholder]="!authService.avatarUrl()">
-                    @if (authService.avatarUrl()) {
+                @let avatarUrl = authService.avatarUrl();
+
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" [class.placeholder]="!avatarUrl">
+                    @if (avatarUrl) {
                         <div class="w-10 rounded-full">
-                            <img [ngSrc]="authService.avatarUrl()!" width="40" height="40" alt="User Avatar" />
+                            <img [ngSrc]="avatarUrl" width="40" height="40" alt="User Avatar" />
                         </div>
                     } @else {
                         <div class="bg-primary text-primary-content w-10 rounded-full flex items-center justify-center">
@@ -45,7 +58,14 @@
                 <ul
                     tabindex="0"
                     class="menu dropdown-content bg-base-200 rounded-box z-10 mt-3 w-52 p-2 shadow-lg font-medium">
-                    <li><a tabindex="0" (keyup.enter)="authService.logout()" (click)="authService.logout()">{{ 'ui.navbar.logout' | translate }}</a></li>
+                    @for (item of userOptions; track item.text) {
+                        <li>
+                            <a tabindex="0" (keyup.enter)="item.onClick()" (click)="item.onClick()" class="flex items-center gap-2">
+                                <i [class]="item.iconClassList.join(' ') + ' text-lg'"></i>
+                                {{ item.text | translate }}
+                            </a>
+                        </li>
+                    }
                 </ul>
             </div>
         }

@@ -1,6 +1,7 @@
 export const environment = {
-  production: false,
-  keycloakUrl: 'https://keycloak.furrify.site',
-  keycloakRealm: 'furrify-dev',
-  keycloakClientId: 'furrifysite'
+    production: false,
+    keycloakUrl: 'https://keycloak.furrify.site',
+    keycloakRealm: 'furrify-dev',
+    keycloakClientId: 'furrifysite',
+    gatewayUrl: 'http://localhost:8080',
 };

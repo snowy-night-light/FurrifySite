@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {AuthService} from '../../shared/service/auth.service';
 
@@ -10,14 +10,45 @@ export type LanguageData = {
     unicodeFlag: string
 };
 
+export type NavItem = {
+    name: string,
+    route: string,
+    iconClassList: string[]
+};
+
+export type NavUserItem = {
+    text: string,
+    iconClassList: string[],
+    onClick: () => void
+};
+
+
 @Component({
   selector: 'ui-navbar',
-    imports: [NgOptimizedImage, RouterLink, TranslatePipe],
+    imports: [NgOptimizedImage, RouterLink, RouterLinkActive, TranslatePipe],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
     authService = inject(AuthService);
+
+    userOptions: NavUserItem[] = [
+        {
+            text: 'ui.navbar.logout',
+            iconClassList: ['bi', 'bi-box-arrow-right'],
+            onClick: () => {
+                this.authService.logout();
+            }
+        }
+    ];
+
+    navItems: NavItem[] = [
+        {
+            name: 'Dashboard',
+            route: '/',
+            iconClassList: ['bi', 'bi-grid-1x2']
+        }
+    ];
 
     languages: LanguageData[] = [
         {
