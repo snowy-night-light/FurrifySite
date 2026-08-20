@@ -2,7 +2,6 @@ import { Component, signal } from '@angular/core';
 import {InputFieldComponent} from '../../../ui/input-field/input-field.component';
 import {LabelComponent} from '../../../ui/label.component/label.component';
 import {email, form, FormField, required} from '@angular/forms/signals';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 export interface LoginData {
   email: string;
