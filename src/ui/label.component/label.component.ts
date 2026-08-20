@@ -10,6 +10,7 @@ export type LabelType = 'float' | 'static';
     ],
     templateUrl: './label.component.html',
     styleUrl: './label.component.css',
+    host: { class: 'block w-full' }
 })
 export class LabelComponent {
     text = input.required<string>();
