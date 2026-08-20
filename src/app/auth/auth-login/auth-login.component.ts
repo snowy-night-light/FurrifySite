@@ -29,8 +29,8 @@ export class AuthLoginComponent {
     required(schemaPath.password, {message: 'Password is required'});
   });
 
-    onSubmit($event: SubmitEvent) {
+    onSubmit(event: SubmitEvent) {
     console.log(this.loginForm().value());
-    event?.preventDefault();
+    event.preventDefault();
   }
 }
