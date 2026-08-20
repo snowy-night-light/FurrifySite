@@ -13,6 +13,7 @@ describe('ValidationFeedback', () => {
 
         fixture = TestBed.createComponent(ValidationFeedbackComponent);
         component = fixture.componentInstance;
+        fixture.componentRef.setInput('feedback', { key: 'error', message: 'Test error' });
         await fixture.whenStable();
     });
 
