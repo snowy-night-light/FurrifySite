@@ -16,7 +16,8 @@ import {
 } from 'keycloak-angular';
 
 import {environment} from '../environments/environment';
-import {provideDefaultClient} from '../openapi/generated';
+import {provideStorageClient} from '../openapi/generated/storage';
+import {provideAttachmentsClient} from '../openapi/generated/attachments';
 
 
 const urlCondition = createInterceptorCondition<IncludeBearerTokenCondition>({
@@ -33,7 +34,10 @@ export const appConfig: ApplicationConfig = {
             fallbackLang: 'en-US',
             lang: 'en-US'
         }),
-        provideDefaultClient({
+        provideStorageClient({
+            basePath: environment.gatewayUrl,
+        }),
+        provideAttachmentsClient({
             basePath: environment.gatewayUrl,
         }),
         provideKeycloak({
