@@ -7,8 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:open": "npm start & cypress open",
+    "cypress:run": "npm start & cypress run"
   },
   "private": true,
   "packageManager": "npm@12.0.2",
@@ -24,7 +24,7 @@
     "bootstrap-icons": "^1.13.1",
     "keycloak-angular": "^22.0.0",
     "keycloak-js": "^26.2.4",
-    "ng-openapi-gen": "^1.0.5",
+    "ng-openapi": "^0.3.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
