@@ -26,10 +26,12 @@ const urlCondition = createInterceptorCondition<IncludeBearerTokenCondition>({
     bearerPrefix: 'Bearer'
 });
 
+const isCypress = !!(window as any).Cypress;
+const interceptors = isCypress ? [] : [includeBearerTokenInterceptor];
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideHttpClient(withInterceptors([includeBearerTokenInterceptor])),
+        provideHttpClient(withInterceptors(interceptors)),
         provideTranslateService({
             loader: provideTranslateHttpLoader({prefix: '/translations/', suffix: '.json'}),
             fallbackLang: 'en-US',
