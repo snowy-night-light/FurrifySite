@@ -13,9 +13,10 @@ import { Observable } from "rxjs";
 import { BASE_PATH_STORAGE, CLIENT_CONTEXT_TOKEN_STORAGE } from "../tokens";
 import { HttpParamsBuilder } from "../utils/http-params-builder";
 import { Pageable, RequestOptions, PagedModelMediaDTO, CreateMediaRequest, MediaDTO, PatchMediaRequest } from "../models";
+import { PagedRestService } from "../../../base/paged-rest-service.interface";
 
 @Injectable({ providedIn: "root" })
-export class MediaV1RestControllerService {
+export class MediaV1RestControllerService implements PagedRestService<MediaDTO, CreateMediaRequest, PatchMediaRequest> {
     private readonly httpClient: HttpClient = inject(HttpClient);
     private readonly basePath: string = inject(BASE_PATH_STORAGE);
     private readonly clientContextToken: HttpContextToken<string> = CLIENT_CONTEXT_TOKEN_STORAGE;
@@ -25,10 +26,10 @@ export class MediaV1RestControllerService {
         return context.set(this.clientContextToken, 'Storage');
     }
 
-    getAllPaged5(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelMediaDTO>;
-    getAllPaged5(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelMediaDTO>>;
-    getAllPaged5(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelMediaDTO>>;
-    getAllPaged5(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelMediaDTO>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelMediaDTO>>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelMediaDTO>>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/media`;
 
         let params = new HttpParams();
@@ -60,10 +61,10 @@ export class MediaV1RestControllerService {
         });
     }
 
-    save5(createMediaRequest: CreateMediaRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<MediaDTO>;
-    save5(createMediaRequest: CreateMediaRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<MediaDTO>>;
-    save5(createMediaRequest: CreateMediaRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<MediaDTO>>;
-    save5(createMediaRequest: CreateMediaRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    save(createMediaRequest: CreateMediaRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<MediaDTO>;
+    save(createMediaRequest: CreateMediaRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<MediaDTO>>;
+    save(createMediaRequest: CreateMediaRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<MediaDTO>>;
+    save(createMediaRequest: CreateMediaRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/media`;
 
         let headers: HttpHeaders;
@@ -92,10 +93,10 @@ export class MediaV1RestControllerService {
         });
     }
 
-    getById5(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<MediaDTO>;
-    getById5(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<MediaDTO>>;
-    getById5(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<MediaDTO>>;
-    getById5(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getById(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<MediaDTO>;
+    getById(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<MediaDTO>>;
+    getById(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<MediaDTO>>;
+    getById(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/media/${id}`;
 
         let headers: HttpHeaders;
@@ -118,10 +119,10 @@ export class MediaV1RestControllerService {
         });
     }
 
-    patch5(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<MediaDTO>;
-    patch5(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<MediaDTO>>;
-    patch5(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<MediaDTO>>;
-    patch5(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    patch(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<MediaDTO>;
+    patch(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<MediaDTO>>;
+    patch(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<MediaDTO>>;
+    patch(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/media/${id}`;
 
         let headers: HttpHeaders;
@@ -150,10 +151,10 @@ export class MediaV1RestControllerService {
         });
     }
 
-    delete5(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
-    delete5(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
-    delete5(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
-    delete5(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    delete(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
+    delete(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
+    delete(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
+    delete(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/media/${id}`;
 
         let headers: HttpHeaders;

@@ -13,9 +13,10 @@ import { Observable } from "rxjs";
 import { BASE_PATH_STORAGE, CLIENT_CONTEXT_TOKEN_STORAGE } from "../tokens";
 import { HttpParamsBuilder } from "../utils/http-params-builder";
 import { Pageable, RequestOptions, PagedModelPostDTO, CreatePostRequest, PostDTO, PatchPostRequest } from "../models";
+import { PagedRestService } from "../../../base/paged-rest-service.interface";
 
 @Injectable({ providedIn: "root" })
-export class PostV1RestControllerService {
+export class PostV1RestControllerService implements PagedRestService<PostDTO, CreatePostRequest, PatchPostRequest> {
     private readonly httpClient: HttpClient = inject(HttpClient);
     private readonly basePath: string = inject(BASE_PATH_STORAGE);
     private readonly clientContextToken: HttpContextToken<string> = CLIENT_CONTEXT_TOKEN_STORAGE;
@@ -25,10 +26,10 @@ export class PostV1RestControllerService {
         return context.set(this.clientContextToken, 'Storage');
     }
 
-    getAllPaged4(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelPostDTO>;
-    getAllPaged4(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelPostDTO>>;
-    getAllPaged4(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelPostDTO>>;
-    getAllPaged4(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelPostDTO>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelPostDTO>>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelPostDTO>>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/posts`;
 
         let params = new HttpParams();
@@ -60,10 +61,10 @@ export class PostV1RestControllerService {
         });
     }
 
-    save4(createPostRequest: CreatePostRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<PostDTO>;
-    save4(createPostRequest: CreatePostRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<PostDTO>>;
-    save4(createPostRequest: CreatePostRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<PostDTO>>;
-    save4(createPostRequest: CreatePostRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    save(createPostRequest: CreatePostRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<PostDTO>;
+    save(createPostRequest: CreatePostRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<PostDTO>>;
+    save(createPostRequest: CreatePostRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<PostDTO>>;
+    save(createPostRequest: CreatePostRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/posts`;
 
         let headers: HttpHeaders;
@@ -92,10 +93,10 @@ export class PostV1RestControllerService {
         });
     }
 
-    getById4(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PostDTO>;
-    getById4(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PostDTO>>;
-    getById4(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PostDTO>>;
-    getById4(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getById(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PostDTO>;
+    getById(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PostDTO>>;
+    getById(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PostDTO>>;
+    getById(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/posts/${id}`;
 
         let headers: HttpHeaders;
@@ -118,10 +119,10 @@ export class PostV1RestControllerService {
         });
     }
 
-    patch4(id: string, patchPostRequest: PatchPostRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<PostDTO>;
-    patch4(id: string, patchPostRequest: PatchPostRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<PostDTO>>;
-    patch4(id: string, patchPostRequest: PatchPostRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<PostDTO>>;
-    patch4(id: string, patchPostRequest: PatchPostRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    patch(id: string, patchPostRequest: PatchPostRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<PostDTO>;
+    patch(id: string, patchPostRequest: PatchPostRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<PostDTO>>;
+    patch(id: string, patchPostRequest: PatchPostRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<PostDTO>>;
+    patch(id: string, patchPostRequest: PatchPostRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/posts/${id}`;
 
         let headers: HttpHeaders;
@@ -150,10 +151,10 @@ export class PostV1RestControllerService {
         });
     }
 
-    delete4(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
-    delete4(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
-    delete4(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
-    delete4(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    delete(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
+    delete(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
+    delete(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
+    delete(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/posts/${id}`;
 
         let headers: HttpHeaders;

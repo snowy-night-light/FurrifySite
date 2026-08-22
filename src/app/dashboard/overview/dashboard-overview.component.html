@@ -1,9 +1,9 @@
 <div class="flex justify-between items-center w-full">
     <h1 class="text-3xl font-bold">{{ 'app.dashboard.overview.title' | translate }}</h1>
-    <button class="btn btn-ghost btn-circle" id="refreshStatisticsBtn" (keydown.enter)="fetchStatistics()" (click)="fetchStatistics()" [disabled]="areUserStatsFetching()" aria-label="Refresh">
-        <i class="bi bi-arrow-clockwise text-xl inline-block transition-transform duration-700 ease-in-out"
-           [style.transform]="'rotate(' + refreshRotation() + 'deg)'"></i>
-    </button>
+    <ui-refresh-button id="refreshStatisticsBtn"
+                       [isRefreshing]="areUserStatsFetching()"
+                       (refresh)="fetchStatistics()">
+    </ui-refresh-button>
 </div>
 
 @let valueNotAvailable = "N/A";
@@ -76,14 +76,26 @@
     <div class="card bg-base-100 shadow-xl col-span-1">
         <div class="card-body">
             <h2 class="card-title">{{ 'app.dashboard.overview.mediaTypes.title' | translate }}</h2>
-            <div echarts [options]="pieChartOptions()" class="h-80 w-full mt-4" id="mediaTypesChart"></div>
+            @if (areUserStatsFetching()) {
+                <div class="h-80 w-full mt-4 flex justify-center items-center">
+                    <span class="loading loading-spinner text-primary w-12 h-12"></span>
+                </div>
+            } @else {
+                <div echarts [options]="pieChartOptions()" class="h-80 w-full mt-4" id="mediaTypesChart"></div>
+            }
         </div>
     </div>
 
     <div class="card bg-base-100 shadow-xl col-span-1 lg:col-span-2">
         <div class="card-body">
             <h2 class="card-title">{{ 'app.dashboard.overview.growthChart.title' | translate }}</h2>
-            <div echarts [options]="lineChartOptions()" class="h-80 w-full mt-4" id="growthChart"></div>
+            @if (areUserStatsFetching()) {
+                <div class="h-80 w-full mt-4 flex justify-center items-center">
+                    <span class="loading loading-spinner text-primary w-12 h-12"></span>
+                </div>
+            } @else {
+                <div echarts [options]="lineChartOptions()" class="h-80 w-full mt-4" id="growthChart"></div>
+            }
         </div>
     </div>
 

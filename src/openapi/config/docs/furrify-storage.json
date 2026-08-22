@@ -21,7 +21,7 @@
         "tags": [
           "tag-v-1-rest-controller"
         ],
-        "operationId": "getAllPaged",
+        "operationId": "TagV1RestController_getAllPaged",
         "parameters": [
           {
             "name": "spec",
@@ -57,7 +57,7 @@
         "tags": [
           "tag-v-1-rest-controller"
         ],
-        "operationId": "save",
+        "operationId": "TagV1RestController_save",
         "requestBody": {
           "content": {
             "application/json": {
@@ -87,7 +87,7 @@
         "tags": [
           "tag-category-v-1-rest-controller"
         ],
-        "operationId": "getAllPaged_1",
+        "operationId": "TagCategoryV1RestController_getAllPaged",
         "parameters": [
           {
             "name": "spec",
@@ -123,7 +123,7 @@
         "tags": [
           "tag-category-v-1-rest-controller"
         ],
-        "operationId": "save_1",
+        "operationId": "TagCategoryV1RestController_save",
         "requestBody": {
           "content": {
             "application/json": {
@@ -153,7 +153,7 @@
         "tags": [
           "tag-alias-v-1-rest-controller"
         ],
-        "operationId": "getAllPaged_2",
+        "operationId": "TagAliasV1RestController_getAllPaged",
         "parameters": [
           {
             "name": "spec",
@@ -189,7 +189,7 @@
         "tags": [
           "tag-alias-v-1-rest-controller"
         ],
-        "operationId": "save_2",
+        "operationId": "TagAliasV1RestController_save",
         "requestBody": {
           "content": {
             "application/json": {
@@ -219,7 +219,7 @@
         "tags": [
           "source-v-1-rest-controller"
         ],
-        "operationId": "getAllPaged_3",
+        "operationId": "SourceV1RestController_getAllPaged",
         "parameters": [
           {
             "name": "spec",
@@ -255,7 +255,7 @@
         "tags": [
           "source-v-1-rest-controller"
         ],
-        "operationId": "save_3",
+        "operationId": "SourceV1RestController_save",
         "requestBody": {
           "content": {
             "application/json": {
@@ -285,7 +285,7 @@
         "tags": [
           "post-v-1-rest-controller"
         ],
-        "operationId": "getAllPaged_4",
+        "operationId": "PostV1RestController_getAllPaged",
         "parameters": [
           {
             "name": "spec",
@@ -321,7 +321,7 @@
         "tags": [
           "post-v-1-rest-controller"
         ],
-        "operationId": "save_4",
+        "operationId": "PostV1RestController_save",
         "requestBody": {
           "content": {
             "application/json": {
@@ -351,7 +351,7 @@
         "tags": [
           "media-v-1-rest-controller"
         ],
-        "operationId": "getAllPaged_5",
+        "operationId": "MediaV1RestController_getAllPaged",
         "parameters": [
           {
             "name": "spec",
@@ -387,7 +387,7 @@
         "tags": [
           "media-v-1-rest-controller"
         ],
-        "operationId": "save_5",
+        "operationId": "MediaV1RestController_save",
         "requestBody": {
           "content": {
             "application/json": {
@@ -417,7 +417,7 @@
         "tags": [
           "library-v-1-rest-controller"
         ],
-        "operationId": "getAllPaged_6",
+        "operationId": "LibraryV1RestController_getAllPaged",
         "parameters": [
           {
             "name": "spec",
@@ -453,7 +453,7 @@
         "tags": [
           "library-v-1-rest-controller"
         ],
-        "operationId": "save_6",
+        "operationId": "LibraryV1RestController_save",
         "requestBody": {
           "content": {
             "application/json": {
@@ -483,7 +483,7 @@
         "tags": [
           "collection-v-1-rest-controller"
         ],
-        "operationId": "getAllPaged_7",
+        "operationId": "CollectionV1RestController_getAllPaged",
         "parameters": [
           {
             "name": "spec",
@@ -519,7 +519,7 @@
         "tags": [
           "collection-v-1-rest-controller"
         ],
-        "operationId": "save_7",
+        "operationId": "CollectionV1RestController_save",
         "requestBody": {
           "content": {
             "application/json": {
@@ -549,7 +549,7 @@
         "tags": [
           "artist-v-1-rest-controller"
         ],
-        "operationId": "getAllPaged_8",
+        "operationId": "ArtistV1RestController_getAllPaged",
         "parameters": [
           {
             "name": "spec",
@@ -585,7 +585,7 @@
         "tags": [
           "artist-v-1-rest-controller"
         ],
-        "operationId": "save_8",
+        "operationId": "ArtistV1RestController_save",
         "requestBody": {
           "content": {
             "application/json": {
@@ -615,7 +615,7 @@
         "tags": [
           "tag-v-1-rest-controller"
         ],
-        "operationId": "getById",
+        "operationId": "TagV1RestController_getById",
         "parameters": [
           {
             "name": "id",
@@ -644,7 +644,7 @@
         "tags": [
           "tag-v-1-rest-controller"
         ],
-        "operationId": "delete",
+        "operationId": "TagV1RestController_delete",
         "parameters": [
           {
             "name": "id",
@@ -666,7 +666,7 @@
         "tags": [
           "tag-v-1-rest-controller"
         ],
-        "operationId": "patch",
+        "operationId": "TagV1RestController_patch",
         "parameters": [
           {
             "name": "id",
@@ -707,7 +707,7 @@
         "tags": [
           "tag-category-v-1-rest-controller"
         ],
-        "operationId": "getById_1",
+        "operationId": "TagCategoryV1RestController_getById",
         "parameters": [
           {
             "name": "id",
@@ -736,7 +736,7 @@
         "tags": [
           "tag-category-v-1-rest-controller"
         ],
-        "operationId": "delete_1",
+        "operationId": "TagCategoryV1RestController_delete",
         "parameters": [
           {
             "name": "id",
@@ -758,7 +758,7 @@
         "tags": [
           "tag-category-v-1-rest-controller"
         ],
-        "operationId": "patch_1",
+        "operationId": "TagCategoryV1RestController_patch",
         "parameters": [
           {
             "name": "id",
@@ -799,7 +799,7 @@
         "tags": [
           "tag-alias-v-1-rest-controller"
         ],
-        "operationId": "getById_2",
+        "operationId": "TagAliasV1RestController_getById",
         "parameters": [
           {
             "name": "id",
@@ -828,7 +828,7 @@
         "tags": [
           "tag-alias-v-1-rest-controller"
         ],
-        "operationId": "delete_2",
+        "operationId": "TagAliasV1RestController_delete",
         "parameters": [
           {
             "name": "id",
@@ -850,7 +850,7 @@
         "tags": [
           "tag-alias-v-1-rest-controller"
         ],
-        "operationId": "patch_2",
+        "operationId": "TagAliasV1RestController_patch",
         "parameters": [
           {
             "name": "id",
@@ -891,7 +891,7 @@
         "tags": [
           "source-v-1-rest-controller"
         ],
-        "operationId": "getById_3",
+        "operationId": "SourceV1RestController_getById",
         "parameters": [
           {
             "name": "id",
@@ -920,7 +920,7 @@
         "tags": [
           "source-v-1-rest-controller"
         ],
-        "operationId": "delete_3",
+        "operationId": "SourceV1RestController_delete",
         "parameters": [
           {
             "name": "id",
@@ -942,7 +942,7 @@
         "tags": [
           "source-v-1-rest-controller"
         ],
-        "operationId": "patch_3",
+        "operationId": "SourceV1RestController_patch",
         "parameters": [
           {
             "name": "id",
@@ -983,7 +983,7 @@
         "tags": [
           "post-v-1-rest-controller"
         ],
-        "operationId": "getById_4",
+        "operationId": "PostV1RestController_getById",
         "parameters": [
           {
             "name": "id",
@@ -1012,7 +1012,7 @@
         "tags": [
           "post-v-1-rest-controller"
         ],
-        "operationId": "delete_4",
+        "operationId": "PostV1RestController_delete",
         "parameters": [
           {
             "name": "id",
@@ -1034,7 +1034,7 @@
         "tags": [
           "post-v-1-rest-controller"
         ],
-        "operationId": "patch_4",
+        "operationId": "PostV1RestController_patch",
         "parameters": [
           {
             "name": "id",
@@ -1075,7 +1075,7 @@
         "tags": [
           "media-v-1-rest-controller"
         ],
-        "operationId": "getById_5",
+        "operationId": "MediaV1RestController_getById",
         "parameters": [
           {
             "name": "id",
@@ -1104,7 +1104,7 @@
         "tags": [
           "media-v-1-rest-controller"
         ],
-        "operationId": "delete_5",
+        "operationId": "MediaV1RestController_delete",
         "parameters": [
           {
             "name": "id",
@@ -1126,7 +1126,7 @@
         "tags": [
           "media-v-1-rest-controller"
         ],
-        "operationId": "patch_5",
+        "operationId": "MediaV1RestController_patch",
         "parameters": [
           {
             "name": "id",
@@ -1167,7 +1167,7 @@
         "tags": [
           "library-v-1-rest-controller"
         ],
-        "operationId": "getById_6",
+        "operationId": "LibraryV1RestController_getById",
         "parameters": [
           {
             "name": "id",
@@ -1196,7 +1196,7 @@
         "tags": [
           "library-v-1-rest-controller"
         ],
-        "operationId": "delete_6",
+        "operationId": "LibraryV1RestController_delete",
         "parameters": [
           {
             "name": "id",
@@ -1218,7 +1218,7 @@
         "tags": [
           "library-v-1-rest-controller"
         ],
-        "operationId": "patch_6",
+        "operationId": "LibraryV1RestController_patch",
         "parameters": [
           {
             "name": "id",
@@ -1259,7 +1259,7 @@
         "tags": [
           "collection-v-1-rest-controller"
         ],
-        "operationId": "getById_7",
+        "operationId": "CollectionV1RestController_getById",
         "parameters": [
           {
             "name": "id",
@@ -1288,7 +1288,7 @@
         "tags": [
           "collection-v-1-rest-controller"
         ],
-        "operationId": "delete_7",
+        "operationId": "CollectionV1RestController_delete",
         "parameters": [
           {
             "name": "id",
@@ -1310,7 +1310,7 @@
         "tags": [
           "collection-v-1-rest-controller"
         ],
-        "operationId": "patch_7",
+        "operationId": "CollectionV1RestController_patch",
         "parameters": [
           {
             "name": "id",
@@ -1351,7 +1351,7 @@
         "tags": [
           "artist-v-1-rest-controller"
         ],
-        "operationId": "getById_8",
+        "operationId": "ArtistV1RestController_getById",
         "parameters": [
           {
             "name": "id",
@@ -1380,7 +1380,7 @@
         "tags": [
           "artist-v-1-rest-controller"
         ],
-        "operationId": "delete_8",
+        "operationId": "ArtistV1RestController_delete",
         "parameters": [
           {
             "name": "id",
@@ -1402,7 +1402,7 @@
         "tags": [
           "artist-v-1-rest-controller"
         ],
-        "operationId": "patch_8",
+        "operationId": "ArtistV1RestController_patch",
         "parameters": [
           {
             "name": "id",
@@ -1443,7 +1443,7 @@
         "tags": [
           "user-statistics-v-1-rest-controller"
         ],
-        "operationId": "getUserStatistics",
+        "operationId": "UserStatisticsV1RestController_getUserStatistics",
         "parameters": [
           {
             "name": "userId",

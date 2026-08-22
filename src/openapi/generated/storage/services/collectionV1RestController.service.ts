@@ -13,9 +13,10 @@ import { Observable } from "rxjs";
 import { BASE_PATH_STORAGE, CLIENT_CONTEXT_TOKEN_STORAGE } from "../tokens";
 import { HttpParamsBuilder } from "../utils/http-params-builder";
 import { Pageable, RequestOptions, PagedModelCollectionDTO, CreateCollectionRequest, CollectionDTO, PatchCollectionRequest } from "../models";
+import { PagedRestService } from "../../../base/paged-rest-service.interface";
 
 @Injectable({ providedIn: "root" })
-export class CollectionV1RestControllerService {
+export class CollectionV1RestControllerService implements PagedRestService<CollectionDTO, CreateCollectionRequest, PatchCollectionRequest> {
     private readonly httpClient: HttpClient = inject(HttpClient);
     private readonly basePath: string = inject(BASE_PATH_STORAGE);
     private readonly clientContextToken: HttpContextToken<string> = CLIENT_CONTEXT_TOKEN_STORAGE;
@@ -25,10 +26,10 @@ export class CollectionV1RestControllerService {
         return context.set(this.clientContextToken, 'Storage');
     }
 
-    getAllPaged7(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelCollectionDTO>;
-    getAllPaged7(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelCollectionDTO>>;
-    getAllPaged7(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelCollectionDTO>>;
-    getAllPaged7(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelCollectionDTO>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelCollectionDTO>>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelCollectionDTO>>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/collections`;
 
         let params = new HttpParams();
@@ -60,10 +61,10 @@ export class CollectionV1RestControllerService {
         });
     }
 
-    save7(createCollectionRequest: CreateCollectionRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<CollectionDTO>;
-    save7(createCollectionRequest: CreateCollectionRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<CollectionDTO>>;
-    save7(createCollectionRequest: CreateCollectionRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<CollectionDTO>>;
-    save7(createCollectionRequest: CreateCollectionRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    save(createCollectionRequest: CreateCollectionRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<CollectionDTO>;
+    save(createCollectionRequest: CreateCollectionRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<CollectionDTO>>;
+    save(createCollectionRequest: CreateCollectionRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<CollectionDTO>>;
+    save(createCollectionRequest: CreateCollectionRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/collections`;
 
         let headers: HttpHeaders;
@@ -92,10 +93,10 @@ export class CollectionV1RestControllerService {
         });
     }
 
-    getById7(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<CollectionDTO>;
-    getById7(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<CollectionDTO>>;
-    getById7(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<CollectionDTO>>;
-    getById7(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getById(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<CollectionDTO>;
+    getById(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<CollectionDTO>>;
+    getById(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<CollectionDTO>>;
+    getById(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/collections/${id}`;
 
         let headers: HttpHeaders;
@@ -118,10 +119,10 @@ export class CollectionV1RestControllerService {
         });
     }
 
-    patch7(id: string, patchCollectionRequest: PatchCollectionRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<CollectionDTO>;
-    patch7(id: string, patchCollectionRequest: PatchCollectionRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<CollectionDTO>>;
-    patch7(id: string, patchCollectionRequest: PatchCollectionRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<CollectionDTO>>;
-    patch7(id: string, patchCollectionRequest: PatchCollectionRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    patch(id: string, patchCollectionRequest: PatchCollectionRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<CollectionDTO>;
+    patch(id: string, patchCollectionRequest: PatchCollectionRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<CollectionDTO>>;
+    patch(id: string, patchCollectionRequest: PatchCollectionRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<CollectionDTO>>;
+    patch(id: string, patchCollectionRequest: PatchCollectionRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/collections/${id}`;
 
         let headers: HttpHeaders;
@@ -150,10 +151,10 @@ export class CollectionV1RestControllerService {
         });
     }
 
-    delete7(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
-    delete7(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
-    delete7(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
-    delete7(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    delete(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
+    delete(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
+    delete(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
+    delete(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/collections/${id}`;
 
         let headers: HttpHeaders;
