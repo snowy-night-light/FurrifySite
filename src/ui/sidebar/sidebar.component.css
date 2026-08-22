@@ -1,0 +1,3 @@
+:host ::ng-deep .menu li > details > summary::after {
+    scale: 1.4;
+}

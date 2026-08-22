@@ -2,7 +2,7 @@ import {ApplicationConfig, provideBrowserGlobalErrorListeners} from '@angular/co
 import {provideRouter} from '@angular/router';
 import {provideTranslateService} from '@ngx-translate/core';
 import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
-import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClient, withInterceptors} from '@angular/common/http';
 
 import {routes} from './app.routes';
 import {
@@ -12,12 +12,13 @@ import {
     UserActivityService,
     INCLUDE_BEARER_TOKEN_INTERCEPTOR_CONFIG,
     createInterceptorCondition,
-    IncludeBearerTokenCondition
+    IncludeBearerTokenCondition,
+    includeBearerTokenInterceptor
 } from 'keycloak-angular';
 
 import {environment} from '../environments/environment';
 import {provideStorageClient} from '../openapi/generated/storage';
-import {provideAttachmentsClient} from '../openapi/generated/attachments';
+import {provideAttachmentClient} from '../openapi/generated/attachment';
 
 
 const urlCondition = createInterceptorCondition<IncludeBearerTokenCondition>({
@@ -28,7 +29,7 @@ const urlCondition = createInterceptorCondition<IncludeBearerTokenCondition>({
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideHttpClient(),
+        provideHttpClient(withInterceptors([includeBearerTokenInterceptor])),
         provideTranslateService({
             loader: provideTranslateHttpLoader({prefix: '/translations/', suffix: '.json'}),
             fallbackLang: 'en-US',
@@ -37,7 +38,7 @@ export const appConfig: ApplicationConfig = {
         provideStorageClient({
             basePath: environment.gatewayUrl + '/storage',
         }),
-        provideAttachmentsClient({
+        provideAttachmentClient({
             basePath: environment.gatewayUrl + '/attachments',
         }),
         provideKeycloak({
@@ -53,7 +54,7 @@ export const appConfig: ApplicationConfig = {
             features: [
                 withAutoRefreshToken({
                     onInactivityTimeout: 'logout',
-                    sessionTimeout: 60000
+                    sessionTimeout: 1200000
                 })
             ],
             providers: [

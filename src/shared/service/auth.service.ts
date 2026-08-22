@@ -19,6 +19,10 @@ export class AuthService {
         if (!this.authenticated() || !this.keycloak.tokenParsed) return undefined;
         return (this.keycloak.tokenParsed['picture'] as string) || (this.keycloak.tokenParsed['avatar'] as string);
     });
+    userId = computed<string | undefined>(() => {
+        if (!this.authenticated() || !this.keycloak.tokenParsed) return undefined;
+        return this.keycloak.tokenParsed.sub;
+    });
 
     private authenticated = signal<boolean>(false);
 
@@ -42,6 +46,10 @@ export class AuthService {
         return this.keycloak.login();
     }
 
+    getUserId(): string | undefined {
+        if (!this.authenticated() || !this.keycloak.tokenParsed) return undefined;
+        return this.keycloak.tokenParsed.sub;
+    }
 
     logout() {
         return this.keycloak.logout();

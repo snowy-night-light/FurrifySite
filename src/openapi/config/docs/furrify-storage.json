@@ -16,7 +16,7 @@
     }
   ],
   "paths": {
-    "/v1/storage/tags": {
+    "/v1/tags": {
       "get": {
         "tags": [
           "tag-v-1-rest-controller"
@@ -82,7 +82,7 @@
         }
       }
     },
-    "/v1/storage/tags/categories": {
+    "/v1/tags/categories": {
       "get": {
         "tags": [
           "tag-category-v-1-rest-controller"
@@ -148,7 +148,7 @@
         }
       }
     },
-    "/v1/storage/tags/aliases": {
+    "/v1/tags/aliases": {
       "get": {
         "tags": [
           "tag-alias-v-1-rest-controller"
@@ -214,7 +214,7 @@
         }
       }
     },
-    "/v1/storage/sources": {
+    "/v1/sources": {
       "get": {
         "tags": [
           "source-v-1-rest-controller"
@@ -280,7 +280,7 @@
         }
       }
     },
-    "/v1/storage/posts": {
+    "/v1/posts": {
       "get": {
         "tags": [
           "post-v-1-rest-controller"
@@ -346,7 +346,7 @@
         }
       }
     },
-    "/v1/storage/media": {
+    "/v1/media": {
       "get": {
         "tags": [
           "media-v-1-rest-controller"
@@ -412,12 +412,144 @@
         }
       }
     },
-    "/v1/storage/artists": {
+    "/v1/libraries": {
+      "get": {
+        "tags": [
+          "library-v-1-rest-controller"
+        ],
+        "operationId": "getAllPaged_6",
+        "parameters": [
+          {
+            "name": "spec",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedModelLibraryDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "library-v-1-rest-controller"
+        ],
+        "operationId": "save_6",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLibraryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/LibraryDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/collections": {
+      "get": {
+        "tags": [
+          "collection-v-1-rest-controller"
+        ],
+        "operationId": "getAllPaged_7",
+        "parameters": [
+          {
+            "name": "spec",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedModelCollectionDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "collection-v-1-rest-controller"
+        ],
+        "operationId": "save_7",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCollectionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/artists": {
       "get": {
         "tags": [
           "artist-v-1-rest-controller"
         ],
-        "operationId": "getAllPaged_6",
+        "operationId": "getAllPaged_8",
         "parameters": [
           {
             "name": "spec",
@@ -453,7 +585,7 @@
         "tags": [
           "artist-v-1-rest-controller"
         ],
-        "operationId": "save_6",
+        "operationId": "save_8",
         "requestBody": {
           "content": {
             "application/json": {
@@ -478,7 +610,7 @@
         }
       }
     },
-    "/v1/storage/tags/{id}": {
+    "/v1/tags/{id}": {
       "get": {
         "tags": [
           "tag-v-1-rest-controller"
@@ -570,7 +702,7 @@
         }
       }
     },
-    "/v1/storage/tags/categories/{id}": {
+    "/v1/tags/categories/{id}": {
       "get": {
         "tags": [
           "tag-category-v-1-rest-controller"
@@ -662,7 +794,7 @@
         }
       }
     },
-    "/v1/storage/tags/aliases/{id}": {
+    "/v1/tags/aliases/{id}": {
       "get": {
         "tags": [
           "tag-alias-v-1-rest-controller"
@@ -754,7 +886,7 @@
         }
       }
     },
-    "/v1/storage/sources/{id}": {
+    "/v1/sources/{id}": {
       "get": {
         "tags": [
           "source-v-1-rest-controller"
@@ -846,7 +978,7 @@
         }
       }
     },
-    "/v1/storage/posts/{id}": {
+    "/v1/posts/{id}": {
       "get": {
         "tags": [
           "post-v-1-rest-controller"
@@ -938,7 +1070,7 @@
         }
       }
     },
-    "/v1/storage/media/{id}": {
+    "/v1/media/{id}": {
       "get": {
         "tags": [
           "media-v-1-rest-controller"
@@ -1030,12 +1162,196 @@
         }
       }
     },
-    "/v1/storage/artists/{id}": {
+    "/v1/libraries/{id}": {
+      "get": {
+        "tags": [
+          "library-v-1-rest-controller"
+        ],
+        "operationId": "getById_6",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LibraryDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "library-v-1-rest-controller"
+        ],
+        "operationId": "delete_6",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "library-v-1-rest-controller"
+        ],
+        "operationId": "patch_6",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchLibraryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/LibraryDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/collections/{id}": {
+      "get": {
+        "tags": [
+          "collection-v-1-rest-controller"
+        ],
+        "operationId": "getById_7",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "collection-v-1-rest-controller"
+        ],
+        "operationId": "delete_7",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "collection-v-1-rest-controller"
+        ],
+        "operationId": "patch_7",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchCollectionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/artists/{id}": {
       "get": {
         "tags": [
           "artist-v-1-rest-controller"
         ],
-        "operationId": "getById_6",
+        "operationId": "getById_8",
         "parameters": [
           {
             "name": "id",
@@ -1064,7 +1380,7 @@
         "tags": [
           "artist-v-1-rest-controller"
         ],
-        "operationId": "delete_6",
+        "operationId": "delete_8",
         "parameters": [
           {
             "name": "id",
@@ -1086,7 +1402,7 @@
         "tags": [
           "artist-v-1-rest-controller"
         ],
-        "operationId": "patch_6",
+        "operationId": "patch_8",
         "parameters": [
           {
             "name": "id",
@@ -1121,6 +1437,36 @@
           }
         }
       }
+    },
+    "/v1/user/{userId}/statistics": {
+      "get": {
+        "tags": [
+          "user-statistics-v-1-rest-controller"
+        ],
+        "operationId": "getUserStatistics",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserStatisticsDto"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1140,6 +1486,9 @@
           "name": {
             "type": "string",
             "pattern": "^[a-z0-9 ]+$"
+          },
+          "library": {
+            "$ref": "#/components/schemas/EntityIdRequest"
           }
         },
         "required": [
@@ -1155,6 +1504,321 @@
           }
         }
       },
+      "ArtistDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "modifiedBy": {
+            "type": "string"
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ownerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "nicknames": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ArtistNickname"
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SourceDTO"
+            }
+          },
+          "avatar": {
+            "$ref": "#/components/schemas/MediaDTO"
+          },
+          "library": {}
+        }
+      },
+      "ArtistNickname": {
+        "type": "object",
+        "properties": {
+          "nickname": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9._\\-]+$"
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "required": [
+          "nickname"
+        ]
+      },
+      "CollectionDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "modifiedBy": {
+            "type": "string"
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ownerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "library": {}
+        }
+      },
+      "LibraryDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "modifiedBy": {
+            "type": "string"
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ownerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "posts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PostDTO"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TagDTO"
+            }
+          },
+          "artists": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ArtistDTO"
+            }
+          },
+          "collections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionDTO"
+            }
+          }
+        }
+      },
+      "MediaDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "modifiedBy": {
+            "type": "string"
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ownerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fileReferenceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SourceDTO"
+            }
+          }
+        }
+      },
+      "PostDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "modifiedBy": {
+            "type": "string"
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ownerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TagDTO"
+            }
+          },
+          "artists": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ArtistDTO"
+            }
+          },
+          "displayMediaList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MediaDTO"
+            }
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MediaDTO"
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SourceDTO"
+            }
+          },
+          "collections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionDTO"
+            }
+          },
+          "library": {}
+        }
+      },
+      "SourceDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "modifiedBy": {
+            "type": "string"
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ownerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "data": {
+            "type": "object",
+            "additionalProperties": {}
+          },
+          "strategy": {
+            "$ref": "#/components/schemas/SourceStrategy"
+          }
+        }
+      },
+      "SourceStrategy": {},
       "TagAliasDTO": {
         "type": "object",
         "properties": {
@@ -1270,6 +1934,9 @@
           },
           "category": {
             "$ref": "#/components/schemas/TagCategoryDTO"
+          },
+          "library": {
+            "$ref": "#/components/schemas/LibraryDTO"
           }
         }
       },
@@ -1322,45 +1989,6 @@
           "strategy"
         ]
       },
-      "SourceStrategy": {},
-      "SourceDTO": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "version": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "modifiedBy": {
-            "type": "string"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdBy": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "ownerId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "data": {
-            "type": "object",
-            "additionalProperties": {}
-          },
-          "strategy": {
-            "$ref": "#/components/schemas/SourceStrategy"
-          }
-        }
-      },
       "CreatePostRequest": {
         "type": "object",
         "properties": {
@@ -1401,187 +2029,16 @@
             "items": {
               "$ref": "#/components/schemas/EntityIdRequest"
             }
+          },
+          "library": {
+            "$ref": "#/components/schemas/EntityIdRequest"
           }
         },
         "required": [
+          "library",
           "tags",
           "title"
         ]
-      },
-      "ArtistDTO": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "version": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "modifiedBy": {
-            "type": "string"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdBy": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "ownerId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "nicknames": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ArtistNickname"
-            }
-          },
-          "sources": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SourceDTO"
-            }
-          },
-          "avatar": {
-            "$ref": "#/components/schemas/MediaDTO"
-          }
-        }
-      },
-      "ArtistNickname": {
-        "type": "object",
-        "properties": {
-          "nickname": {
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[A-Za-z0-9._\\-]+$"
-          },
-          "priority": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "required": [
-          "nickname"
-        ]
-      },
-      "MediaDTO": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "version": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "modifiedBy": {
-            "type": "string"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdBy": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "ownerId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "priority": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "fileReferenceId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "sources": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SourceDTO"
-            }
-          }
-        }
-      },
-      "PostDTO": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "version": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "modifiedBy": {
-            "type": "string"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdBy": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "ownerId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TagDTO"
-            }
-          },
-          "artists": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ArtistDTO"
-            }
-          },
-          "displayMediaList": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MediaDTO"
-            }
-          },
-          "attachments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MediaDTO"
-            }
-          },
-          "sources": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SourceDTO"
-            }
-          }
-        }
       },
       "CreateMediaRequest": {
         "type": "object",
@@ -1608,6 +2065,35 @@
           "priority"
         ]
       },
+      "CreateLibraryRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "title"
+        ]
+      },
+      "CreateCollectionRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "posts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityIdRequest"
+            }
+          },
+          "library": {
+            "$ref": "#/components/schemas/EntityIdRequest"
+          }
+        }
+      },
       "CreateArtistRequest": {
         "type": "object",
         "properties": {
@@ -1625,6 +2111,9 @@
             }
           },
           "avatar": {
+            "$ref": "#/components/schemas/EntityIdRequest"
+          },
+          "library": {
             "$ref": "#/components/schemas/EntityIdRequest"
           }
         },
@@ -1676,6 +2165,9 @@
           },
           "name": {
             "$ref": "#/components/schemas/JsonNullableString"
+          },
+          "library": {
+            "$ref": "#/components/schemas/JsonNullableEntityIdRequest"
           }
         }
       },
@@ -1757,6 +2249,9 @@
           },
           "sources": {
             "$ref": "#/components/schemas/JsonNullableListEntityIdRequest"
+          },
+          "library": {
+            "$ref": "#/components/schemas/JsonNullableEntityIdRequest"
           }
         }
       },
@@ -1796,6 +2291,28 @@
           }
         }
       },
+      "PatchLibraryRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "$ref": "#/components/schemas/JsonNullableString"
+          }
+        }
+      },
+      "PatchCollectionRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "$ref": "#/components/schemas/JsonNullableString"
+          },
+          "posts": {
+            "$ref": "#/components/schemas/JsonNullableListEntityIdRequest"
+          },
+          "library": {
+            "$ref": "#/components/schemas/JsonNullableEntityIdRequest"
+          }
+        }
+      },
       "JsonNullableListArtistNickname": {
         "type": "object",
         "properties": {
@@ -1818,6 +2335,84 @@
           },
           "avatar": {
             "$ref": "#/components/schemas/JsonNullableEntityIdRequest"
+          },
+          "library": {
+            "$ref": "#/components/schemas/JsonNullableEntityIdRequest"
+          }
+        }
+      },
+      "DailyUserStatisticsChartData": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "newPostsCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "newCollectionsCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "newTagsCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "newArtistsCount": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "UserStatisticsDto": {
+        "type": "object",
+        "properties": {
+          "postsCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "collectionsCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "librariesCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tagsCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "artistsCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "imagesCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "videoCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "animationCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "musicCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ownerId": {
+            "type": "string"
+          },
+          "last7DaysChart": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DailyUserStatisticsChartData"
+            }
           }
         }
       },
@@ -1940,6 +2535,34 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MediaDTO"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMetadata"
+          }
+        }
+      },
+      "PagedModelLibraryDTO": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LibraryDTO"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMetadata"
+          }
+        }
+      },
+      "PagedModelCollectionDTO": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionDTO"
             }
           },
           "page": {

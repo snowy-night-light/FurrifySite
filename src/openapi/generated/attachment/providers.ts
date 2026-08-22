@@ -9,12 +9,12 @@
 */
 import { EnvironmentProviders, Provider, makeEnvironmentProviders } from "@angular/core";
 import { HTTP_INTERCEPTORS, HttpInterceptor } from "@angular/common/http";
-import { BASE_PATH_ATTACHMENTS, HTTP_INTERCEPTORS_ATTACHMENTS } from "./tokens";
-import { AttachmentsBaseInterceptor } from "./utils/base-interceptor";
+import { BASE_PATH_ATTACHMENT, HTTP_INTERCEPTORS_ATTACHMENT } from "./tokens";
+import { AttachmentBaseInterceptor } from "./utils/base-interceptor";
 import { DateInterceptor } from "./utils/date-transformer";
 
-/** Configuration options for Attachments client */
-export interface AttachmentsConfig {
+/** Configuration options for Attachment client */
+export interface AttachmentConfig {
     /** Base API URL */
     basePath: string;
     /** Enable automatic date transformation (default: true) */
@@ -26,16 +26,16 @@ export interface AttachmentsConfig {
     dateTransformRegex?: RegExp;
 }
 
-/** Provides configuration for Attachments client */
+/** Provides configuration for Attachment client */
 /** */
 /** @example */
 /** ```typescript */
 /** // In your app.config.ts */
-/** import { provideAttachmentsClient } from './api/providers'; */
+/** import { provideAttachmentClient } from './api/providers'; */
 /** */
 /** export const appConfig: ApplicationConfig = { */
 /**   providers: [ */
-/**     provideAttachmentsClient({ */
+/**     provideAttachmentClient({ */
 /**       basePath: 'https://api.example.com', */
 /**       interceptors: [AuthInterceptor, LoggingInterceptor] // Classes, not instances */
 /**     }), */
@@ -43,18 +43,18 @@ export interface AttachmentsConfig {
 /**   ] */
 /** }; */
 /** ``` */
-export function provideAttachmentsClient(config: AttachmentsConfig): EnvironmentProviders {
+export function provideAttachmentClient(config: AttachmentConfig): EnvironmentProviders {
 
     const providers: Provider[] = [
         // Base path token for this client
         {
-            provide: BASE_PATH_ATTACHMENTS,
+            provide: BASE_PATH_ATTACHMENT,
             useValue: config.basePath
         },
         // Base interceptor that handles client-specific interceptors
         {
             provide: HTTP_INTERCEPTORS,
-            useClass: AttachmentsBaseInterceptor,
+            useClass: AttachmentBaseInterceptor,
             multi: true
         }
     ];
@@ -69,19 +69,19 @@ export function provideAttachmentsClient(config: AttachmentsConfig): Environment
         }
 
         providers.push({
-            provide: HTTP_INTERCEPTORS_ATTACHMENTS,
+            provide: HTTP_INTERCEPTORS_ATTACHMENT,
             useValue: interceptorInstances
         });
     } else if (config.enableDateTransform !== false) {
         // Only date interceptor enabled
         providers.push({
-            provide: HTTP_INTERCEPTORS_ATTACHMENTS,
+            provide: HTTP_INTERCEPTORS_ATTACHMENT,
             useValue: [new DateInterceptor(config.dateTransformRegex)]
         });
     } else {
         // No interceptors
         providers.push({
-            provide: HTTP_INTERCEPTORS_ATTACHMENTS,
+            provide: HTTP_INTERCEPTORS_ATTACHMENT,
             useValue: []
         });
     }

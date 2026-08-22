@@ -1,4 +1,52 @@
 {
+    "app": {
+        "navbar": {
+            "dashboard": "Dashboard",
+            "logout": "Logout"
+        },
+        "dashboard": {
+            "overview": {
+                "title": "Overview",
+                "collections": "Collection",
+                "libraries": "Libraries",
+                "brokers": "Brokers",
+                "tags": "Tags",
+                "artists": "Artists",
+                "posts": "Posts",
+                "mediaTypes": {
+                    "title": "Media Types",
+                    "images": "Images",
+                    "videos": "Videos",
+                    "animations": "Animations",
+                    "music": "Music"
+                },
+                "growthChart": {
+                    "title": "Growth Activity (Last 7 Days)",
+                    "newCollections": "New collections",
+                    "newPosts": "New posts",
+                    "newTags": "New tags",
+                    "newArtists": "New artists"
+                }
+            },
+            "sidebar": {
+                "navigation": "Navigation",
+                "libraries": "Libraries",
+                "overview": "Overview",
+                "manageLibraries": "Manage Libraries"
+            }
+        }
+    },
+    "store": {
+        "dataset": {
+            "errors": {
+                "getByIdFailedTitle": "Failed to fetch record!",
+                "updateByIdFailedTitle": "Failed to update record!",
+                "createFailedTitle": "Failed to create record!",
+                "fetchFailedTitle": "Failed to fetch records!",
+                "deleteByIdFailedTitle": "Failed to remove record!"
+            }
+        }
+    },
     "auth": {
         "welcomeBack": "Welcome back!",
         "welcomeBackDescription": "Sign in to access your dashboard, manage your collection, and connect with your favourite creators content.",
@@ -6,11 +54,6 @@
             "signIn": "Sign In",
             "loginToContinue": "Log in to your account to continue",
             "continueWithPurifyAuth": "Continue with FurrifyAuth"
-        }
-    },
-    "ui": {
-        "navbar": {
-            "logout": "Logout"
         }
     },
     "notFound": {

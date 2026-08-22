@@ -17,11 +17,104 @@ export interface CreateTagRequest extends CreateRequest {
     aliases?: Array<EntityIdRequest>;
     category: EntityIdRequest;
     name?: string;
+    library?: EntityIdRequest;
 }
 
 export interface EntityIdRequest {
     id?: string;
 }
+
+export interface ArtistDTO extends UserScopeEntity {
+    id?: string;
+    version?: number;
+    modifiedBy?: string;
+    modifiedAt?: Date;
+    createdBy?: string;
+    createdAt?: Date;
+    ownerId?: string;
+    nicknames?: Array<ArtistNickname>;
+    sources?: Array<SourceDTO>;
+    avatar?: MediaDTO;
+    library?: any;
+}
+
+export interface ArtistNickname {
+    nickname: string;
+    priority?: number;
+}
+
+export interface CollectionDTO extends UserScopeEntity {
+    id?: string;
+    version?: number;
+    modifiedBy?: string;
+    modifiedAt?: Date;
+    createdBy?: string;
+    createdAt?: Date;
+    ownerId?: string;
+    title?: string;
+    library?: any;
+}
+
+export interface LibraryDTO extends UserScopeEntity {
+    id?: string;
+    version?: number;
+    modifiedBy?: string;
+    modifiedAt?: Date;
+    createdBy?: string;
+    createdAt?: Date;
+    ownerId?: string;
+    title?: string;
+    posts?: Array<PostDTO>;
+    tags?: Array<TagDTO>;
+    artists?: Array<ArtistDTO>;
+    collections?: Array<CollectionDTO>;
+}
+
+export interface MediaDTO extends UserScopeEntity {
+    id?: string;
+    version?: number;
+    modifiedBy?: string;
+    modifiedAt?: Date;
+    createdBy?: string;
+    createdAt?: Date;
+    ownerId?: string;
+    priority?: number;
+    fileReferenceId?: string;
+    sources?: Array<SourceDTO>;
+}
+
+export interface PostDTO extends UserScopeEntity {
+    id?: string;
+    version?: number;
+    modifiedBy?: string;
+    modifiedAt?: Date;
+    createdBy?: string;
+    createdAt?: Date;
+    ownerId?: string;
+    title?: string;
+    description?: string;
+    tags?: Array<TagDTO>;
+    artists?: Array<ArtistDTO>;
+    displayMediaList?: Array<MediaDTO>;
+    attachments?: Array<MediaDTO>;
+    sources?: Array<SourceDTO>;
+    collections?: Array<CollectionDTO>;
+    library?: any;
+}
+
+export interface SourceDTO extends UserScopeEntity {
+    id?: string;
+    version?: number;
+    modifiedBy?: string;
+    modifiedAt?: Date;
+    createdBy?: string;
+    createdAt?: Date;
+    ownerId?: string;
+    data?: Record<string, any>;
+    strategy?: SourceStrategy;
+}
+
+export type SourceStrategy = any;
 
 export interface TagAliasDTO extends UserScopeEntity {
     id?: string;
@@ -58,6 +151,7 @@ export interface TagDTO extends UserScopeEntity {
     name?: string;
     aliases?: Array<TagAliasDTO>;
     category?: TagCategoryDTO;
+    library?: LibraryDTO;
 }
 
 export interface CreateTagCategoryRequest extends CreateRequest {
@@ -75,20 +169,6 @@ export interface CreateSourceRequest extends CreateRequest {
     strategy: SourceStrategy;
 }
 
-export type SourceStrategy = any;
-
-export interface SourceDTO extends UserScopeEntity {
-    id?: string;
-    version?: number;
-    modifiedBy?: string;
-    modifiedAt?: Date;
-    createdBy?: string;
-    createdAt?: Date;
-    ownerId?: string;
-    data?: Record<string, any>;
-    strategy?: SourceStrategy;
-}
-
 export interface CreatePostRequest extends CreateRequest {
     title: string;
     description?: string;
@@ -97,54 +177,7 @@ export interface CreatePostRequest extends CreateRequest {
     displayMediaList?: Array<EntityIdRequest>;
     attachments?: Array<EntityIdRequest>;
     sources?: Array<EntityIdRequest>;
-}
-
-export interface ArtistDTO extends UserScopeEntity {
-    id?: string;
-    version?: number;
-    modifiedBy?: string;
-    modifiedAt?: Date;
-    createdBy?: string;
-    createdAt?: Date;
-    ownerId?: string;
-    nicknames?: Array<ArtistNickname>;
-    sources?: Array<SourceDTO>;
-    avatar?: MediaDTO;
-}
-
-export interface ArtistNickname {
-    nickname: string;
-    priority?: number;
-}
-
-export interface MediaDTO extends UserScopeEntity {
-    id?: string;
-    version?: number;
-    modifiedBy?: string;
-    modifiedAt?: Date;
-    createdBy?: string;
-    createdAt?: Date;
-    ownerId?: string;
-    priority?: number;
-    fileReferenceId?: string;
-    sources?: Array<SourceDTO>;
-}
-
-export interface PostDTO extends UserScopeEntity {
-    id?: string;
-    version?: number;
-    modifiedBy?: string;
-    modifiedAt?: Date;
-    createdBy?: string;
-    createdAt?: Date;
-    ownerId?: string;
-    title?: string;
-    description?: string;
-    tags?: Array<TagDTO>;
-    artists?: Array<ArtistDTO>;
-    displayMediaList?: Array<MediaDTO>;
-    attachments?: Array<MediaDTO>;
-    sources?: Array<SourceDTO>;
+    library: EntityIdRequest;
 }
 
 export interface CreateMediaRequest extends CreateRequest {
@@ -153,10 +186,21 @@ export interface CreateMediaRequest extends CreateRequest {
     sources?: Array<EntityIdRequest>;
 }
 
+export interface CreateLibraryRequest extends CreateRequest {
+    title: string;
+}
+
+export interface CreateCollectionRequest extends CreateRequest {
+    title?: string;
+    posts?: Array<EntityIdRequest>;
+    library?: EntityIdRequest;
+}
+
 export interface CreateArtistRequest extends CreateRequest {
     nicknames: Array<ArtistNickname>;
     sources?: Array<EntityIdRequest>;
     avatar?: EntityIdRequest;
+    library?: EntityIdRequest;
 }
 
 export interface JsonNullableEntityIdRequest {
@@ -178,6 +222,7 @@ export interface PatchTagRequest extends PatchRequest {
     aliases?: JsonNullableListEntityIdRequest;
     category?: JsonNullableEntityIdRequest;
     name?: JsonNullableString;
+    library?: JsonNullableEntityIdRequest;
 }
 
 export interface PatchTagCategoryRequest extends PatchRequest {
@@ -213,6 +258,7 @@ export interface PatchPostRequest extends PatchRequest {
     displayMediaList?: JsonNullableListEntityIdRequest;
     attachments?: JsonNullableListEntityIdRequest;
     sources?: JsonNullableListEntityIdRequest;
+    library?: JsonNullableEntityIdRequest;
 }
 
 export interface JsonNullableInteger {
@@ -231,6 +277,16 @@ export interface PatchMediaRequest extends PatchRequest {
     sources?: JsonNullableListEntityIdRequest;
 }
 
+export interface PatchLibraryRequest extends PatchRequest {
+    title?: JsonNullableString;
+}
+
+export interface PatchCollectionRequest extends PatchRequest {
+    title?: JsonNullableString;
+    posts?: JsonNullableListEntityIdRequest;
+    library?: JsonNullableEntityIdRequest;
+}
+
 export interface JsonNullableListArtistNickname {
     present?: boolean;
     undefined?: boolean;
@@ -240,6 +296,29 @@ export interface PatchArtistRequest extends PatchRequest {
     nicknames?: JsonNullableListArtistNickname;
     sources?: JsonNullableListEntityIdRequest;
     avatar?: JsonNullableEntityIdRequest;
+    library?: JsonNullableEntityIdRequest;
+}
+
+export interface DailyUserStatisticsChartData {
+    date?: Date;
+    newPostsCount?: number;
+    newCollectionsCount?: number;
+    newTagsCount?: number;
+    newArtistsCount?: number;
+}
+
+export interface UserStatisticsDto {
+    postsCount?: number;
+    collectionsCount?: number;
+    librariesCount?: number;
+    tagsCount?: number;
+    artistsCount?: number;
+    imagesCount?: number;
+    videoCount?: number;
+    animationCount?: number;
+    musicCount?: number;
+    ownerId?: string;
+    last7DaysChart?: Array<DailyUserStatisticsChartData>;
 }
 
 export interface Pageable {
@@ -282,6 +361,16 @@ export interface PagedModelPostDTO extends Page<PostDTO> {
 
 export interface PagedModelMediaDTO extends Page<MediaDTO> {
     content?: Array<MediaDTO>;
+    page?: PageMetadata;
+}
+
+export interface PagedModelLibraryDTO extends Page<LibraryDTO> {
+    content?: Array<LibraryDTO>;
+    page?: PageMetadata;
+}
+
+export interface PagedModelCollectionDTO extends Page<CollectionDTO> {
+    content?: Array<CollectionDTO>;
     page?: PageMetadata;
 }
 

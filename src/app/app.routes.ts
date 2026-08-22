@@ -7,12 +7,27 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 export const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
+  },
+  {
+    path: 'dashboard',
     component: DashboardComponent,
     canActivate: [canActivateAuthRole],
     data: {
       redirect: '/login'
-    }
+    },
+    children: [
+      {
+        path: '',
+        redirectTo: 'overview',
+        pathMatch: 'full'
+      },
+      {
+        path: 'overview',
+        loadComponent: () => import('./dashboard/overview/dashboard-overview.component').then(m => m.DashboardOverviewComponent)
+      }
+    ]
   },
   {
     path: 'login',

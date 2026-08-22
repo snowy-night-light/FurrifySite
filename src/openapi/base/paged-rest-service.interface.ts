@@ -1,6 +1,6 @@
 import {
     RequestOptions
-} from '../generated/attachments';
+} from './request-options';
 import {Observable} from 'rxjs';
 import {HttpEvent, HttpResponse} from '@angular/common/http';
 import {BaseEntity} from './base-entity.interface';

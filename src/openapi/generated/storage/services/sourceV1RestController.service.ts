@@ -29,7 +29,7 @@ export class SourceV1RestControllerService {
     getAllPaged3(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelSourceDTO>>;
     getAllPaged3(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelSourceDTO>>;
     getAllPaged3(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/sources`;
+        const url = `${this.basePath}/v1/sources`;
 
         let params = new HttpParams();
         if (spec != null) {
@@ -64,7 +64,7 @@ export class SourceV1RestControllerService {
     save3(createSourceRequest: CreateSourceRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<SourceDTO>>;
     save3(createSourceRequest: CreateSourceRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<SourceDTO>>;
     save3(createSourceRequest: CreateSourceRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/sources`;
+        const url = `${this.basePath}/v1/sources`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {
@@ -96,7 +96,7 @@ export class SourceV1RestControllerService {
     getById3(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<SourceDTO>>;
     getById3(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<SourceDTO>>;
     getById3(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/sources/${id}`;
+        const url = `${this.basePath}/v1/sources/${id}`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {
@@ -122,7 +122,7 @@ export class SourceV1RestControllerService {
     patch3(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<SourceDTO>>;
     patch3(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<SourceDTO>>;
     patch3(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/sources/${id}`;
+        const url = `${this.basePath}/v1/sources/${id}`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {
@@ -154,7 +154,7 @@ export class SourceV1RestControllerService {
     delete3(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
     delete3(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
     delete3(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/sources/${id}`;
+        const url = `${this.basePath}/v1/sources/${id}`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {

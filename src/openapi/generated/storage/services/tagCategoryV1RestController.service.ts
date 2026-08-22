@@ -29,7 +29,7 @@ export class TagCategoryV1RestControllerService {
     getAllPaged1(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelTagCategoryDTO>>;
     getAllPaged1(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelTagCategoryDTO>>;
     getAllPaged1(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/tags/categories`;
+        const url = `${this.basePath}/v1/tags/categories`;
 
         let params = new HttpParams();
         if (spec != null) {
@@ -64,7 +64,7 @@ export class TagCategoryV1RestControllerService {
     save1(createTagCategoryRequest: CreateTagCategoryRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagCategoryDTO>>;
     save1(createTagCategoryRequest: CreateTagCategoryRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagCategoryDTO>>;
     save1(createTagCategoryRequest: CreateTagCategoryRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/tags/categories`;
+        const url = `${this.basePath}/v1/tags/categories`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {
@@ -96,7 +96,7 @@ export class TagCategoryV1RestControllerService {
     getById1(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<TagCategoryDTO>>;
     getById1(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<TagCategoryDTO>>;
     getById1(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/tags/categories/${id}`;
+        const url = `${this.basePath}/v1/tags/categories/${id}`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {
@@ -122,7 +122,7 @@ export class TagCategoryV1RestControllerService {
     patch1(id: string, patchTagCategoryRequest: PatchTagCategoryRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagCategoryDTO>>;
     patch1(id: string, patchTagCategoryRequest: PatchTagCategoryRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagCategoryDTO>>;
     patch1(id: string, patchTagCategoryRequest: PatchTagCategoryRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/tags/categories/${id}`;
+        const url = `${this.basePath}/v1/tags/categories/${id}`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {
@@ -154,7 +154,7 @@ export class TagCategoryV1RestControllerService {
     delete1(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
     delete1(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
     delete1(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/tags/categories/${id}`;
+        const url = `${this.basePath}/v1/tags/categories/${id}`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {

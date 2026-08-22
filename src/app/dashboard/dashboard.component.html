@@ -1,4 +1,7 @@
-<div class="flex-1 flex flex-col justify-center items-center p-12 text-center">
-    <h1 class="text-4xl font-bold text-primary">Welcome to FurrifySite!</h1>
-    <p class="mt-4 text-lg">You are securely authenticated and viewing the main dashboard.</p>
+<div class="flex flex-col lg:flex-row h-[calc(100vh-65px)] w-full overflow-hidden relative">
+    <ui-sidebar [items]="sidebarItems" class="block w-full lg:w-64 lg:h-full shrink-0 z-20"></ui-sidebar>
+
+    <main class="flex-1 p-6 space-y-6 overflow-y-auto bg-base-200">
+        <router-outlet></router-outlet>
+    </main>
 </div>
