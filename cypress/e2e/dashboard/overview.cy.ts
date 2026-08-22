@@ -23,8 +23,8 @@ describe('Overview page', () => {
         cy.get('#tagsCount').should('contain.text', '4');
         cy.get('#collectionsCount').should('contain.text', '3');
         cy.get('#librariesCount').should('contain.text', '6');
-        cy.get('#growthChart').should('be.visible');
-        cy.get('#mediaTypesChart').should('be.visible');
+        cy.get('#growthChart').scrollIntoView().should('be.visible');
+        cy.get('#mediaTypesChart').scrollIntoView().should('be.visible');
     });
 
     it("Should refresh on refresh icon clicked", () => {
