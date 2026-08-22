@@ -27,6 +27,17 @@ export class AuthService {
     private authenticated = signal<boolean>(false);
 
     constructor() {
+        // If we are running Cypress tests
+        if ((window as any).Cypress) {
+            this.authenticated.set(true);
+            this.keycloak.tokenParsed = {
+                sub: '8619f350-7307-4c54-92dc-258177db8a44',
+                preferred_username: 'testuser',
+                name: 'Test User'
+            };
+            return;
+        }
+
         effect(() => {
             const keycloakEvent = this.keycloakSignal();
 
