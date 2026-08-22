@@ -1,6 +1,6 @@
 import {BaseEntity} from '../../../openapi/base/base-entity.interface';
 import {Page} from '../../../openapi/base/page.interface';
-import {signal} from '@angular/core';
+import {Signal, signal} from '@angular/core';
 import {PagedRestService} from '../../../openapi/base/paged-rest-service.interface';
 import {CreateRequest} from '../../../openapi/base/create-request.interface';
 import {PatchRequest} from '../../../openapi/base/patch-request.interface';
@@ -11,12 +11,12 @@ import {buildSpecString, EntitySpecification} from '../specification';
 import {BaseDataSource} from '../base-data-source';
 
 export class CrudDataSource<DTO extends BaseEntity, CREATE_REQ extends CreateRequest, PATCH_REQ extends PatchRequest> extends BaseDataSource {
-    page = signal<Page<DTO> | undefined>(undefined);
-    pageable = signal<Pageable>({
+    private page = signal<Page<DTO> | undefined>(undefined);
+    private pageable = signal<Pageable>({
         page: 0,
         size: 50
     });
-    specification = signal<EntitySpecification | undefined>(undefined);
+    private specification = signal<EntitySpecification | undefined>(undefined);
 
     constructor(private service: PagedRestService<DTO, CREATE_REQ, PATCH_REQ>) {
         super();
@@ -51,11 +51,31 @@ export class CrudDataSource<DTO extends BaseEntity, CREATE_REQ extends CreateReq
         }));
     }
 
+    getSpecificationSignal() {
+        return this.specification.asReadonly();
+    }
+
+    setSpecification(spec: EntitySpecification | undefined): void {
+        this.specification.set(spec);
+    }
+
+    setPageable(pageable: Pageable) {
+        this.pageable.set(pageable);
+    }
+
+    getPageableSignal(): Signal<Pageable> {
+        return this.pageable.asReadonly();
+    }
+
     protected fetchAfter<O>(): (source: Observable<O>) => Observable<O> {
         return (source: Observable<O>) => source.pipe(
             switchMap((value) => this.fetch().pipe(
                 map(() => value)
             ))
         );
+    }
+
+    getPageSignal(): Signal<Page<DTO> | undefined> {
+        return this.page.asReadonly();
     }
 }

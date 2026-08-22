@@ -9,10 +9,11 @@ import {UiToastService} from '../../../ui/core/service/ui-toast.service';
 import {UserStatisticsDto, UserStatisticsV1RestControllerService} from '../../../openapi/generated/storage';
 import {AuthService} from '../../../shared/service/auth.service';
 import {toSignal} from '@angular/core/rxjs-interop';
+import { RefreshButtonComponent } from '../../../ui/refresh-button/refresh-button.component';
 
 @Component({
     selector: 'app-dashboard-overview',
-    imports: [CommonModule, NgxEchartsDirective, TranslatePipe],
+    imports: [CommonModule, NgxEchartsDirective, TranslatePipe, RefreshButtonComponent],
     providers: [
         provideEchartsCore({ echarts: () => import('echarts') })
     ],
@@ -31,14 +32,12 @@ export class DashboardOverviewComponent implements OnInit {
     areUserStatsFetching = computed(() => this.statsEndpointDataSet.getIsFetchingSignal()());
 
     userStats = signal<UserStatisticsDto | undefined>(undefined);
-    refreshRotation = signal(0);
 
     ngOnInit(): void {
         this.fetchStatistics();
     }
 
     fetchStatistics() {
-        this.refreshRotation.update(r => r + 360);
         const userId = this.authService.getUserId();
         if (!userId) {
             console.error("User id not found in token.");

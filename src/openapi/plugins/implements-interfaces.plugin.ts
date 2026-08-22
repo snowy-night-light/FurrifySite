@@ -88,15 +88,27 @@ export class ImplementsInterfacesPlugin implements IPluginGenerator {
     }
 
     private processService(cls: ClassDeclaration, sourceFile: SourceFile) {
+        for (const method of cls.getMethods()) {
+            const name = method.getName();
+            const controllerIndex = name.indexOf('Controller');
+            if (controllerIndex !== -1) {
+                const restOfName = name.substring(controllerIndex + 'Controller'.length);
+                if (restOfName.length > 0) {
+                    const newName = restOfName.charAt(0).toLowerCase() + restOfName.slice(1);
+                    method.rename(newName);
+                }
+            }
+        }
+
         const methods = cls.getMethods().map(m => m.getName());
         const requiredMethods = ['getAllPaged', 'save', 'getById', 'patch', 'delete'];
 
-        const hasAll = requiredMethods.every(req => methods.some(m => m.endsWith(req.charAt(0).toUpperCase() + req.slice(1)) || m === req));
+        const hasAll = requiredMethods.every(req => methods.includes(req));
 
         if (hasAll) {
-            const saveMethodBase = cls.getMethods().find(m => m.getName().endsWith('Save') || m.getName() === 'save');
-            const patchMethodBase = cls.getMethods().find(m => m.getName().endsWith('Patch') || m.getName() === 'patch');
-            const getByIdMethodBase = cls.getMethods().find(m => m.getName().endsWith('GetById') || m.getName() === 'getById');
+            const saveMethodBase = cls.getMethods().find(m => m.getName() === 'save');
+            const patchMethodBase = cls.getMethods().find(m => m.getName() === 'patch');
+            const getByIdMethodBase = cls.getMethods().find(m => m.getName() === 'getById');
 
             const saveMethod = saveMethodBase?.getOverloads()[0] || saveMethodBase;
             const patchMethod = patchMethodBase?.getOverloads()[0] || patchMethodBase;

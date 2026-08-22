@@ -6,11 +6,30 @@ import {CrudDataSource} from './crud-data-source';
 import {UiToastService} from '../../../ui/core/service/ui-toast.service';
 import {Page} from '../../../openapi/base/page.interface';
 import {BaseDataSet} from '../base-data-set';
+import {EntitySpecification} from '../specification';
+import {Pageable} from '../../../openapi/base/pageable.interface';
+import {Signal} from '@angular/core';
 
 export class CrudDataSet<DTO extends BaseEntity, CREATE_REQ extends CreateRequest, PATCH_REQ extends PatchRequest> extends BaseDataSet {
 
     constructor(protected override dataSource: CrudDataSource<DTO, CREATE_REQ, PATCH_REQ>, toastService: UiToastService) {
         super(dataSource, toastService);
+    }
+
+    getSpecificationSignal() {
+        return this.dataSource.getSpecificationSignal();
+    }
+
+    setSpecification(spec: EntitySpecification | undefined): void {
+        this.dataSource.setSpecification(spec);
+    }
+
+    setPageable(pageable: Pageable) {
+        this.dataSource.setPageable(pageable);
+    }
+
+    getPageableSignal(): Signal<Pageable> {
+        return this.dataSource.getPageableSignal();
     }
 
     getById(id: string): Observable<DTO> {
@@ -45,5 +64,9 @@ export class CrudDataSet<DTO extends BaseEntity, CREATE_REQ extends CreateReques
         return this.dataSource.fetch().pipe(
             this.handleError('store.dataset.errors.fetchFailedTitle')
         );
+    }
+
+    getPageSignal(): Signal<Page<DTO> | undefined> {
+        return this.dataSource.getPageSignal();
     }
 }

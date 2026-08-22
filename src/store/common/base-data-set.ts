@@ -4,8 +4,11 @@ import {UiToastService} from '../../ui/core/service/ui-toast.service';
 import {Signal} from '@angular/core';
 
 import {BaseDataSource} from './base-data-source';
+import {TranslatePipe} from '@ngx-translate/core';
 
 export abstract class BaseDataSet {
+
+    private translatePipe = new TranslatePipe();
 
     protected constructor(protected dataSource: BaseDataSource, protected toastService: UiToastService) {
     }
@@ -19,7 +22,7 @@ export abstract class BaseDataSet {
             catchError((error) => {
                 this.toastService.addToast({
                     iconClassList: ['bi', 'bi-x-circle'],
-                    text: titleKey ?? error.message,
+                    text: this.translatePipe.transform(titleKey) ?? error.message,
                     duration: 7000,
                     color: 'error'
                 });

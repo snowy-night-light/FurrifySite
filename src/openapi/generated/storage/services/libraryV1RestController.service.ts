@@ -13,9 +13,10 @@ import { Observable } from "rxjs";
 import { BASE_PATH_STORAGE, CLIENT_CONTEXT_TOKEN_STORAGE } from "../tokens";
 import { HttpParamsBuilder } from "../utils/http-params-builder";
 import { Pageable, RequestOptions, PagedModelLibraryDTO, CreateLibraryRequest, LibraryDTO, PatchLibraryRequest } from "../models";
+import { PagedRestService } from "../../../base/paged-rest-service.interface";
 
 @Injectable({ providedIn: "root" })
-export class LibraryV1RestControllerService {
+export class LibraryV1RestControllerService implements PagedRestService<LibraryDTO, CreateLibraryRequest, PatchLibraryRequest> {
     private readonly httpClient: HttpClient = inject(HttpClient);
     private readonly basePath: string = inject(BASE_PATH_STORAGE);
     private readonly clientContextToken: HttpContextToken<string> = CLIENT_CONTEXT_TOKEN_STORAGE;
@@ -25,10 +26,10 @@ export class LibraryV1RestControllerService {
         return context.set(this.clientContextToken, 'Storage');
     }
 
-    getAllPaged6(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelLibraryDTO>;
-    getAllPaged6(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelLibraryDTO>>;
-    getAllPaged6(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelLibraryDTO>>;
-    getAllPaged6(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelLibraryDTO>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelLibraryDTO>>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelLibraryDTO>>;
+    getAllPaged(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/libraries`;
 
         let params = new HttpParams();
@@ -60,10 +61,10 @@ export class LibraryV1RestControllerService {
         });
     }
 
-    save6(createLibraryRequest: CreateLibraryRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<LibraryDTO>;
-    save6(createLibraryRequest: CreateLibraryRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<LibraryDTO>>;
-    save6(createLibraryRequest: CreateLibraryRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<LibraryDTO>>;
-    save6(createLibraryRequest: CreateLibraryRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    save(createLibraryRequest: CreateLibraryRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<LibraryDTO>;
+    save(createLibraryRequest: CreateLibraryRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<LibraryDTO>>;
+    save(createLibraryRequest: CreateLibraryRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<LibraryDTO>>;
+    save(createLibraryRequest: CreateLibraryRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/libraries`;
 
         let headers: HttpHeaders;
@@ -92,10 +93,10 @@ export class LibraryV1RestControllerService {
         });
     }
 
-    getById6(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<LibraryDTO>;
-    getById6(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<LibraryDTO>>;
-    getById6(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<LibraryDTO>>;
-    getById6(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    getById(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<LibraryDTO>;
+    getById(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<LibraryDTO>>;
+    getById(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<LibraryDTO>>;
+    getById(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/libraries/${id}`;
 
         let headers: HttpHeaders;
@@ -118,10 +119,10 @@ export class LibraryV1RestControllerService {
         });
     }
 
-    patch6(id: string, patchLibraryRequest: PatchLibraryRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<LibraryDTO>;
-    patch6(id: string, patchLibraryRequest: PatchLibraryRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<LibraryDTO>>;
-    patch6(id: string, patchLibraryRequest: PatchLibraryRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<LibraryDTO>>;
-    patch6(id: string, patchLibraryRequest: PatchLibraryRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    patch(id: string, patchLibraryRequest: PatchLibraryRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<LibraryDTO>;
+    patch(id: string, patchLibraryRequest: PatchLibraryRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<LibraryDTO>>;
+    patch(id: string, patchLibraryRequest: PatchLibraryRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<LibraryDTO>>;
+    patch(id: string, patchLibraryRequest: PatchLibraryRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/libraries/${id}`;
 
         let headers: HttpHeaders;
@@ -150,10 +151,10 @@ export class LibraryV1RestControllerService {
         });
     }
 
-    delete6(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
-    delete6(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
-    delete6(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
-    delete6(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
+    delete(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;
+    delete(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
+    delete(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
+    delete(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/libraries/${id}`;
 
         let headers: HttpHeaders;
