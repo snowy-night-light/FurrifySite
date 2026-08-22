@@ -1,0 +1,51 @@
+<!-- Mobile Header -->
+<div class="w-full flex items-center bg-base-100 p-4 lg:hidden shadow-sm relative z-30">
+    <button class="btn btn-square btn-ghost" (click)="toggleMobileMenu()" aria-label="Toggle Menu">
+        <i class="bi text-3xl" [class.bi-list]="!isMobileMenuOpen()" [class.bi-x]="isMobileMenuOpen()"></i>
+    </button>
+</div>
+
+<aside class="w-full lg:w-64 bg-base-100 lg:border-r border-base-300 shrink-0 h-[calc(100vh-65px-72px)] lg:h-full overflow-y-auto shadow-xl lg:shadow-sm z-20 absolute lg:static left-0 right-0 top-[72px] lg:top-0 transition-all duration-300 ease-out lg:translate-y-0 lg:opacity-100 lg:pointer-events-auto"
+       [class.opacity-0]="!isMobileMenuOpen()"
+       [class.pointer-events-none]="!isMobileMenuOpen()"
+       [class.-translate-y-full]="!isMobileMenuOpen()"
+       [class.opacity-100]="isMobileMenuOpen()"
+       [class.translate-y-0]="isMobileMenuOpen()">
+    <ul class="menu p-4 w-full text-base-content space-y-2 text-base font-medium">
+        @for (item of items(); track $index) {
+
+            @if (item.isDivider) {
+                <div class="divider my-2"></div>
+            } @else if (item.isTitle) {
+                <li class="menu-title mt-4 text-lg font-bold">{{ item.labelKey | translate}}</li>
+            } @else if (item.children && item.children.length > 0) {
+                <li>
+                    <details>
+                        <summary class="py-3" [ngClass]="item.textClass || ''" [class.opacity-50]="item.isDisabled" [class.pointer-events-none]="item.isDisabled">
+                            @if (item.iconClass) { <i [class]="item.iconClass + ' text-xl'"></i> }
+                            {{ item.labelKey | translate}}
+                        </summary>
+                        <ul>
+                            @for (subItem of item.children; track $index) {
+                                <li>
+                                    <a class="py-2" [routerLink]="subItem.route" routerLinkActive="active bg-primary text-primary-content font-bold shadow-sm" [routerLinkActiveOptions]="{exact: true}" [class.opacity-50]="subItem.isDisabled" [class.pointer-events-none]="subItem.isDisabled">
+                                        @if (subItem.iconClass) { <i [class]="subItem.iconClass"></i> }
+                                        {{ subItem.labelKey | translate}}
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </details>
+                </li>
+            } @else {
+                <li>
+                    <a class="py-3" [class.active]="item.isActive" [ngClass]="item.isActive ? 'bg-primary text-primary-content font-bold shadow-sm ' + (item.textClass || '') : (item.textClass || '')" [routerLink]="item.route" routerLinkActive="active bg-primary text-primary-content font-bold shadow-sm" [routerLinkActiveOptions]="{exact: true}" [class.opacity-50]="item.isDisabled" [class.pointer-events-none]="item.isDisabled">
+                        @if (item.iconClass) { <i [class]="item.iconClass + ' text-xl'"></i> }
+                        {{ item.labelKey | translate}}
+                    </a>
+                </li>
+            }
+
+        }
+    </ul>
+</aside>

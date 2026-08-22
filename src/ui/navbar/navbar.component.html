@@ -2,11 +2,11 @@
     <div class="navbar-start">
         @if (authService.isAuthenticated()) {
             <ul class="menu menu-horizontal px-1">
-                @for (item of navItems; track item.route) {
+                @for (item of navItems(); track item.route) {
                     <li>
                         <a [routerLink]="item.route" routerLinkActive="bg-primary text-primary-content font-bold shadow-sm" [routerLinkActiveOptions]="{exact: true}" class="font-medium text-base gap-2">
                             <i [class]="item.iconClassList.join(' ')"></i>
-                            {{ item.name }}
+                            {{ item.nameKey | translate }}
                         </a>
                     </li>
                 }
@@ -25,7 +25,7 @@
                 <i class="bi bi-translate"></i>
             </div>
             <ul tabindex="0" class="dropdown-content menu bg-base-200 rounded-box z-10 w-40 p-2 shadow-lg font-medium">
-                @for (lang of languages; track lang.languageCode; ) {
+                @for (lang of languages(); track lang.languageCode; ) {
                     <li><a tabindex="0" (keyup.enter)="onLanguageChange(lang.languageCode)" (click)="onLanguageChange(lang.languageCode)" class="flex items-center gap-2"><span
                         class="text-lg">{{ lang.unicodeFlag }}</span> <span>{{ lang.name }}</span></a></li>
                 }
@@ -58,11 +58,11 @@
                 <ul
                     tabindex="0"
                     class="menu dropdown-content bg-base-200 rounded-box z-10 mt-3 w-52 p-2 shadow-lg font-medium">
-                    @for (item of userOptions; track item.text) {
+                    @for (item of userOptions(); track item.textKey) {
                         <li>
                             <a tabindex="0" (keyup.enter)="item.onClick()" (click)="item.onClick()" class="flex items-center gap-2">
                                 <i [class]="item.iconClassList.join(' ') + ' text-lg'"></i>
-                                {{ item.text | translate }}
+                                {{ item.textKey | translate }}
                             </a>
                         </li>
                     }

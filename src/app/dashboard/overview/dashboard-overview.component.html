@@ -1,0 +1,90 @@
+<div class="flex justify-between items-center w-full">
+    <h1 class="text-3xl font-bold">{{ 'app.dashboard.overview.title' | translate }}</h1>
+    <button class="btn btn-ghost btn-circle" (click)="fetchStatistics()" [disabled]="areUserStatsFetching()" aria-label="Refresh">
+        <i class="bi bi-arrow-clockwise text-xl inline-block transition-transform duration-700 ease-in-out"
+           [style.transform]="'rotate(' + refreshRotation() + 'deg)'"></i>
+    </button>
+</div>
+
+@let valueNotAvailable = "N/A";
+
+<div class="stats stats-vertical lg:stats-horizontal shadow w-full">
+    <div class="stat">
+        <div class="stat-title">{{ 'app.dashboard.overview.posts' | translate }}</div>
+        <div class="stat-value text-primary">
+            @if (areUserStatsFetching()) {
+                <span class="loading loading-spinner"></span>
+            } @else {
+                {{ (userStats()?.postsCount ?? valueNotAvailable) }}
+            }
+        </div>
+    </div>
+    <div class="stat">
+        <div class="stat-title">{{ 'app.dashboard.overview.collections' | translate }}</div>
+        <div class="stat-value text-secondary">
+            @if (areUserStatsFetching()) {
+                <span class="loading loading-spinner"></span>
+            } @else {
+                {{ (userStats()?.collectionsCount ?? valueNotAvailable) }}
+            }
+        </div>
+    </div>
+    <div class="stat">
+        <div class="stat-title">{{ 'app.dashboard.overview.libraries' | translate }}</div>
+        <div class="stat-value">
+            @if (areUserStatsFetching()) {
+                <span class="loading loading-spinner"></span>
+            } @else {
+                {{ (userStats()?.librariesCount ?? valueNotAvailable) }}
+            }
+        </div>
+    </div>
+    <div class="stat">
+        <div class="stat-title">{{ 'app.dashboard.overview.tags' | translate }}</div>
+        <div class="stat-value text-accent">
+            @if (areUserStatsFetching()) {
+                <span class="loading loading-spinner"></span>
+            } @else {
+                {{ (userStats()?.tagsCount ?? valueNotAvailable) }}
+            }
+        </div>
+    </div>
+    <div class="stat">
+        <div class="stat-title">{{ 'app.dashboard.overview.artists' | translate }}</div>
+        <div class="stat-value text-info">
+            @if (areUserStatsFetching()) {
+                <span class="loading loading-spinner"></span>
+            } @else {
+                {{ (userStats()?.artistsCount ?? valueNotAvailable) }}
+            }
+        </div>
+    </div>
+    <div class="stat">
+        <div class="stat-title">{{ 'app.dashboard.overview.brokers' | translate }}</div>
+        <div class="stat-value text-success">
+            @if (areUserStatsFetching()) {
+                <span class="loading loading-spinner"></span>
+            } @else {
+                {{ valueNotAvailable }}
+            }
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <div class="card bg-base-100 shadow-xl col-span-1">
+        <div class="card-body">
+            <h2 class="card-title">{{ 'app.dashboard.overview.mediaTypes.title' | translate }}</h2>
+            <div echarts [options]="pieChartOptions()" class="h-80 w-full mt-4"></div>
+        </div>
+    </div>
+
+    <div class="card bg-base-100 shadow-xl col-span-1 lg:col-span-2">
+        <div class="card-body">
+            <h2 class="card-title">{{ 'app.dashboard.overview.growthChart.title' | translate }}</h2>
+            <div echarts [options]="lineChartOptions()" class="h-80 w-full mt-4"></div>
+        </div>
+    </div>
+
+</div>

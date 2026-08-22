@@ -3,9 +3,9 @@ import { GeneratorConfig } from "ng-openapi";
 import { ImplementsInterfacesPlugin } from "../plugins/implements-interfaces.plugin.ts";
 
 const config: GeneratorConfig = {
-    input: "./docs/furrify-attachments.json",
-    output: "../generated/attachments",
-    clientName: "Attachments",
+    input: "./docs/furrify-attachment.json",
+    output: "../generated/attachment",
+    clientName: "Attachment",
     options: {
         dateType: "Date",
         enumStyle: "enum",
@@ -14,3 +14,4 @@ const config: GeneratorConfig = {
 };
 
 export default config;
+

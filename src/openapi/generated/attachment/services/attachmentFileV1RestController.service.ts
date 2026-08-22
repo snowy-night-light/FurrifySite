@@ -10,7 +10,7 @@
 import { HttpClient, HttpContext, HttpContextToken, HttpEvent, HttpHeaders, HttpParams, HttpResponse } from "@angular/common/http";
 import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { BASE_PATH_ATTACHMENTS, CLIENT_CONTEXT_TOKEN_ATTACHMENTS } from "../tokens";
+import { BASE_PATH_ATTACHMENT, CLIENT_CONTEXT_TOKEN_ATTACHMENT } from "../tokens";
 import { HttpParamsBuilder } from "../utils/http-params-builder";
 import { Pageable, RequestOptions, PagedModelAttachmentFileDTO, CreateAttachmentFileRequest, AttachmentFileDTO, PatchAttachmentFileRequest } from "../models";
 import { PagedRestService } from "../../../base/paged-rest-service.interface";
@@ -18,19 +18,19 @@ import { PagedRestService } from "../../../base/paged-rest-service.interface";
 @Injectable({ providedIn: "root" })
 export class AttachmentFileV1RestControllerService implements PagedRestService<AttachmentFileDTO, CreateAttachmentFileRequest, PatchAttachmentFileRequest> {
     private readonly httpClient: HttpClient = inject(HttpClient);
-    private readonly basePath: string = inject(BASE_PATH_ATTACHMENTS);
-    private readonly clientContextToken: HttpContextToken<string> = CLIENT_CONTEXT_TOKEN_ATTACHMENTS;
+    private readonly basePath: string = inject(BASE_PATH_ATTACHMENT);
+    private readonly clientContextToken: HttpContextToken<string> = CLIENT_CONTEXT_TOKEN_ATTACHMENT;
 
     private createContextWithClientId(existingContext?: HttpContext): HttpContext {
         const context = existingContext || new HttpContext();
-        return context.set(this.clientContextToken, 'Attachments');
+        return context.set(this.clientContextToken, 'Attachment');
     }
 
     getAllPaged(pageable: Pageable, spec?: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<PagedModelAttachmentFileDTO>;
     getAllPaged(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelAttachmentFileDTO>>;
     getAllPaged(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelAttachmentFileDTO>>;
     getAllPaged(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/files`;
+        const url = `${this.basePath}/v1/files`;
 
         let params = new HttpParams();
         if (spec != null) {
@@ -65,7 +65,7 @@ export class AttachmentFileV1RestControllerService implements PagedRestService<A
     save(requestBody: CreateAttachmentFileRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<AttachmentFileDTO>>;
     save(requestBody: CreateAttachmentFileRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<AttachmentFileDTO>>;
     save(requestBody: CreateAttachmentFileRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/files`;
+        const url = `${this.basePath}/v1/files`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {
@@ -97,7 +97,7 @@ export class AttachmentFileV1RestControllerService implements PagedRestService<A
     getById(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<AttachmentFileDTO>>;
     getById(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<AttachmentFileDTO>>;
     getById(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/files/${id}`;
+        const url = `${this.basePath}/v1/files/${id}`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {
@@ -123,7 +123,7 @@ export class AttachmentFileV1RestControllerService implements PagedRestService<A
     patch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<AttachmentFileDTO>>;
     patch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<AttachmentFileDTO>>;
     patch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/files/${id}`;
+        const url = `${this.basePath}/v1/files/${id}`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {
@@ -155,7 +155,7 @@ export class AttachmentFileV1RestControllerService implements PagedRestService<A
     delete(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
     delete(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
     delete(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/files/${id}`;
+        const url = `${this.basePath}/v1/files/${id}`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {

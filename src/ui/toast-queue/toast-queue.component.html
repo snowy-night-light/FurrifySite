@@ -1,0 +1,14 @@
+<div class="toast">
+    @for (alert of queue(); track alert.id) {
+        <div class="alert max-w-sm shadow-lg" 
+             [class.alert-info]="alert.color === 'info'"
+             [class.alert-success]="alert.color === 'success'"
+             [class.alert-warning]="alert.color === 'warning'"
+             [class.alert-error]="alert.color === 'error'">
+            @if (alert.iconClassList) {
+                <i [class]="'text-xl shrink-0 ' + alert.iconClassList.join(' ')"></i>
+            }
+            <span class="w-full min-w-0 break-words max-h-40 overflow-y-auto pr-2 text-sm">{{ alert.text }}</span>
+        </div>
+    }
+</div>

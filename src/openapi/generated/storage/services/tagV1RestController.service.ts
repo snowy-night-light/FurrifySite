@@ -30,7 +30,7 @@ export class TagV1RestControllerService implements PagedRestService<TagDTO, Crea
     getAllPaged(pageable: Pageable, spec?: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PagedModelTagDTO>>;
     getAllPaged(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PagedModelTagDTO>>;
     getAllPaged(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/tags`;
+        const url = `${this.basePath}/v1/tags`;
 
         let params = new HttpParams();
         if (spec != null) {
@@ -65,7 +65,7 @@ export class TagV1RestControllerService implements PagedRestService<TagDTO, Crea
     save(createTagRequest: CreateTagRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagDTO>>;
     save(createTagRequest: CreateTagRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagDTO>>;
     save(createTagRequest: CreateTagRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/tags`;
+        const url = `${this.basePath}/v1/tags`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {
@@ -97,7 +97,7 @@ export class TagV1RestControllerService implements PagedRestService<TagDTO, Crea
     getById(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<TagDTO>>;
     getById(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<TagDTO>>;
     getById(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/tags/${id}`;
+        const url = `${this.basePath}/v1/tags/${id}`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {
@@ -123,7 +123,7 @@ export class TagV1RestControllerService implements PagedRestService<TagDTO, Crea
     patch(id: string, patchTagRequest: PatchTagRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagDTO>>;
     patch(id: string, patchTagRequest: PatchTagRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagDTO>>;
     patch(id: string, patchTagRequest: PatchTagRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/tags/${id}`;
+        const url = `${this.basePath}/v1/tags/${id}`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {
@@ -155,7 +155,7 @@ export class TagV1RestControllerService implements PagedRestService<TagDTO, Crea
     delete(id: string, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<any>>;
     delete(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<any>>;
     delete(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
-        const url = `${this.basePath}/v1/storage/tags/${id}`;
+        const url = `${this.basePath}/v1/tags/${id}`;
 
         let headers: HttpHeaders;
         if (options?.headers instanceof HttpHeaders) {

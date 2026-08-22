@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import {Component, inject, input} from '@angular/core';
+import {NgOptimizedImage} from '@angular/common';
+import {RouterLink, RouterLinkActive} from '@angular/router';
 import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 import {AuthService} from '../../shared/service/auth.service';
 
@@ -11,54 +11,32 @@ export type LanguageData = {
 };
 
 export type NavItem = {
-    name: string,
+    nameKey: string,
     route: string,
     iconClassList: string[]
 };
 
 export type NavUserItem = {
-    text: string,
+    textKey: string,
     iconClassList: string[],
     onClick: () => void
 };
 
 
 @Component({
-  selector: 'ui-navbar',
+    selector: 'ui-navbar',
     imports: [NgOptimizedImage, RouterLink, RouterLinkActive, TranslatePipe],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css',
+    templateUrl: './navbar.component.html',
+    styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
+    private translate = inject(TranslateService);
     authService = inject(AuthService);
 
-    userOptions: NavUserItem[] = [
-        {
-            text: 'ui.navbar.logout',
-            iconClassList: ['bi', 'bi-box-arrow-right'],
-            onClick: () => {
-                this.authService.logout();
-            }
-        }
-    ];
+    userOptions = input.required<NavUserItem[]>();
+    navItems = input.required<NavItem[]>();
 
-    navItems: NavItem[] = [
-        {
-            name: 'Dashboard',
-            route: '/',
-            iconClassList: ['bi', 'bi-grid-1x2']
-        }
-    ];
-
-    languages: LanguageData[] = [
-        {
-            name: "English",
-            languageCode: 'en-US',
-            unicodeFlag: '🇺🇸'
-        }
-    ]
-
-    private translate = inject(TranslateService);
+    languages = input.required<LanguageData[]>();
 
     protected onLanguageChange(languageCode: string) {
         this.translate.use(languageCode);
