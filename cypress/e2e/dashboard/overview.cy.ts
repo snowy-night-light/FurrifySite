@@ -3,7 +3,6 @@ describe('Overview page', () => {
     beforeEach(() => {
         cy.login();
 
-
         cy.intercept(
             {
                 method: 'GET',
@@ -12,9 +11,18 @@ describe('Overview page', () => {
             { fixture: 'dashboard/get-user-statistics.json' }
         ).as('getUserStatistics');
 
+        cy.intercept(
+            {
+                method: 'GET',
+                url: '**/storage/v1/libraries**',
+            },
+            { fixture: 'dashboard/get-libraries.json' }
+        ).as('getLibraries');
+
         cy.visit('/dashboard/overview');
 
         cy.wait('@getUserStatistics');
+        cy.wait('@getLibraries');
     })
 
     it("Loads overview tab", () => {
