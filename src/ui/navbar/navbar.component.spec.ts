@@ -23,6 +23,7 @@ describe('Navbar', () => {
 
     fixture = TestBed.createComponent(NavbarComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('languages', []);
     await fixture.whenStable();
   });
 
