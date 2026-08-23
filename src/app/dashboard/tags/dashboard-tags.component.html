@@ -1,0 +1,13 @@
+<div class="w-full flex flex-col gap-6">
+    <div class="flex justify-between items-center w-full">
+        <h1 class="text-3xl font-bold">{{ 'app.dashboard.sidebar.tags' | translate }}</h1>
+    </div>
+
+    <ui-tabs [tabs]="tabs"></ui-tabs>
+    <div class="w-full max-w-lg mx-auto">
+        <ui-search-bar (queryChange)="onQueryChanged($event)"></ui-search-bar>
+    </div>
+    <div class="w-full">
+        <router-outlet></router-outlet>
+    </div>
+</div>

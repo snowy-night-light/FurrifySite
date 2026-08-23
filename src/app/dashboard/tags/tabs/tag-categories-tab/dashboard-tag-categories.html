@@ -1,0 +1,70 @@
+<div class="flex justify-between items-center mb-6">
+    <h2 class="text-xl font-bold">{{ 'app.dashboard.tags.tabs.categories.manageCategories' | translate }}</h2>
+    <div class="flex items-center gap-2">
+        <ui-refresh-button
+            [isRefreshing]="areCategoriesFetching()"
+            (refresh)="refreshCategories()">
+        </ui-refresh-button>
+        <button class="btn btn-primary font-bold">
+            <i class="bi bi-plus-lg text-xl"></i> {{ 'app.dashboard.tags.tabs.categories.addCategory' | translate }}
+        </button>
+    </div>
+</div>
+
+@let categoriesData = this.categoriesData();
+
+@if (areCategoriesFetching()) {
+    <div class="w-full flex justify-center p-12">
+        <span class="loading loading-spinner w-14 h-14 text-primary"></span>
+    </div>
+} @else {
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+        @for (category of categoriesData?.content; track category.id) {
+            <div class="card bg-base-100 shadow-sm border border-base-200 hover:shadow-md hover:-translate-y-0.5 transition-all overflow-hidden relative group cursor-pointer">
+
+                <div class="absolute left-0 top-0 bottom-0 w-1.5"
+                     [style.background-color]="category.hexColor || 'hsl(var(--bc) / 0.2)'"></div>
+
+                <div class="card-body py-3 pr-3 pl-5 flex flex-row items-center justify-between gap-4">
+
+                    <div class="flex flex-col overflow-hidden min-w-0" title="View {{ category.name }} details">
+                        <span class="font-bold text-base-content truncate text-base flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full" [style.background-color]="category.hexColor || 'hsl(var(--bc) / 0.2)'"></span>
+                            {{ category.name }}
+                        </span>
+                    </div>
+
+                    <div class="flex gap-1 shrink-0">
+                        <button class="btn btn-sm btn-ghost btn-square" title="Edit" (click)="$event.stopPropagation()">
+                            <i class="bi bi-pencil text-base"></i>
+                        </button>
+                        <button class="btn btn-sm btn-ghost btn-square text-error hover:bg-error hover:text-error-content transition-colors"
+                                title="Delete"
+                                [disabled]="deletingCategories().has(category.id!)"
+                                (click)="$event.stopPropagation(); deleteCategory(category.id!)">
+                            @if (deletingCategories().has(category.id!)) {
+                                <span class="loading loading-spinner loading-sm"></span>
+                            } @else {
+                                <i class="bi bi-trash text-base"></i>
+                            }
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (categoriesData) {
+        <div class="mt-24">
+            <ui-pagination [pageData]="categoriesData" (pageChange)="onPageChange($event)"></ui-pagination>
+        </div>
+    }
+
+    @if (categoriesData?.content?.length === 0) {
+        <div class="w-full flex flex-col items-center justify-center p-12 text-base-content/50 border-2 border-dashed border-base-300 rounded-2xl">
+            <i class="bi bi-tags text-4xl mb-2"></i>
+            <p>{{ 'app.dashboard.tags.tabs.categories.noCategoriesFound' | translate }}</p>
+        </div>
+    }
+}

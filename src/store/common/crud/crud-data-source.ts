@@ -27,7 +27,7 @@ export class CrudDataSource<DTO extends BaseEntity, CREATE_REQ extends CreateReq
     }
 
     deleteById(id: string): Observable<void> {
-        return this.service.delete(id).pipe(this.track());
+        return this.service.delete(id).pipe(this.track(), this.fetchAfter());
     }
 
     updateById(id: string, request: PATCH_REQ): Observable<DTO> {
@@ -43,10 +43,10 @@ export class CrudDataSource<DTO extends BaseEntity, CREATE_REQ extends CreateReq
 
         const specification = this.specification();
         if (specification) {
-            buildSpecString(specification)
+            specString = buildSpecString(specification) ?? ''
         }
 
-        return this.service.getAllPaged(this.pageable(), specString).pipe(this.track(), tap(response => {
+        return this.service.getAllPaged(this.pageable(), btoa(specString)).pipe(this.track(), tap(response => {
             this.page.set(response);
         }));
     }

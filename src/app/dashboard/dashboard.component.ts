@@ -43,8 +43,9 @@ export class DashboardComponent implements OnInit {
                     children: [
                         {labelKey: 'app.dashboard.sidebar.collections', iconClass: 'bi bi-collection'},
                         {labelKey: 'app.dashboard.sidebar.posts', iconClass: 'bi bi-file-earmark-text'},
-                        {labelKey: 'app.dashboard.sidebar.tags', iconClass: 'bi bi-tags'},
+                        {labelKey: 'app.dashboard.sidebar.tags', iconClass: 'bi bi-tags', route: ['/dashboard', library.id, 'tags']},
                         {labelKey: 'app.dashboard.sidebar.artists', iconClass: 'bi bi-palette'},
+                        {labelKey: 'app.dashboard.sidebar.books', iconClass: 'bi bi-book'},
                         {labelKey: 'app.dashboard.sidebar.brokers', iconClass: 'bi bi-robot', isDisabled: true}
                     ]
                 });

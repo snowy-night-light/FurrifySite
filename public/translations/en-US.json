@@ -31,7 +31,8 @@
             "sidebar": {
                 "navigation": "Navigation",
                 "overview": "Overview",
-                "collections": "Collection",
+                "books": "Books",
+                "collections": "Collections",
                 "libraries": "Libraries",
                 "library": "Library",
                 "brokers": "Brokers",
@@ -39,6 +40,32 @@
                 "artists": "Artists",
                 "posts": "Posts",
                 "manageLibraries": "Manage Libraries"
+            },
+            "tags": {
+                "tabs": {
+                    "tags": {
+                        "deleteBtnTitle": "Delete tag",
+                        "title": "Tags",
+                        "aliases": "aliases",
+                        "alias": "alias",
+                        "manageTags": "Manage tags",
+                        "addTag": "Add tag",
+                        "noAliases": "No aliases",
+                        "noTagsFound": "No tags found. Click \"Add Tag\" to create one."
+                    },
+                    "categories": {
+                        "title": "Categories",
+                        "manageCategories": "Manage categories",
+                        "addCategory": "Add category",
+                        "noCategoriesFound": "No categories found. Click \"Add Category\" to create one."
+                    },
+                    "aliases": {
+                        "title": "Aliases",
+                        "manageAliases": "Manage aliases",
+                        "addAlias": "Add alias",
+                        "noAliasesFound": "No aliases found. Click \"Add Alias\" to create one."
+                    }
+                }
             }
         }
     },

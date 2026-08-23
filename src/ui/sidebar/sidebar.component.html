@@ -30,8 +30,8 @@
                     <span class="loading loading-spinner loading-md text-primary"></span>
                 </li>
             } @else if (item.children && item.children.length > 0) {
-                <li>
-                    <details>
+                <li routerLinkActive="active-parent" #rla="routerLinkActive" [routerLinkActiveOptions]="{exact: false}">
+                    <details [attr.open]="rla.isActive ? true : null">
                         <summary class="py-3" [ngClass]="item.textClass || ''" [class.opacity-50]="item.isDisabled" [class.pointer-events-none]="item.isDisabled">
                             @if (item.iconClass) { <i [class]="item.iconClass + ' text-xl'"></i> }
                             {{ item.labelKey | translate}}
@@ -39,7 +39,7 @@
                         <ul>
                             @for (subItem of item.children; track $index) {
                                 <li>
-                                    <a class="py-2" [routerLink]="subItem.route" routerLinkActive="active bg-primary text-primary-content font-bold shadow-sm" [routerLinkActiveOptions]="{exact: true}" [class.opacity-50]="subItem.isDisabled" [class.pointer-events-none]="subItem.isDisabled">
+                                    <a class="py-2" [routerLink]="subItem.route" routerLinkActive="active bg-primary text-primary-content font-bold shadow-sm" [routerLinkActiveOptions]="{exact: false}" [class.opacity-50]="subItem.isDisabled" [class.pointer-events-none]="subItem.isDisabled">
                                         @if (subItem.iconClass) { <i [class]="subItem.iconClass"></i> }
                                         {{ subItem.labelKey | translate}}
                                     </a>

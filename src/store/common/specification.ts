@@ -1,5 +1,5 @@
 export enum SpecOperator {
-    EQUALS = "=", NOT_EQUALS = "!=", GREATER = ">", GREATER_EQUALS = ">=", LESSER = "<", LESSER_EQUALS = "<=", EQUALS_IGNORE_CASE = "=^", NOT_EQUALS_IGNORE_CASE = "!=^"
+    EQUALS = "=", NOT_EQUALS = "!=", GREATER = ">", GREATER_EQUALS = ">=", LESSER = "<", LESSER_EQUALS = "<=", EQUALS_IGNORE_CASE = "=^", NOT_EQUALS_IGNORE_CASE = "!=^", LIKE = 'like', NOT_LIKE = '!like', LIKE_IGNORE_CASE = 'like^', NOT_LIKE_IGNORE_CASE = '!like^'
 }
 
 export enum SpecConnector {
@@ -9,7 +9,7 @@ export enum SpecConnector {
 export interface SpecCondition {
     field: string;
     operator: SpecOperator;
-    value: string | number | boolean;
+    value: string | number | boolean | null;
 }
 
 export interface SpecGroup {

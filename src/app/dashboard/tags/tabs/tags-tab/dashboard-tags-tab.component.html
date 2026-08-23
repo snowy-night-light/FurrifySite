@@ -1,0 +1,86 @@
+<div class="flex justify-between items-center mb-6">
+    <h2 class="text-xl font-bold">{{ 'app.dashboard.tags.tabs.tags.manageTags' | translate }}</h2>
+    <div class="flex items-center gap-2">
+        <ui-refresh-button
+            [isRefreshing]="areTagsFetching()"
+            (refresh)="refreshTags()">
+        </ui-refresh-button>
+        <button class="btn btn-primary font-bold">
+            <i class="bi bi-plus-lg text-xl"></i> {{ 'app.dashboard.tags.tabs.tags.addTag' | translate }}
+        </button>
+    </div>
+</div>
+
+@let tagsData = this.tagsData();
+
+@if (areTagsFetching()) {
+    <div class="w-full flex justify-center p-12">
+        <span class="loading loading-spinner w-14 h-14 text-primary"></span>
+    </div>
+} @else {
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+        @for (tag of tagsData?.content; track tag.id) {
+            <div class="card bg-base-100 shadow-sm border border-base-200 hover:shadow-md hover:-translate-y-0.5 transition-all overflow-hidden relative group cursor-pointer">
+
+                <div class="absolute left-0 top-0 bottom-0 w-1.5"
+                     [style.background-color]="tag.category?.hexColor || 'hsl(var(--bc) / 0.2)'"></div>
+
+                <div class="card-body py-3 pr-3 pl-5 flex flex-row items-center justify-between gap-4">
+
+                    <div class="flex flex-col overflow-hidden min-w-0" title="{{ tag.name }}">
+                        <span class="font-bold text-base-content truncate text-base">
+                            {{ tag.name }}
+                        </span>
+
+                        <div class="text-xs text-base-content/60 truncate mt-0.5 flex items-center gap-1.5">
+                            @if (tag.category) {
+                                <span class="font-medium" [style.color]="tag.category.hexColor">{{ tag.category.name }}</span>
+                                <span class="opacity-40 text-[10px]">•</span>
+                            }
+
+                            @if (tag.aliases && tag.aliases.length > 0) {
+                                <span class="flex items-center gap-1">
+                                    <i class="bi bi-tag-fill opacity-60"></i> {{ tag.aliases.length }} {{ ((tag.aliases.length === 1) ? 'app.dashboard.tags.tabs.tags.alias' : 'app.dashboard.tags.tabs.tags.aliases') | translate }}
+                                </span>
+                            } @else {
+                                <span class="opacity-70">
+                                    {{ 'app.dashboard.tags.tabs.tags.noAliases' | translate }}
+                                </span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="flex gap-1 shrink-0">
+                        <button class="btn btn-sm btn-ghost btn-square" title="Edit" (click)="$event.stopPropagation()">
+                            <i class="bi bi-pencil text-base"></i>
+                        </button>
+                        <button class="btn btn-sm btn-ghost btn-square text-error hover:bg-error hover:text-error-content transition-colors"
+                                [title]="'app.dashboard.tags.tabs.tags.deleteBtnTitle' | translate"
+                                [disabled]="deletingTags().has(tag.id ?? '-1')"
+                                (click)="$event.stopPropagation(); deleteTag(tag.id ?? '-1')">
+                            @if (deletingTags().has(tag.id ?? '-1')) {
+                                <span class="loading loading-spinner loading-sm"></span>
+                            } @else {
+                                <i class="bi bi-trash text-base"></i>
+                            }
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (tagsData) {
+        <div class="mt-24">
+            <ui-pagination [pageData]="tagsData" (pageChange)="onPageChange($event)"></ui-pagination>
+        </div>
+    }
+
+    @if (tagsData?.content?.length === 0) {
+        <div class="w-full flex flex-col items-center justify-center p-12 text-base-content/50 border-2 border-dashed border-base-300 rounded-2xl">
+            <i class="bi bi-tags text-4xl mb-2"></i>
+            <p>{{ 'app.dashboard.tags.tabs.tags.noTagsFound' | translate }}</p>
+        </div>
+    }
+}

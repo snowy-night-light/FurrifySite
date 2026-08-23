@@ -35,8 +35,9 @@ export class App {
     navItems: NavItem[] = [
         {
             nameKey: 'app.navbar.dashboard',
-            route: '/dashboard/overview',
-            iconClassList: ['bi', 'bi-grid-1x2']
+            route: '/dashboard',
+            iconClassList: ['bi', 'bi-grid-1x2'],
+            isRouteExact: false
         }
     ];
 }

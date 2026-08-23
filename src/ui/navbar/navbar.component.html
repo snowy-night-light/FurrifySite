@@ -4,7 +4,7 @@
             <ul class="menu menu-horizontal px-1">
                 @for (item of navItems(); track item.route) {
                     <li>
-                        <a [routerLink]="item.route" routerLinkActive="bg-primary text-primary-content font-bold shadow-sm" [routerLinkActiveOptions]="{exact: true}" class="font-medium text-base gap-2">
+                        <a [routerLink]="item.route" routerLinkActive="bg-primary text-primary-content font-bold shadow-sm" [routerLinkActiveOptions]="{exact: item.isRouteExact ?? true}" class="font-medium text-base gap-2">
                             <i [class]="item.iconClassList.join(' ')"></i>
                             {{ item.nameKey | translate }}
                         </a>
