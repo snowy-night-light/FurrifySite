@@ -1,20 +1,20 @@
 @let size = this.size();
 @let color = this.color();
 
-<label class="input input-bordered flex items-center gap-2 w-full" [ngClass]="{
+<label class="input input-bordered flex items-center gap-3 w-full rounded-full px-5 transition-all border-2 focus-within:!outline-none" [ngClass]="{
                 'input-xs': size === 'xs',
                 'input-sm': size === 'sm',
                 'input-md': size === 'md',
                 'input-lg': size === 'lg',
                 'input-xl': size === 'xl',
-                'input-neutral': color === 'neutral',
-                'input-primary': color === 'primary',
-                'input-secondary': color === 'secondary',
-                'input-accent': color === 'accent',
-                'input-info': color === 'info',
-                'input-success': color === 'success',
-                'input-warning': color === 'warning',
-                'input-ghost': color === 'transparent',
+                'focus-within:input-neutral': color === 'neutral',
+                'focus-within:input-primary': color === 'primary',
+                'focus-within:input-secondary': color === 'secondary',
+                'focus-within:input-accent': color === 'accent',
+                'focus-within:input-info': color === 'info',
+                'focus-within:input-success': color === 'success',
+                'focus-within:input-warning': color === 'warning',
+                'focus-within:input-ghost': color === 'transparent',
                 'input-error': (color === 'error') || invalid(),
            }">
     @let iconClass = this.iconClass();
@@ -23,7 +23,7 @@
         <i [class]="['opacity-50', ...iconClass].join(' ')"></i>
     }
 
-    <input class="grow" [type]="type()" [placeholder]="placeholder()" [autocomplete]="autocomplete()"
+    <input class="grow outline-none focus:outline-none bg-transparent" [type]="type()" [placeholder]="placeholder()" [autocomplete]="autocomplete()"
            [attr.list]="datasetId()" [disabled]="disabled()"
            [value]="value()" (input)="onInput($event)" (blur)="onBlur()"/>
     @let datalist = this.datalist();

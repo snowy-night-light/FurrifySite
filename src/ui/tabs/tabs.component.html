@@ -1,0 +1,14 @@
+<div class="w-full flex justify-center pb-4">
+    <div class="flex gap-2 p-2 bg-base-100 rounded-full shadow-md border border-base-300">
+        @for (tab of tabs(); track $index) {
+            <a class="btn rounded-full px-10 transition-all hover:scale-105 shadow-none" 
+               [routerLink]="tab.route" 
+               routerLinkActive="btn-primary"
+               [routerLinkActiveOptions]="{exact: false}"
+               [queryParams]="{ page: null }"
+               queryParamsHandling="merge">
+               {{ tab.labelKey | translate }}
+            </a>
+        }
+    </div>
+</div>

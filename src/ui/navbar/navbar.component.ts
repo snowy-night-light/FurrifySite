@@ -13,6 +13,7 @@ export type LanguageData = {
 export type NavItem = {
     nameKey: string,
     route: string,
+    isRouteExact?: boolean,
     iconClassList: string[]
 };
 

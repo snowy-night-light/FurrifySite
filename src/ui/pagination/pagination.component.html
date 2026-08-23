@@ -1,0 +1,43 @@
+@if (totalElements() > 0) {
+    <div class="flex justify-center w-full pt-4">
+        <div class="join shadow-sm border border-base-200 bg-base-100 p-1 rounded-full">
+            <button class="join-item btn btn-ghost h-10 min-h-10 rounded-full px-3"
+                    [disabled]="!hasPrevious()"
+                    (click)="goToPage(0)"
+                    aria-label="First page">
+                <i class="bi bi-chevron-double-left text-base"></i>
+            </button>
+
+            <button class="join-item btn btn-ghost h-10 min-h-10 rounded-full px-3"
+                    [disabled]="!hasPrevious()"
+                    (click)="goToPage(currentPage() - 1)"
+                    aria-label="Previous page">
+                <i class="bi bi-chevron-left text-base"></i>
+            </button>
+
+            @for (p of pages(); track p) {
+                <button class="join-item btn h-10 min-h-10 rounded-full px-4 text-base"
+                        [class.btn-primary]="p === currentPage()"
+                        [class.btn-ghost]="p !== currentPage()"
+                        (click)="goToPage(p)">
+                    {{ p + 1 }}
+                </button>
+            }
+
+            <button class="join-item btn btn-ghost h-10 min-h-10 rounded-full px-3"
+                    [disabled]="!hasNext()"
+                    (click)="goToPage(currentPage() + 1)"
+                    aria-label="Next page">
+                <i class="bi bi-chevron-right text-base"></i>
+            </button>
+
+            <button class="join-item btn btn-ghost h-10 min-h-10 rounded-full px-3"
+                    [disabled]="!hasNext()"
+                    (click)="goToPage(totalPages() - 1)"
+                    aria-label="Last page">
+                <i class="bi bi-chevron-double-right text-base"></i>
+            </button>
+        </div>
+    </div>
+
+}
