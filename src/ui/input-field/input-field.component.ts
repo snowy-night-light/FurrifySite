@@ -1,6 +1,5 @@
-import {Component, computed, input, forwardRef, output} from '@angular/core';
+import {Component, computed, input, output, signal} from '@angular/core';
 import {NgClass} from '@angular/common';
-import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ValidationFeedbackComponent} from '../validation-feedback/validation-feedback.component';
 import {UiFormControl} from '../core/abstract/ui-form-control.abstract';
 
@@ -48,6 +47,7 @@ export type InputFieldColors =
 export class InputFieldComponent extends UiFormControl {
     id = computed(() => self.crypto.randomUUID())
     datasetId = computed(() => this.id() + '-dataset')
+    hideValidation = signal(false);
 
     type = input.required<InputFieldTypes>();
     rounded = input<boolean>(false)

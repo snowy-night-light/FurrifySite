@@ -5,7 +5,7 @@
             [isRefreshing]="areAliasesFetching()"
             (refresh)="refreshAliases()">
         </ui-refresh-button>
-        <button class="btn btn-primary font-bold">
+        <button class="btn btn-primary font-bold" (click)="openAddModal()">
             <i class="bi bi-plus-lg text-xl"></i> {{ 'app.dashboard.tags.tabs.aliases.addAlias' | translate }}
         </button>
     </div>
@@ -30,23 +30,25 @@
                         <span class="font-bold text-base-content truncate text-base">
                             {{ alias.alias }}
                         </span>
-                        
+
                         @if (alias.targetTag) {
-                            <div class="text-xs text-base-content/60 truncate mt-0.5 flex items-center gap-1">
+                            <div class="text-xs text-base-content/60 truncate mt-0.5 flex items-center gap-1 hover:text-primary transition-colors cursor-pointer"
+                                 [title]="'app.dashboard.tags.tabs.aliases.viewTag' | translate"
+                                 (click)="$event.stopPropagation(); navigateToTag(alias.targetTag.name!)">
                                 <i class="bi bi-arrow-return-right opacity-60"></i> {{ alias.targetTag.name }}
                             </div>
                         }
                     </div>
 
                     <div class="flex gap-1 shrink-0">
-                        <button class="btn btn-sm btn-ghost btn-square" title="Edit" (click)="$event.stopPropagation()">
+                        <button class="btn btn-sm btn-ghost btn-square" [title]="'app.dashboard.tags.tabs.aliases.edit' | translate" (click)="$event.stopPropagation(); openEditModal(alias)">
                             <i class="bi bi-pencil text-base"></i>
                         </button>
                         <button class="btn btn-sm btn-ghost btn-square text-error hover:bg-error hover:text-error-content transition-colors"
                                 title="Delete"
                                 [disabled]="deletingAliases().has(alias.id!)"
                                 (click)="$event.stopPropagation(); deleteAlias(alias.id!)">
-                            @if (deletingAliases().has(alias.id!)) {
+                            @if (deletingAliases().has(alias.id ?? '-1')) {
                                 <span class="loading loading-spinner loading-sm"></span>
                             } @else {
                                 <i class="bi bi-trash text-base"></i>
@@ -61,7 +63,7 @@
 
     @if (aliasesData) {
         <div class="mt-24">
-            <ui-pagination [pageData]="aliasesData" (pageChange)="onPageChange($event)"></ui-pagination>
+            <ui-pagination [pageData]="aliasesData" [queryParam]="'page'"></ui-pagination>
         </div>
     }
 
@@ -72,3 +74,11 @@
         </div>
     }
 }
+
+<ui-modal-dialog
+    #aliasDialog
+    [titleKey]="aliasToEdit()?.id ? 'app.dashboard.tags.tabs.aliases.editAlias' : 'app.dashboard.tags.tabs.aliases.addAlias'"
+    [component]="editComponent"
+    [data]="aliasDialogData()"
+    [onSave]="onSaveAlias">
+</ui-modal-dialog>

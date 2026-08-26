@@ -1,18 +1,22 @@
-import {Component, computed, inject, OnInit, signal} from '@angular/core';
-import {combineLatest} from 'rxjs';
-import {finalize} from 'rxjs/operators';
+import {Component, computed, inject, OnInit, signal, viewChild} from '@angular/core';
+import {combineLatest, Observable, of} from 'rxjs';
+import {catchError, finalize, map} from 'rxjs/operators';
 import {TranslatePipe} from '@ngx-translate/core';
 import {RefreshButtonComponent} from '../../../../../ui/refresh-button/refresh-button.component';
 import {PaginationComponent} from '../../../../../ui/pagination/pagination.component';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {DashboardTagsService} from '../dashboard-tags.service';
+import {ModalDialogComponent} from '../../../../../ui/modal-dialog/modal-dialog.component';
+import {DashboardAliasEdit} from './dashboard-alias-edit/dashboard-alias-edit';
+import {TagAliasDTO} from '../../../../../openapi/generated/storage';
 
 @Component({
     selector: 'app-dashboard-tags-aliases-tab',
     imports: [
         RefreshButtonComponent,
         PaginationComponent,
-        TranslatePipe
+        TranslatePipe,
+        ModalDialogComponent
     ],
     templateUrl: './dashboard-tag-aliases.html',
     styleUrl: './dashboard-tag-aliases.css',
@@ -27,6 +31,7 @@ export class DashboardTagAliases implements OnInit {
     deletingAliases = signal<Set<string>>(new Set());
 
     currentLibraryId = signal<string | undefined>(undefined);
+    readonly editComponent = DashboardAliasEdit;
 
     ngOnInit() {
         combineLatest([
@@ -58,10 +63,6 @@ export class DashboardTagAliases implements OnInit {
         }
     }
 
-    onPageChange(page: number) {
-
-    }
-
     deleteAlias(id: string) {
         if (!id) return;
 
@@ -80,5 +81,41 @@ export class DashboardTagAliases implements OnInit {
                 });
             })
         ).subscribe();
+    }
+
+    aliasToEdit = signal<TagAliasDTO | null>(null);
+    aliasDialogData = computed(() => this.aliasToEdit() ? { data: this.aliasToEdit()! } : undefined);
+    aliasDialog = viewChild<ModalDialogComponent<TagAliasDTO, TagAliasDTO>>('aliasDialog');
+
+    openAddModal() {
+        this.aliasToEdit.set({} as TagAliasDTO);
+        setTimeout(() => this.aliasDialog()?.openModal());
+    }
+
+    openEditModal(alias: TagAliasDTO) {
+        this.aliasToEdit.set(alias);
+        setTimeout(() => this.aliasDialog()?.openModal());
+    }
+
+    onSaveAlias = (alias: TagAliasDTO): Observable<boolean> => {
+        const action = alias.id
+            ? this.dashboardTagsService.updateAlias(alias)
+            : this.dashboardTagsService.createAlias(alias);
+
+        return action.pipe(
+            map(() => true),
+            catchError(() => of(false))
+        );
+    }
+    private readonly router = inject(Router);
+
+    navigateToTag(tagName: string) {
+        if (!tagName) return;
+        const libraryId = this.currentLibraryId();
+        if (libraryId) {
+            this.router.navigate(['/dashboard', libraryId, 'tags', 'tab', 'tags'], {
+                queryParams: { query: tagName }
+            });
+        }
     }
 }

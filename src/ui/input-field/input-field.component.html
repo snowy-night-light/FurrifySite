@@ -40,6 +40,6 @@
 </label>
 
 @let validationFeedback = this.validationFeedback();
-@if (validationFeedback) {
+@if (validationFeedback && !hideValidation()) {
     <ui-validation-feedback [feedback]="validationFeedback"></ui-validation-feedback>
 }

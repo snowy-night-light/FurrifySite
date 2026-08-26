@@ -5,7 +5,7 @@
 
     <ui-tabs [tabs]="tabs"></ui-tabs>
     <div class="w-full max-w-lg mx-auto">
-        <ui-search-bar [placeholder]="'app.dashboard.tags.searchTags' | translate" (queryChange)="onQueryChanged($event)"></ui-search-bar>
+        <ui-search-bar [placeholder]="'app.dashboard.tags.searchTags' | translate" [query]="currentQuery()" (queryChange)="onQueryChanged($event)"></ui-search-bar>
     </div>
     <div class="w-full">
         <router-outlet></router-outlet>
