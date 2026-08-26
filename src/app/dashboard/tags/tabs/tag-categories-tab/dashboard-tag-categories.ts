@@ -58,10 +58,6 @@ export class DashboardTagCategories implements OnInit {
         }
     }
 
-    onPageChange(page: number) {
-
-    }
-
     deleteCategory(id: string) {
         if (!id) return;
 

@@ -57,7 +57,7 @@
 
     @if (categoriesData) {
         <div class="mt-24">
-            <ui-pagination [pageData]="categoriesData" (pageChange)="onPageChange($event)"></ui-pagination>
+            <ui-pagination [pageData]="categoriesData" [queryParam]="'page'"></ui-pagination>
         </div>
     }
 

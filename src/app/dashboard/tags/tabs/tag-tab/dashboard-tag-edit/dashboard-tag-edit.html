@@ -17,19 +17,7 @@
         </ui-label>
     </ui-dynamic-dropdown>
 
-    <ui-dynamic-dropdown
-        [dataset]="libraryDataset"
-        [mapDisplayItem]="mapLibraryToDisplayItem"
-        (itemSelected)="updateLibrary($event)"
-        (itemUnselect)="clearLibrary()" [searchGroup]="[{field: 'title', valueType: 'string'}]">
-        <ui-label [text]="'app.dashboard.tags.tabs.tags.library' | translate" type="float">
-            <ui-input-field
-                [type]="'text'"
-                [formField]="tagForm.libraryName"
-                [placeholder]="'app.dashboard.tags.tabs.tags.selectLibrary' | translate">
-            </ui-input-field>
-        </ui-label>
-    </ui-dynamic-dropdown>
+
 
     @if (data().data?.id) {
         <div class="flex flex-col gap-1">
@@ -41,12 +29,12 @@
             </div>
             <div class="flex flex-wrap items-center gap-2 mt-1">
                 @for (alias of aliases(); track alias.id) {
-                    <div class="badge badge-primary gap-1 pl-2 pr-1 h-7 shadow-sm">
-                        <span class="truncate max-w-[200px] font-medium text-sm">{{ alias.alias }}</span>
+                    <div class="badge badge-primary gap-1 pl-2 pr-1 h-7 shadow-sm cursor-pointer hover:brightness-110 transition-all" (click)="navigateToAlias(alias.alias!)">
+                        <span class="truncate max-w-50 font-medium text-sm">{{ alias.alias }}</span>
                         @if (removingAliasId() === alias.id) {
                             <span class="loading loading-spinner w-3.5 h-3.5 ml-1"></span>
                         } @else {
-                            <button type="button" class="rounded-full w-5 h-5 flex items-center justify-center hover:bg-base-100/20 cursor-pointer transition-colors ml-1" (click)="removeAlias(alias.id!)">
+                            <button type="button" class="rounded-full w-5 h-5 flex items-center justify-center hover:bg-base-100/20 cursor-pointer transition-colors ml-1" (click)="$event.stopPropagation(); removeAlias(alias.id!)">
                                 <i class="bi bi-x text-lg leading-none"></i>
                             </button>
                         }
@@ -57,6 +45,24 @@
                     <span class="text-sm opacity-60">{{ 'app.dashboard.tags.tabs.tags.noAliases' | translate }}</span>
                 }
             </div>
+
+            @if (aliasDataset.getPageSignal()(); as pageData) {
+                <div class="mt-2">
+                    <ui-pagination
+                        [pageData]="pageData"
+                        [small]="true"
+                        (pageChange)="onAliasPageChange($event)">
+                    </ui-pagination>
+                </div>
+            }
         </div>
     }
 </form>
+
+<ui-modal-dialog
+    #aliasDialog
+    [titleKey]="'app.dashboard.tags.tabs.aliases.createAlias'"
+    [data]="aliasDialogData()"
+    [component]="aliasEditComponent"
+    [onSave]="onAliasSave.bind(this)"
+></ui-modal-dialog>

@@ -11,7 +11,12 @@ import {BaseEntity} from '../../openapi/base/base-entity.interface';
     templateUrl: './pagination.component.html'
 })
 export class PaginationComponent<DTO extends BaseEntity> implements OnInit, OnDestroy {
-    pageData = input.required<Page<DTO>>();
+    pageData = input<Page<DTO>>();
+    currentPageInput = input<number>(0, { alias: 'currentPage' });
+    totalPagesInput = input<number>(0, { alias: 'totalPages' });
+    queryParam = input<string>();
+    small = input<boolean>(false);
+    
     pageChange = output<number>();
 
     private router = inject(Router);
@@ -22,11 +27,14 @@ export class PaginationComponent<DTO extends BaseEntity> implements OnInit, OnDe
 
     ngOnInit() {
         this.sub = this.route.queryParamMap.subscribe(params => {
-            const pageParam = params.get('page');
-            const pageNum = pageParam ? parseInt(pageParam, 10) : 0;
-            if (!isNaN(pageNum) && this.lastEmittedPage !== pageNum) {
-                this.lastEmittedPage = pageNum;
-                this.pageChange.emit(pageNum);
+            const queryParamName = this.queryParam();
+            if (queryParamName) {
+                const pageParam = params.get(queryParamName);
+                const pageNum = pageParam ? parseInt(pageParam, 10) : 0;
+                if (!isNaN(pageNum) && this.lastEmittedPage !== pageNum) {
+                    this.lastEmittedPage = pageNum;
+                    this.pageChange.emit(pageNum);
+                }
             }
         });
     }
@@ -35,9 +43,27 @@ export class PaginationComponent<DTO extends BaseEntity> implements OnInit, OnDe
         this.sub?.unsubscribe();
     }
 
-    currentPage = computed(() => this.pageData()?.page?.number ?? (this.pageData() as any)?.number ?? 0);
-    totalPages = computed(() => this.pageData()?.page?.totalPages ?? (this.pageData() as any)?.totalPages ?? 0);
-    totalElements = computed(() => this.pageData()?.page?.totalElements ?? (this.pageData() as any)?.totalElements ?? 0);
+    currentPage = computed(() => {
+        if (this.pageData()) {
+            return this.pageData()?.page?.number ?? (this.pageData() as any)?.number ?? 0;
+        }
+        return this.currentPageInput();
+    });
+
+    totalPages = computed(() => {
+        if (this.pageData()) {
+            return this.pageData()?.page?.totalPages ?? (this.pageData() as any)?.totalPages ?? 0;
+        }
+        return this.totalPagesInput();
+    });
+
+    totalElementsInput = input<number>(0, { alias: 'totalElements' });
+    totalElements = computed(() => {
+        if (this.pageData()) {
+            return this.pageData()?.page?.totalElements ?? (this.pageData() as any)?.totalElements ?? 0;
+        }
+        return this.totalElementsInput();
+    });
 
     hasPrevious = computed(() => this.currentPage() > 0);
     hasNext = computed(() => this.currentPage() < this.totalPages() - 1);
@@ -66,11 +92,16 @@ export class PaginationComponent<DTO extends BaseEntity> implements OnInit, OnDe
 
     goToPage(page: number) {
         if (page >= 0 && page < this.totalPages() && page !== this.currentPage()) {
-            this.router.navigate([], {
-                relativeTo: this.route,
-                queryParams: { page: page },
-                queryParamsHandling: 'merge'
-            });
+            const queryParamName = this.queryParam();
+            if (queryParamName) {
+                this.router.navigate([], {
+                    relativeTo: this.route,
+                    queryParams: { [queryParamName]: page },
+                    queryParamsHandling: 'merge'
+                });
+            } else {
+                this.pageChange.emit(page);
+            }
         }
     }
 }

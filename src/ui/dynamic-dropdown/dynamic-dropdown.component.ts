@@ -39,7 +39,7 @@ export interface DynamicDropdownSearchGroup {
     }
 })
 export class DynamicDropdownComponent<DTO extends BaseEntity, CREATE_REQ extends CreateRequest, PATCH_REQ extends PatchRequest, ITEM_VALUE> implements OnInit {
-    isOpen = false;
+    isOpen = signal(false);
 
     inputRef = contentChild.required(InputFieldComponent);
     dataset = input.required<CrudDataSet<DTO, CREATE_REQ, PATCH_REQ>>();
@@ -69,7 +69,7 @@ export class DynamicDropdownComponent<DTO extends BaseEntity, CREATE_REQ extends
 
     onFocusOut(event: FocusEvent) {
         if (!this.isMousedownInside && !this.elementRef.nativeElement.contains(event.relatedTarget as Node)) {
-            this.isOpen = false;
+            this.isOpen.set(false);
         }
     }
 
@@ -79,9 +79,8 @@ export class DynamicDropdownComponent<DTO extends BaseEntity, CREATE_REQ extends
         }
     }
 
+    private lastSearchValue: string | null | undefined = null;
     isDebouncing = signal(false);
-    private lastSearchValue?: string;
-
     private searchSubject = new Subject<string>();
 
     constructor(private elementRef: ElementRef) {
@@ -89,7 +88,10 @@ export class DynamicDropdownComponent<DTO extends BaseEntity, CREATE_REQ extends
             const inputField = this.inputRef();
             if (inputField) {
                 const inputValue = inputField.value();
+                
                 untracked(() => {
+                    inputField.hideValidation.set(this.isOpen());
+                    
                     if (this.lastSearchValue !== inputValue) {
                         this.isDebouncing.set(true);
                         this.items.set([]);
@@ -170,21 +172,21 @@ export class DynamicDropdownComponent<DTO extends BaseEntity, CREATE_REQ extends
 
     onClickOutside(event: Event) {
         if (!this.elementRef.nativeElement.contains(event.target)) {
-            this.isOpen = false;
+            this.isOpen.set(false);
         }
     }
 
     onInputFocus() {
-        if (!this.isOpen) {
+        if (!this.isOpen()) {
             this.resetAndFetch();
-            this.isOpen = true;
+            this.isOpen.set(true);
         }
     }
 
 
     selectItem(item: ITEM_VALUE) {
         this.itemSelected.emit(item);
-        this.isOpen = false;
+        this.isOpen.set(false);
     }
 
     onScroll(event: Event) {

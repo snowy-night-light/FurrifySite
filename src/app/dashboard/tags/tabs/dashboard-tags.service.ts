@@ -6,7 +6,8 @@ import {
     TagV1RestControllerService,
     TagCategoryV1RestControllerService,
     TagAliasV1RestControllerService,
-    TagDTO, PatchTagRequest, CreateTagRequest
+    TagDTO, PatchTagRequest, CreateTagRequest,
+    TagAliasDTO, PatchTagAliasRequest, CreateTagAliasRequest
 } from '../../../../openapi/generated/storage';
 import {SpecConnector, SpecOperator} from '../../../../store/common/specification';
 import {Observable} from 'rxjs';
@@ -140,6 +141,32 @@ export class DashboardTagsService {
             return this.tagsDataSet.updateById(dto.id, request);
         } else {
             throw Error('Cannot update tag without id');
+        }
+    }
+
+    createAlias(dto: TagAliasDTO): Observable<TagAliasDTO> {
+        const request: CreateTagAliasRequest = {
+            alias: dto.alias,
+            targetTag: {
+                id: dto.targetTag?.id
+            }
+        };
+
+        return this.aliasesDataSet.create(request);
+    }
+
+    updateAlias(dto: TagAliasDTO): Observable<TagAliasDTO> {
+        const request: PatchTagAliasRequest = {
+            alias: dto.alias,
+            targetTag: {
+                id: dto.targetTag?.id
+            }
+        };
+
+        if (dto.id) {
+            return this.aliasesDataSet.updateById(dto.id, request);
+        } else {
+            throw Error('Cannot update alias without id');
         }
     }
 }

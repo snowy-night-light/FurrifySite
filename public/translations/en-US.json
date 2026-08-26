@@ -87,10 +87,23 @@
                         "noCategoriesFound": "No categories found. Click \"Add Category\" to create one."
                     },
                     "aliases": {
+                        "viewTag": "View tag",
+                        "edit": "Edit",
                         "title": "Aliases",
+                        "editAlias": "Edit alias",
+                        "targetTag": "Target tag",
+                        "selectTargetTag": "Select target tag...",
                         "manageAliases": "Manage aliases",
                         "addAlias": "Add alias",
-                        "noAliasesFound": "No aliases found. Click \"Add Alias\" to create one."
+                        "noAliasesFound": "No aliases found. Click \"Add Alias\" to create one.",
+                        "editTagAliasModal": {
+                            "errors": {
+                                "targetTagIsRequired": "Target tag is required.",
+                                "selectTargetTagFromDropdown": "Please select a target tag from the dropdown.",
+                                "invalidPattern": "Tag name should only contain a-z, 0-9 and spaces between words.",
+                                "aliasIsRequired": "Alias is required."
+                            }
+                        }
                     }
                 }
             }

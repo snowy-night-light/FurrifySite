@@ -6,6 +6,7 @@ import {TranslatePipe} from '@ngx-translate/core';
 export interface TabItem {
     labelKey: string;
     route: string | any[];
+    queryParams?: any;
 }
 
 @Component({

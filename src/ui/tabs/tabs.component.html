@@ -5,7 +5,7 @@
                [routerLink]="tab.route" 
                routerLinkActive="btn-primary"
                [routerLinkActiveOptions]="{exact: false}"
-               [queryParams]="{ page: null }"
+               [queryParams]="tab.queryParams || { page: null }"
                queryParamsHandling="merge">
                {{ tab.labelKey | translate }}
             </a>

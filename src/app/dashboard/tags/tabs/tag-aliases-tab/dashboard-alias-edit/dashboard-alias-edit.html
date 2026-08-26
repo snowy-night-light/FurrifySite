@@ -1,0 +1,19 @@
+<form class="flex flex-col gap-6 pt-2 pb-4">
+    <ui-label [text]="'Alias'" type="float">
+        <ui-input-field [type]="'text'" [formField]="aliasForm.alias" [placeholder]="'Tag alias'"></ui-input-field>
+    </ui-label>
+
+    <ui-dynamic-dropdown
+        [dataset]="tagDataset"
+        [mapDisplayItem]="mapTagToDisplayItem"
+        (itemSelected)="updateTag($event)"
+        (itemUnselect)="clearTag()" [searchGroup]="[{field: 'name', valueType: 'string'}]">
+        <ui-label [text]="'app.dashboard.tags.tabs.aliases.targetTag' | translate" type="float">
+            <ui-input-field
+                [type]="'text'"
+                [formField]="aliasForm.targetTagName"
+                [placeholder]="'app.dashboard.tags.tabs.aliases.selectTargetTag' | translate">
+            </ui-input-field>
+        </ui-label>
+    </ui-dynamic-dropdown>
+</form>

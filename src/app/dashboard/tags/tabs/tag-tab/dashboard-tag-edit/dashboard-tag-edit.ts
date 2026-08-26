@@ -1,12 +1,18 @@
-import {Component, inject, input, signal, OnInit} from '@angular/core';
+import {Component, inject, input, signal, computed, OnInit, viewChild} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {Observable, of} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
+import {ModalDialogComponent} from '../../../../../../ui/modal-dialog/modal-dialog.component';
+import {DashboardAliasEdit} from '../../tag-aliases-tab/dashboard-alias-edit/dashboard-alias-edit';
 import {ModalComponent} from '../../../../../../ui/core/interface/modal-component.interface';
 import {
-    LibraryDTO,
-    LibraryV1RestControllerService, TagAliasDTO, TagAliasV1RestControllerService,
+    TagAliasDTO, TagAliasV1RestControllerService,
     TagCategoryDTO,
     TagCategoryV1RestControllerService,
     TagDTO
 } from '../../../../../../openapi/generated/storage';
+import {PaginationComponent} from '../../../../../../ui/pagination/pagination.component';
+import {DashboardTagsService} from '../../dashboard-tags.service';
 import {InputFieldComponent} from '../../../../../../ui/input-field/input-field.component';
 import {LabelComponent} from '../../../../../../ui/label/label.component';
 import {
@@ -18,13 +24,12 @@ import {CrudDataSource} from '../../../../../../store/common/crud/crud-data-sour
 import {disabled, form, FormField, required, validate, SchemaPath, pattern} from '@angular/forms/signals';
 import {dependsOnField} from '../../../../../../ui/core/validator/depends-on-field.validator';
 import {TranslatePipe} from '@ngx-translate/core';
+import {SpecOperator} from '../../../../../../store/common/specification';
 
 export interface EditTagFormModel {
     name: string;
     categoryName: string;
     categoryId: string;
-    libraryName: string;
-    libraryId: string;
 }
 
 @Component({
@@ -34,14 +39,15 @@ export interface EditTagFormModel {
         LabelComponent,
         DynamicDropdownComponent,
         FormField,
-        TranslatePipe
+        TranslatePipe,
+        ModalDialogComponent,
+        PaginationComponent
     ],
     templateUrl: './dashboard-tag-edit.html',
     styleUrl: './dashboard-tag-edit.css',
 })
 export class DashboardTagEdit implements ModalComponent<TagDTO>, OnInit {
     private readonly tagCategoriesService = inject(TagCategoryV1RestControllerService);
-    private readonly libraryService = inject(LibraryV1RestControllerService);
     private readonly tagAliasService = inject(TagAliasV1RestControllerService);
 
     private readonly translatePipe = new TranslatePipe();
@@ -51,17 +57,53 @@ export class DashboardTagEdit implements ModalComponent<TagDTO>, OnInit {
     tagModel = signal<EditTagFormModel>({
         name: '',
         categoryName: '',
-        categoryId: '',
-        libraryName: '',
-        libraryId: ''
+        categoryId: ''
     });
 
-    aliases = signal<TagAliasDTO[]>([]);
     aliasDataset = new CrudDataSet(new CrudDataSource(this.tagAliasService));
+    aliases = computed(() => this.aliasDataset.getPageSignal()()?.content || []);
     removingAliasId = signal<string | null>(null);
 
+    private readonly router = inject(Router);
+
+    aliasDialog = viewChild<ModalDialogComponent<TagAliasDTO, { data: TagAliasDTO }>>('aliasDialog');
+    readonly aliasEditComponent = DashboardAliasEdit;
+    aliasDialogData = signal<{ data: TagAliasDTO }>({ data: {} });
+
+    private readonly dashboardTagsService = inject(DashboardTagsService);
+
     createAlias() {
-        // TODO: Implement create alias logic
+        this.aliasDialogData.set({
+            data: {
+                targetTag: this.data().data
+            }
+        });
+        setTimeout(() => this.aliasDialog()?.openModal());
+    }
+
+    onAliasSave(data: TagAliasDTO): Observable<boolean> {
+        return this.dashboardTagsService.createAlias({
+            alias: data.alias,
+            targetTag: data.targetTag
+        }).pipe(
+            map(() => {
+                this.aliasDataset.fetch().subscribe();
+                return true;
+            }),
+            catchError(() => of(false))
+        );
+    }
+
+    private readonly route = inject(ActivatedRoute);
+
+    navigateToAlias(aliasName: string) {
+        if (!aliasName) return;
+        const libraryId = this.route.snapshot.paramMap.get('libraryId') || this.route.parent?.snapshot.paramMap.get('libraryId') || this.route.parent?.parent?.snapshot.paramMap.get('libraryId');
+        if (libraryId) {
+            this.router.navigate(['/dashboard', libraryId, 'tags', 'tab', 'aliases'], {
+                queryParams: { query: aliasName }
+            });
+        }
     }
 
     removeAlias(aliasId: string) {
@@ -69,7 +111,7 @@ export class DashboardTagEdit implements ModalComponent<TagDTO>, OnInit {
         this.aliasDataset.deleteById(aliasId).subscribe({
             next: () => {
                 this.removingAliasId.set(null);
-                this.aliases.update(aliases => aliases.filter(a => a.id !== aliasId));
+                this.aliasDataset.fetch().subscribe();
             },
             error: () => {
                 this.removingAliasId.set(null);
@@ -83,15 +125,9 @@ export class DashboardTagEdit implements ModalComponent<TagDTO>, OnInit {
 
         dependsOnField(schemaPath.categoryName, schemaPath.categoryId, {message: this.translatePipe.transform('app.dashboard.tags.tabs.tags.editTagModal.errors.selectCategoryFromDropdown')});
         required(schemaPath.categoryName, {message: this.translatePipe.transform('app.dashboard.tags.tabs.tags.editTagModal.errors.categoryRequired')});
-
-        required(schemaPath.libraryName, {message: this.translatePipe.transform('app.dashboard.tags.tabs.tags.editTagModal.errors.libraryRequired')});
-        dependsOnField(schemaPath.libraryName, schemaPath.libraryId, {message: this.translatePipe.transform('app.dashboard.tags.tabs.tags.editTagModal.errors.selectLibraryFromDropdown')});
-
-        disabled(schemaPath.libraryName, { when: () => !!this.data().data?.library?.id });
     });
 
     categoryDataset = new CrudDataSet(new CrudDataSource(this.tagCategoriesService));
-    libraryDataset = new CrudDataSet(new CrudDataSource(this.libraryService));
 
     ngOnInit() {
         const inputData = this.data();
@@ -99,36 +135,19 @@ export class DashboardTagEdit implements ModalComponent<TagDTO>, OnInit {
             this.tagModel.set({
                 name: inputData.data.name || '',
                 categoryName: inputData.data.category?.name ?? (inputData.data.category?.id ? 'Tag category id ' + inputData.data.category.id : ''),
-                categoryId: inputData.data.category?.id || '',
-                libraryName: inputData.data.library?.title ?? (inputData.data.library?.id ? 'Library id ' + inputData.data.library.id : ''),
-                libraryId: inputData.data.library?.id || ''
+                categoryId: inputData.data.category?.id || ''
             });
 
-            this.aliases.set(inputData.data.aliases || []);
-
-            if (inputData.data.library?.id && !inputData.data.library.title) {
-                this.libraryService.getById(inputData.data.library.id).subscribe(library => {
-                    if (library.title) {
-                        this.tagModel.update(m => ({ ...m, libraryName: library.title! }));
-                    }
+            if (inputData.data.id) {
+                this.aliasDataset.setSpecification({
+                    field: 'targetTag.id',
+                    operator: SpecOperator.EQUALS,
+                    value: inputData.data.id
                 });
+                this.aliasDataset.setPageable({ page: 0, size: 10 });
+                this.aliasDataset.fetch().subscribe();
             }
         }
-    }
-
-    protected mapLibraryToDisplayItem = (dto: LibraryDTO): DynamicDropdownItem<LibraryDTO> => {
-        return {
-            text: dto.title ?? 'Library id ' + dto.id,
-            value: dto
-        };
-    }
-
-    updateLibrary(library: LibraryDTO) {
-        this.tagModel.update(m => ({ ...m, libraryName: library.title ?? 'Library id ' + library.id, libraryId: library.id || '' }));
-    }
-
-    clearLibrary() {
-        this.tagModel.update(m => ({ ...m, libraryId: '' }));
     }
 
     protected mapTagCategoryToDisplayItem = (dto: TagCategoryDTO): DynamicDropdownItem<TagCategoryDTO> => {
@@ -147,6 +166,14 @@ export class DashboardTagEdit implements ModalComponent<TagDTO>, OnInit {
         this.tagModel.update(m => ({ ...m, categoryId: '' }));
     }
 
+    onAliasPageChange(page: number) {
+        this.aliasDataset.setPageable({
+            ...this.aliasDataset.getPageableSignal()(),
+            page
+        });
+        this.aliasDataset.fetch().subscribe();
+    }
+
     get isValid(): boolean {
         return this.tagForm().valid();
     }
@@ -155,8 +182,7 @@ export class DashboardTagEdit implements ModalComponent<TagDTO>, OnInit {
         return {
             ...this.data().data,
             name: this.tagModel().name,
-            category: this.tagModel().categoryId ? { id: this.tagModel().categoryId } : undefined,
-            library: this.tagModel().libraryId ? { id: this.tagModel().libraryId } : undefined
+            category: this.tagModel().categoryId ? { id: this.tagModel().categoryId } : undefined
         } as TagDTO;
     }
 }

@@ -79,7 +79,7 @@
 
     @if (tagsData) {
         <div class="mt-24">
-            <ui-pagination [pageData]="tagsData"></ui-pagination>
+            <ui-pagination [pageData]="tagsData" [queryParam]="'page'"></ui-pagination>
         </div>
     }
 
