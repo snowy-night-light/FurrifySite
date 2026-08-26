@@ -34,7 +34,7 @@ export class CrudDataSource<DTO extends BaseEntity, CREATE_REQ extends CreateReq
         return this.service.patch(id, request).pipe(this.track(), this.fetchAfter());
     }
 
-    createById(id: string, request: CREATE_REQ): Observable<DTO> {
+    create(request: CREATE_REQ): Observable<DTO> {
         return this.service.save(request).pipe(this.track(), this.fetchAfter());
     }
 

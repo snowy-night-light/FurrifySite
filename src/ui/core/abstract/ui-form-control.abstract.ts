@@ -1,8 +1,8 @@
-import {Directive, inject, model, output, signal} from '@angular/core';
+import {Directive, inject, model, output, signal, DoCheck} from '@angular/core';
 import {ControlValueAccessor, NgControl} from '@angular/forms';
 
 @Directive()
-export abstract class UiFormControl implements ControlValueAccessor {
+export abstract class UiFormControl<T = string> implements ControlValueAccessor, DoCheck {
     ngControl = inject(NgControl, { optional: true, self: true });
 
     constructor() {
@@ -11,19 +11,23 @@ export abstract class UiFormControl implements ControlValueAccessor {
         }
     }
 
+    ngDoCheck() {
+        this.updateFeedback();
+    }
+
     protected validationFeedback = signal<string | undefined>(undefined);
 
     disabled = model<boolean>(false);
-    value = model<string>('');
+    value = model<T | undefined>(undefined);
     invalid = signal<boolean>(false);
 
     blur = output<void>();
 
-    onChange: (value: string) => void = () => {};
+    onChange: (value: T | undefined) => void = () => {};
     onTouch: () => void = () => {};
 
     onInput(event: Event) {
-        const val = (event.target as HTMLInputElement).value;
+        const val = (event.target as HTMLInputElement).value as T;
         this.value.set(val);
         this.onChange(val);
         this.updateFeedback();
@@ -60,11 +64,11 @@ export abstract class UiFormControl implements ControlValueAccessor {
         }
     }
 
-    writeValue(value: string | null | undefined): void {
-        this.value.set(value || '');
+    writeValue(value: T | undefined): void {
+        this.value.set(value);
     }
 
-    registerOnChange(fn: (value: string) => void): void {
+    registerOnChange(fn: (value: T | undefined) => void): void {
         this.onChange = fn;
     }
 

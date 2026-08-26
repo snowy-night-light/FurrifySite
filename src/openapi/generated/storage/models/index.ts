@@ -14,7 +14,6 @@ import { PatchRequest } from "../../../base/patch-request.interface";
 import { Page } from "../../../base/page.interface";
 
 export interface CreateTagRequest extends CreateRequest {
-    aliases?: Array<EntityIdRequest>;
     category: EntityIdRequest;
     name?: string;
     library?: EntityIdRequest;
@@ -43,6 +42,51 @@ export interface ArtistNickname {
     priority?: number;
 }
 
+export interface BookChapterDTO extends UserScopeEntity {
+    id?: string;
+    version?: number;
+    modifiedBy?: string;
+    modifiedAt?: Date;
+    createdBy?: string;
+    createdAt?: Date;
+    ownerId?: string;
+    title?: string;
+    book?: BookDTO;
+    versions?: Array<BookChapterVersionDTO>;
+}
+
+export interface BookChapterVersionDTO extends UserScopeEntity {
+    id?: string;
+    version?: number;
+    modifiedBy?: string;
+    modifiedAt?: Date;
+    createdBy?: string;
+    createdAt?: Date;
+    ownerId?: string;
+    chapterVersion?: number;
+    content?: string;
+    authorNotesEnd?: string;
+    authorNotesStart?: string;
+    chapter?: BookChapterDTO;
+}
+
+export interface BookDTO extends UserScopeEntity {
+    id?: string;
+    version?: number;
+    modifiedBy?: string;
+    modifiedAt?: Date;
+    createdBy?: string;
+    createdAt?: Date;
+    ownerId?: string;
+    title?: string;
+    description?: string;
+    cover?: MediaDTO;
+    chapters?: Array<BookChapterDTO>;
+    tags?: Array<TagDTO>;
+    artists?: Array<ArtistDTO>;
+    library?: any;
+}
+
 export interface CollectionDTO extends UserScopeEntity {
     id?: string;
     version?: number;
@@ -68,6 +112,7 @@ export interface LibraryDTO extends UserScopeEntity {
     tags?: Array<TagDTO>;
     artists?: Array<ArtistDTO>;
     collections?: Array<CollectionDTO>;
+    books?: Array<BookDTO>;
 }
 
 export interface MediaDTO extends UserScopeEntity {
@@ -137,6 +182,7 @@ export interface TagCategoryDTO extends UserScopeEntity {
     createdAt?: Date;
     ownerId?: string;
     name?: string;
+    library?: LibraryDTO;
     hexColor?: string;
 }
 
@@ -157,6 +203,7 @@ export interface TagDTO extends UserScopeEntity {
 export interface CreateTagCategoryRequest extends CreateRequest {
     name: string;
     hexColor: string;
+    library?: EntityIdRequest;
 }
 
 export interface CreateTagAliasRequest extends CreateRequest {
@@ -196,6 +243,27 @@ export interface CreateCollectionRequest extends CreateRequest {
     library?: EntityIdRequest;
 }
 
+export interface CreateBookRequest extends CreateRequest {
+    title: string;
+    description: string;
+    cover?: EntityIdRequest;
+    library?: EntityIdRequest;
+    tags?: Array<EntityIdRequest>;
+    artists?: Array<EntityIdRequest>;
+}
+
+export interface CreateBookChapterRequest extends CreateRequest {
+    title: string;
+    book: EntityIdRequest;
+}
+
+export interface CreateBookChapterVersionRequest extends CreateRequest {
+    content: string;
+    authorNotesEnd?: string;
+    authorNotesStart?: string;
+    chapter: EntityIdRequest;
+}
+
 export interface CreateArtistRequest extends CreateRequest {
     nicknames: Array<ArtistNickname>;
     sources?: Array<EntityIdRequest>;
@@ -203,100 +271,81 @@ export interface CreateArtistRequest extends CreateRequest {
     library?: EntityIdRequest;
 }
 
-export interface JsonNullableEntityIdRequest {
-    present?: boolean;
-    undefined?: boolean;
-}
-
-export interface JsonNullableListEntityIdRequest {
-    present?: boolean;
-    undefined?: boolean;
-}
-
-export interface JsonNullableString {
-    present?: boolean;
-    undefined?: boolean;
-}
-
 export interface PatchTagRequest extends PatchRequest {
-    aliases?: JsonNullableListEntityIdRequest;
-    category?: JsonNullableEntityIdRequest;
-    name?: JsonNullableString;
-    library?: JsonNullableEntityIdRequest;
+    category?: EntityIdRequest;
+    name?: string;
+    library?: EntityIdRequest;
 }
 
 export interface PatchTagCategoryRequest extends PatchRequest {
-    name?: JsonNullableString;
-    hexColor?: JsonNullableString;
+    name?: string;
+    hexColor?: string;
+    library?: EntityIdRequest;
 }
 
 export interface PatchTagAliasRequest extends PatchRequest {
-    targetTag?: JsonNullableEntityIdRequest;
-    alias?: JsonNullableString;
-}
-
-export interface JsonNullableMapStringObject {
-    present?: boolean;
-    undefined?: boolean;
-}
-
-export interface JsonNullableSourceStrategy {
-    present?: boolean;
-    undefined?: boolean;
+    targetTag?: EntityIdRequest;
+    alias?: string;
 }
 
 export interface PatchSourceRequest extends PatchRequest {
-    data?: JsonNullableMapStringObject;
-    sourceStrategy?: JsonNullableSourceStrategy;
+    data?: Record<string, any>;
+    sourceStrategy?: SourceStrategy;
 }
 
 export interface PatchPostRequest extends PatchRequest {
-    title?: JsonNullableString;
-    description?: JsonNullableString;
-    tags?: JsonNullableListEntityIdRequest;
-    artists?: JsonNullableListEntityIdRequest;
-    displayMediaList?: JsonNullableListEntityIdRequest;
-    attachments?: JsonNullableListEntityIdRequest;
-    sources?: JsonNullableListEntityIdRequest;
-    library?: JsonNullableEntityIdRequest;
-}
-
-export interface JsonNullableInteger {
-    present?: boolean;
-    undefined?: boolean;
-}
-
-export interface JsonNullableUUID {
-    present?: boolean;
-    undefined?: boolean;
+    title?: string;
+    description?: string;
+    tags?: Array<EntityIdRequest>;
+    artists?: Array<EntityIdRequest>;
+    displayMediaList?: Array<EntityIdRequest>;
+    attachments?: Array<EntityIdRequest>;
+    sources?: Array<EntityIdRequest>;
+    library?: EntityIdRequest;
 }
 
 export interface PatchMediaRequest extends PatchRequest {
-    priority?: JsonNullableInteger;
-    fileReferenceId?: JsonNullableUUID;
-    sources?: JsonNullableListEntityIdRequest;
+    priority?: number;
+    fileReferenceId?: string;
+    sources?: Array<EntityIdRequest>;
 }
 
 export interface PatchLibraryRequest extends PatchRequest {
-    title?: JsonNullableString;
+    title?: string;
 }
 
 export interface PatchCollectionRequest extends PatchRequest {
-    title?: JsonNullableString;
-    posts?: JsonNullableListEntityIdRequest;
-    library?: JsonNullableEntityIdRequest;
+    title?: string;
+    posts?: Array<EntityIdRequest>;
+    library?: EntityIdRequest;
 }
 
-export interface JsonNullableListArtistNickname {
-    present?: boolean;
-    undefined?: boolean;
+export interface PatchBookRequest extends PatchRequest {
+    title?: string;
+    description?: string;
+    cover?: EntityIdRequest;
+    library?: EntityIdRequest;
+    tags?: Array<EntityIdRequest>;
+    artists?: Array<EntityIdRequest>;
+}
+
+export interface PatchBookChapterRequest extends PatchRequest {
+    title?: string;
+    book?: EntityIdRequest;
+}
+
+export interface PatchBookChapterVersionRequest extends PatchRequest {
+    content?: string;
+    authorNotesEnd?: string;
+    authorNotesStart?: string;
+    chapter?: EntityIdRequest;
 }
 
 export interface PatchArtistRequest extends PatchRequest {
-    nicknames?: JsonNullableListArtistNickname;
-    sources?: JsonNullableListEntityIdRequest;
-    avatar?: JsonNullableEntityIdRequest;
-    library?: JsonNullableEntityIdRequest;
+    nicknames?: Array<ArtistNickname>;
+    sources?: Array<EntityIdRequest>;
+    avatar?: EntityIdRequest;
+    library?: EntityIdRequest;
 }
 
 export interface DailyUserStatisticsChartData {
@@ -371,6 +420,21 @@ export interface PagedModelLibraryDTO extends Page<LibraryDTO> {
 
 export interface PagedModelCollectionDTO extends Page<CollectionDTO> {
     content?: Array<CollectionDTO>;
+    page?: PageMetadata;
+}
+
+export interface PagedModelBookDTO extends Page<BookDTO> {
+    content?: Array<BookDTO>;
+    page?: PageMetadata;
+}
+
+export interface PagedModelBookChapterDTO extends Page<BookChapterDTO> {
+    content?: Array<BookChapterDTO>;
+    page?: PageMetadata;
+}
+
+export interface PagedModelBookChapterVersionDTO extends Page<BookChapterVersionDTO> {
+    content?: Array<BookChapterVersionDTO>;
     page?: PageMetadata;
 }
 

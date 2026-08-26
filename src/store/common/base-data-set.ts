@@ -1,16 +1,17 @@
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {UiToastService} from '../../ui/core/service/ui-toast.service';
-import {Signal} from '@angular/core';
+import {inject, Signal} from '@angular/core';
 
 import {BaseDataSource} from './base-data-source';
 import {TranslatePipe} from '@ngx-translate/core';
 
 export abstract class BaseDataSet {
 
-    private translatePipe = new TranslatePipe();
+    protected readonly toastService: UiToastService = inject(UiToastService);
+    private readonly translatePipe = new TranslatePipe();
 
-    protected constructor(protected dataSource: BaseDataSource, protected toastService: UiToastService) {
+    protected constructor(protected dataSource: BaseDataSource) {
     }
 
     getIsFetchingSignal(): Signal<boolean> {

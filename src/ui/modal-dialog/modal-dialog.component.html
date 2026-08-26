@@ -1,0 +1,27 @@
+<dialog [id]="id" class="modal" (close)="onDialogClose()">
+    <div class="modal-box overflow-visible focus:outline-none" tabindex="-1" autofocus>
+        @let titleKey = this.titleKey();
+
+        @if (titleKey) {
+            <h3 class="text-lg font-bold pb-5">{{ titleKey | translate }}</h3>
+        }
+
+        <ng-container #container></ng-container>
+
+        <div class="modal-action">
+            <form method="dialog" class="flex w-full">
+                <button (click)="onClose()?.()" [disabled]="isSaving()" class="btn btn-soft btn-error mr-auto">{{ 'ui.modal.close' | translate }}</button>
+
+                @if (onSave()) {
+                    <button class="btn btn-primary btn-secondary" [disabled]="isSaving() || (componentRef?.instance?.isValid === false)" (click)="handleSave($event)">
+                        @if (isSaving()) {
+                            <span class="loading loading-spinner"></span>
+                        } @else {
+                            {{ 'ui.modal.save' | translate }}
+                        }
+                    </button>
+                }
+            </form>
+        </div>
+    </div>
+</dialog>

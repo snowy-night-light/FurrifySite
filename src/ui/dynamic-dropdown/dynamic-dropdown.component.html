@@ -1,0 +1,39 @@
+<div class="relative w-full">
+    <ng-content #input></ng-content>
+
+    <div [class.hidden]="!isOpen"
+         (scroll)="onScroll($event)"
+         class="absolute top-full left-0 w-full mt-1 z-50 bg-base-100 rounded-box shadow-xl max-h-60 overflow-y-auto overflow-x-hidden">
+        <ul class="menu flex-col flex-nowrap p-2 w-full">
+            @for (item of items(); track item.id) {
+                @let displayItem = mapDisplayItem()(item);
+
+                <li>
+                    <a class="flex items-center gap-3 w-full" (mousedown)="selectItem(displayItem.value)">
+                        @if (displayItem.colorHex) {
+                            <span class="w-3.5 h-3.5 rounded-full shrink-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)]" [style.background-color]="displayItem.colorHex"></span>
+                        }
+                        @if (displayItem.iconClasses) {
+                            <i [classList]="displayItem.iconClasses.join(' ')"></i>
+                        }
+                        <span class="truncate">{{ displayItem.text }}</span>
+                    </a>
+                </li>
+            }
+
+            @if (isFetching() || isDebouncing()) {
+                <li>
+                    <a class="w-full disabled flex justify-center">
+                        <span class="loading loading-spinner text-primary"></span>
+                    </a>
+                </li>
+            } @else if (items().length === 0) {
+                <li>
+                    <a class="block w-full pointer-events-none text-center opacity-60">
+                        {{ 'ui.dynamicDropdown.noItems' | translate }}
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

@@ -1,3 +1,9 @@
+<ui-modal-dialog #tagDialog 
+    [titleKey]="tagToEdit()?.id ? 'app.dashboard.tags.tabs.tags.editTag' : 'app.dashboard.tags.tabs.tags.addTag'" 
+    [component]="DashboardTagEdit" 
+    [data]="tagDialogData()"
+    [onSave]="onTagSave"></ui-modal-dialog>
+
 <div class="flex justify-between items-center mb-6">
     <h2 class="text-xl font-bold">{{ 'app.dashboard.tags.tabs.tags.manageTags' | translate }}</h2>
     <div class="flex items-center gap-2">
@@ -5,7 +11,7 @@
             [isRefreshing]="areTagsFetching()"
             (refresh)="refreshTags()">
         </ui-refresh-button>
-        <button class="btn btn-primary font-bold">
+        <button class="btn btn-primary font-bold" (click)="openAddModal()">
             <i class="bi bi-plus-lg text-xl"></i> {{ 'app.dashboard.tags.tabs.tags.addTag' | translate }}
         </button>
     </div>
@@ -51,7 +57,7 @@
                     </div>
 
                     <div class="flex gap-1 shrink-0">
-                        <button class="btn btn-sm btn-ghost btn-square" title="Edit" (click)="$event.stopPropagation()">
+                        <button class="btn btn-sm btn-ghost btn-square" title="Edit" (click)="$event.stopPropagation(); openEditModal(tag)">
                             <i class="bi bi-pencil text-base"></i>
                         </button>
                         <button class="btn btn-sm btn-ghost btn-square text-error hover:bg-error hover:text-error-content transition-colors"
@@ -73,7 +79,7 @@
 
     @if (tagsData) {
         <div class="mt-24">
-            <ui-pagination [pageData]="tagsData" (pageChange)="onPageChange($event)"></ui-pagination>
+            <ui-pagination [pageData]="tagsData"></ui-pagination>
         </div>
     }
 

@@ -28,7 +28,7 @@ export interface AttachmentFileDTO extends UserScopeEntity {
     ownerId?: string;
     fileName?: string;
     fileHashes?: Array<AttachmentFileHashDTO>;
-    mimeType?: MimeType;
+    mimeType?: string;
     uploadStatus?: FileUploadStatus;
     fileSize?: number;
     fileUri?: string;
@@ -51,30 +51,9 @@ export enum FileUploadStatus {
     UPLOADED = "UPLOADED"
 }
 
-export interface MimeType {
-    type?: string;
-    subtype?: string;
-    parameters?: Record<string, string>;
-    concrete?: boolean;
-    wildcardType?: boolean;
-    wildcardSubtype?: boolean;
-    subtypeSuffix?: string;
-    charset?: string;
-}
-
-export interface JsonNullableMultipartFile {
-    present?: boolean;
-    undefined?: boolean;
-}
-
-export interface JsonNullableString {
-    present?: boolean;
-    undefined?: boolean;
-}
-
 export interface PatchAttachmentFileRequest extends PatchRequest {
-    fileName?: JsonNullableString;
-    file?: JsonNullableMultipartFile;
+    fileName?: string;
+    file?: Blob;
 }
 
 export interface Pageable {

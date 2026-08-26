@@ -38,7 +38,7 @@ export const routes: Routes = [
                     },
                     {
                         path: 'tab/tags',
-                        loadComponent: () => import('./dashboard/tags/tabs/tags-tab/dashboard-tags-tab.component').then(m => m.DashboardTagsTabComponent)
+                        loadComponent: () => import('./dashboard/tags/tabs/tag-tab/dashboard-tags-tab.component').then(m => m.DashboardTagsTabComponent)
                     },
                     {
                         path: 'tab/categories',

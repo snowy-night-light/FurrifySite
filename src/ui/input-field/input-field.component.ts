@@ -1,4 +1,4 @@
-import {Component, computed, input, forwardRef} from '@angular/core';
+import {Component, computed, input, forwardRef, output} from '@angular/core';
 import {NgClass} from '@angular/common';
 import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ValidationFeedbackComponent} from '../validation-feedback/validation-feedback.component';
@@ -50,10 +50,15 @@ export class InputFieldComponent extends UiFormControl {
     datasetId = computed(() => this.id() + '-dataset')
 
     type = input.required<InputFieldTypes>();
+    rounded = input<boolean>(false)
+    bordered = input<boolean>(true);
     size = input<InputFieldSizes>('md');
     color = input<InputFieldColors>('default');
-    placeholder = input<string>();
+    placeholder = input<string>('');
     iconClass = input<string[]>([]);
     datalist = input<string[]>([]);
-    autocomplete = input<boolean>(false)
+    autocomplete = input<boolean>(false);
+
+    focus = output<FocusEvent>();
+    change = output<Event>();
 }

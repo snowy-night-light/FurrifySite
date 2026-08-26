@@ -2,8 +2,9 @@
     <ui-input-field
         type="search"
         [formField]="searchForm.query"
-        placeholder="Search tags..."
-        color="primary"
+        [placeholder]="placeholder()"
+        [color]="'primary'"
+        [rounded]="true"
         [iconClass]="['bi', 'bi-search']">
     </ui-input-field>
 </div>

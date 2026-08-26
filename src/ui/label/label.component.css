@@ -1,0 +1,17 @@
+:host {
+    display: block;
+}
+
+.floating-label:focus-within > span,
+.floating-label:not(:has(input:placeholder-shown,textarea:placeholder-shown)) > span {
+    scale: 0.85 !important;
+    translate: -7.5% calc(-50% - .125em) !important;
+    line-height: 1.5 !important;
+    padding-top: 2px !important;
+    overflow: visible !important;
+}
+
+[dir="rtl"] .floating-label:focus-within > span,
+[dir="rtl"] .floating-label:not(:has(input:placeholder-shown,textarea:placeholder-shown)) > span {
+    translate: 7.5% calc(-50% - .125em) !important;
+}
