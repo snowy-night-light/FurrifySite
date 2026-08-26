@@ -1,7 +1,8 @@
 @let size = this.size();
 @let color = this.color();
 
-<label class="input input-bordered flex items-center gap-3 w-full rounded-full px-5 transition-all border-2 focus-within:!outline-none" [ngClass]="{
+<label class="flex items-center gap-3 w-full transition-all focus-within:outline-none!" [ngClass]="{
+                'input input-bordered border-2 px-5': bordered(),
                 'input-xs': size === 'xs',
                 'input-sm': size === 'sm',
                 'input-md': size === 'md',
@@ -16,6 +17,7 @@
                 'focus-within:input-warning': color === 'warning',
                 'focus-within:input-ghost': color === 'transparent',
                 'input-error': (color === 'error') || invalid(),
+                'rounded-full': rounded()
            }">
     @let iconClass = this.iconClass();
 
@@ -23,9 +25,9 @@
         <i [class]="['opacity-50', ...iconClass].join(' ')"></i>
     }
 
-    <input class="grow outline-none focus:outline-none bg-transparent" [type]="type()" [placeholder]="placeholder()" [autocomplete]="autocomplete()"
-           [attr.list]="datasetId()" [disabled]="disabled()"
-           [value]="value()" (input)="onInput($event)" (blur)="onBlur()"/>
+    <input class="grow outline-none bg-transparent" [type]="type()" [placeholder]="placeholder()" [autocomplete]="autocomplete()"
+           [attr.list]="datasetId()" [disabled]="disabled()" (focus)="focus.emit($event)" (change)="change.emit($event)"
+           [value]="value() ?? ''" (input)="onInput($event)" (blur)="onBlur()"/>
     @let datalist = this.datalist();
 
     @if (datalist) {

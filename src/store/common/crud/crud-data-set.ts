@@ -12,8 +12,8 @@ import {Signal} from '@angular/core';
 
 export class CrudDataSet<DTO extends BaseEntity, CREATE_REQ extends CreateRequest, PATCH_REQ extends PatchRequest> extends BaseDataSet {
 
-    constructor(protected override dataSource: CrudDataSource<DTO, CREATE_REQ, PATCH_REQ>, toastService: UiToastService) {
-        super(dataSource, toastService);
+    constructor(protected override dataSource: CrudDataSource<DTO, CREATE_REQ, PATCH_REQ>) {
+        super(dataSource);
     }
 
     getSpecificationSignal() {
@@ -54,8 +54,8 @@ export class CrudDataSet<DTO extends BaseEntity, CREATE_REQ extends CreateReques
         );
     }
 
-    createById(id: string, request: CREATE_REQ): Observable<DTO> {
-        return this.dataSource.createById(id, request).pipe(
+    create(request: CREATE_REQ): Observable<DTO> {
+        return this.dataSource.create(request).pipe(
             this.handleError('store.dataset.errors.createFailedTitle')
         );
     }

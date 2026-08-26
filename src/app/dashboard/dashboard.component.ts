@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
     private readonly toastService = inject(UiToastService);
     private readonly libraryService = inject(LibraryV1RestControllerService);
 
-    librariesDataSet = new CrudDataSet(new CrudDataSource(this.libraryService), this.toastService);
+    librariesDataSet = new CrudDataSet(new CrudDataSource(this.libraryService));
     areLibrariesFetching = computed(() => this.librariesDataSet.getIsFetchingSignal()());
     librariesData = computed(() => this.librariesDataSet.getPageSignal()());
 

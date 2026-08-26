@@ -22,13 +22,12 @@ import { RefreshButtonComponent } from '../../../ui/refresh-button/refresh-butto
 })
 export class DashboardOverviewComponent implements OnInit {
     private readonly authService = inject(AuthService);
-    private readonly toastService = inject(UiToastService);
     private readonly userStatisticsService = inject(UserStatisticsV1RestControllerService);
     private readonly translate = inject(TranslateService);
 
     private readonly langChange = toSignal(this.translate.onLangChange);
 
-    statsEndpointDataSet = new EndpointDataSet(new EndpointDataSource(), this.toastService);
+    statsEndpointDataSet = new EndpointDataSet(new EndpointDataSource());
     areUserStatsFetching = computed(() => this.statsEndpointDataSet.getIsFetchingSignal()());
 
     userStats = signal<UserStatisticsDto | undefined>(undefined);

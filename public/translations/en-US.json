@@ -1,4 +1,13 @@
 {
+    "ui": {
+        "dynamicDropdown": {
+            "noItems": "No items found."
+        },
+        "modal": {
+            "close": "Close",
+            "save": "Save"
+        }
+    },
     "app": {
         "navbar": {
             "dashboard": "Dashboard",
@@ -42,16 +51,34 @@
                 "manageLibraries": "Manage Libraries"
             },
             "tags": {
+                "searchTags": "Search tags...",
                 "tabs": {
                     "tags": {
                         "deleteBtnTitle": "Delete tag",
                         "title": "Tags",
                         "aliases": "aliases",
                         "alias": "alias",
+                        "library": "Library",
                         "manageTags": "Manage tags",
                         "addTag": "Add tag",
+                        "editTag": "Edit tag",
+                        "selectLibrary": "Select a library...",
+                        "selectCategory": "Select a category...",
+                        "category": "Category",
+                        "tagName": "Tag name",
+                        "name": "Name",
                         "noAliases": "No aliases",
-                        "noTagsFound": "No tags found. Click \"Add Tag\" to create one."
+                        "noTagsFound": "No tags found. Click \"Add Tag\" to create one.",
+                        "editTagModal": {
+                            "errors": {
+                                "nameRequired": "Name is required.",
+                                "categoryRequired": "Category is required.",
+                                "libraryRequired": "Library is required.",
+                                "selectCategoryFromDropdown": "Please select a category from the dropdown.",
+                                "selectLibraryFromDropdown": "Please select a library from the dropdown.",
+                                "invalidPattern": "Tag name should only contain a-z, 0-9 and spaces between words."
+                            }
+                        }
                     },
                     "categories": {
                         "title": "Categories",

@@ -544,6 +544,204 @@
         }
       }
     },
+    "/v1/books": {
+      "get": {
+        "tags": [
+          "book-v-1-rest-controller"
+        ],
+        "operationId": "BookV1RestController_getAllPaged",
+        "parameters": [
+          {
+            "name": "spec",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedModelBookDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "book-v-1-rest-controller"
+        ],
+        "operationId": "BookV1RestController_save",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/book/chapters": {
+      "get": {
+        "tags": [
+          "book-chapter-v-1-rest-controller"
+        ],
+        "operationId": "BookChapterV1RestController_getAllPaged",
+        "parameters": [
+          {
+            "name": "spec",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedModelBookChapterDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "book-chapter-v-1-rest-controller"
+        ],
+        "operationId": "BookChapterV1RestController_save",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookChapterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookChapterDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/book/chapters/versions": {
+      "get": {
+        "tags": [
+          "book-chapter-version-v-1-rest-controller"
+        ],
+        "operationId": "BookChapterVersionV1RestController_getAllPaged",
+        "parameters": [
+          {
+            "name": "spec",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageable",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Pageable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedModelBookChapterVersionDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "book-chapter-version-v-1-rest-controller"
+        ],
+        "operationId": "BookChapterVersionV1RestController_save",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookChapterVersionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookChapterVersionDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/artists": {
       "get": {
         "tags": [
@@ -1346,6 +1544,282 @@
         }
       }
     },
+    "/v1/books/{id}": {
+      "get": {
+        "tags": [
+          "book-v-1-rest-controller"
+        ],
+        "operationId": "BookV1RestController_getById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "book-v-1-rest-controller"
+        ],
+        "operationId": "BookV1RestController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "book-v-1-rest-controller"
+        ],
+        "operationId": "BookV1RestController_patch",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchBookRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/book/chapters/{id}": {
+      "get": {
+        "tags": [
+          "book-chapter-v-1-rest-controller"
+        ],
+        "operationId": "BookChapterV1RestController_getById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookChapterDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "book-chapter-v-1-rest-controller"
+        ],
+        "operationId": "BookChapterV1RestController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "book-chapter-v-1-rest-controller"
+        ],
+        "operationId": "BookChapterV1RestController_patch",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchBookChapterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookChapterDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/book/chapters/versions/{id}": {
+      "get": {
+        "tags": [
+          "book-chapter-version-v-1-rest-controller"
+        ],
+        "operationId": "BookChapterVersionV1RestController_getById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookChapterVersionDTO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "book-chapter-version-v-1-rest-controller"
+        ],
+        "operationId": "BookChapterVersionV1RestController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "book-chapter-version-v-1-rest-controller"
+        ],
+        "operationId": "BookChapterVersionV1RestController_patch",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchBookChapterVersionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookChapterVersionDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/artists/{id}": {
       "get": {
         "tags": [
@@ -1474,18 +1948,12 @@
       "CreateTagRequest": {
         "type": "object",
         "properties": {
-          "aliases": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EntityIdRequest"
-            }
-          },
           "category": {
             "$ref": "#/components/schemas/EntityIdRequest"
           },
           "name": {
             "type": "string",
-            "pattern": "^[a-z0-9 ]+$"
+            "pattern": "^[a-z0-9]+(?: [a-z0-9]+)*$"
           },
           "library": {
             "$ref": "#/components/schemas/EntityIdRequest"
@@ -1557,7 +2025,7 @@
           "nickname": {
             "type": "string",
             "minLength": 1,
-            "pattern": "^[A-Za-z0-9._\\-]+$"
+            "pattern": "^[A-Za-z0-9._\\-]+(?: [A-Za-z0-9._\\-]+)*$"
           },
           "priority": {
             "type": "integer",
@@ -1567,6 +2035,155 @@
         "required": [
           "nickname"
         ]
+      },
+      "BookChapterDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "modifiedBy": {
+            "type": "string"
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ownerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "book": {
+            "$ref": "#/components/schemas/BookDTO"
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BookChapterVersionDTO"
+            }
+          }
+        }
+      },
+      "BookChapterVersionDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "modifiedBy": {
+            "type": "string"
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ownerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "chapterVersion": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "content": {
+            "type": "string"
+          },
+          "authorNotesEnd": {
+            "type": "string"
+          },
+          "authorNotesStart": {
+            "type": "string"
+          },
+          "chapter": {
+            "$ref": "#/components/schemas/BookChapterDTO"
+          }
+        }
+      },
+      "BookDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "modifiedBy": {
+            "type": "string"
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ownerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "cover": {
+            "$ref": "#/components/schemas/MediaDTO"
+          },
+          "chapters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BookChapterDTO"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TagDTO"
+            }
+          },
+          "artists": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ArtistDTO"
+            }
+          },
+          "library": {}
+        }
       },
       "CollectionDTO": {
         "type": "object",
@@ -1657,6 +2274,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CollectionDTO"
+            }
+          },
+          "books": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BookDTO"
             }
           }
         }
@@ -1888,6 +2511,9 @@
           "name": {
             "type": "string"
           },
+          "library": {
+            "$ref": "#/components/schemas/LibraryDTO"
+          },
           "hexColor": {
             "type": "string"
           }
@@ -1952,6 +2578,9 @@
             "maxLength": 7,
             "minLength": 0,
             "pattern": "^#(?:[0-9a-fA-F]{3}){1,2}$"
+          },
+          "library": {
+            "$ref": "#/components/schemas/EntityIdRequest"
           }
         },
         "required": [
@@ -2094,6 +2723,78 @@
           }
         }
       },
+      "CreateBookRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "cover": {
+            "$ref": "#/components/schemas/EntityIdRequest"
+          },
+          "library": {
+            "$ref": "#/components/schemas/EntityIdRequest"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityIdRequest"
+            }
+          },
+          "artists": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityIdRequest"
+            }
+          }
+        },
+        "required": [
+          "description",
+          "title"
+        ]
+      },
+      "CreateBookChapterRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "book": {
+            "$ref": "#/components/schemas/EntityIdRequest"
+          }
+        },
+        "required": [
+          "book",
+          "title"
+        ]
+      },
+      "CreateBookChapterVersionRequest": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "authorNotesEnd": {
+            "type": "string"
+          },
+          "authorNotesStart": {
+            "type": "string"
+          },
+          "chapter": {
+            "$ref": "#/components/schemas/EntityIdRequest"
+          }
+        },
+        "required": [
+          "chapter",
+          "content"
+        ]
+      },
       "CreateArtistRequest": {
         "type": "object",
         "properties": {
@@ -2121,53 +2822,17 @@
           "nicknames"
         ]
       },
-      "JsonNullableEntityIdRequest": {
-        "type": "object",
-        "properties": {
-          "present": {
-            "type": "boolean"
-          },
-          "undefined": {
-            "type": "boolean"
-          }
-        }
-      },
-      "JsonNullableListEntityIdRequest": {
-        "type": "object",
-        "properties": {
-          "present": {
-            "type": "boolean"
-          },
-          "undefined": {
-            "type": "boolean"
-          }
-        }
-      },
-      "JsonNullableString": {
-        "type": "object",
-        "properties": {
-          "present": {
-            "type": "boolean"
-          },
-          "undefined": {
-            "type": "boolean"
-          }
-        }
-      },
       "PatchTagRequest": {
         "type": "object",
         "properties": {
-          "aliases": {
-            "$ref": "#/components/schemas/JsonNullableListEntityIdRequest"
-          },
           "category": {
-            "$ref": "#/components/schemas/JsonNullableEntityIdRequest"
+            "$ref": "#/components/schemas/EntityIdRequest"
           },
           "name": {
-            "$ref": "#/components/schemas/JsonNullableString"
+            "type": "string"
           },
           "library": {
-            "$ref": "#/components/schemas/JsonNullableEntityIdRequest"
+            "$ref": "#/components/schemas/EntityIdRequest"
           }
         }
       },
@@ -2175,10 +2840,13 @@
         "type": "object",
         "properties": {
           "name": {
-            "$ref": "#/components/schemas/JsonNullableString"
+            "type": "string"
           },
           "hexColor": {
-            "$ref": "#/components/schemas/JsonNullableString"
+            "type": "string"
+          },
+          "library": {
+            "$ref": "#/components/schemas/EntityIdRequest"
           }
         }
       },
@@ -2186,32 +2854,10 @@
         "type": "object",
         "properties": {
           "targetTag": {
-            "$ref": "#/components/schemas/JsonNullableEntityIdRequest"
+            "$ref": "#/components/schemas/EntityIdRequest"
           },
           "alias": {
-            "$ref": "#/components/schemas/JsonNullableString"
-          }
-        }
-      },
-      "JsonNullableMapStringObject": {
-        "type": "object",
-        "properties": {
-          "present": {
-            "type": "boolean"
-          },
-          "undefined": {
-            "type": "boolean"
-          }
-        }
-      },
-      "JsonNullableSourceStrategy": {
-        "type": "object",
-        "properties": {
-          "present": {
-            "type": "boolean"
-          },
-          "undefined": {
-            "type": "boolean"
+            "type": "string"
           }
         }
       },
@@ -2219,10 +2865,11 @@
         "type": "object",
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/JsonNullableMapStringObject"
+            "type": "object",
+            "additionalProperties": {}
           },
           "sourceStrategy": {
-            "$ref": "#/components/schemas/JsonNullableSourceStrategy"
+            "$ref": "#/components/schemas/SourceStrategy"
           }
         }
       },
@@ -2230,50 +2877,43 @@
         "type": "object",
         "properties": {
           "title": {
-            "$ref": "#/components/schemas/JsonNullableString"
+            "type": "string"
           },
           "description": {
-            "$ref": "#/components/schemas/JsonNullableString"
+            "type": "string"
           },
           "tags": {
-            "$ref": "#/components/schemas/JsonNullableListEntityIdRequest"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityIdRequest"
+            }
           },
           "artists": {
-            "$ref": "#/components/schemas/JsonNullableListEntityIdRequest"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityIdRequest"
+            }
           },
           "displayMediaList": {
-            "$ref": "#/components/schemas/JsonNullableListEntityIdRequest"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityIdRequest"
+            }
           },
           "attachments": {
-            "$ref": "#/components/schemas/JsonNullableListEntityIdRequest"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityIdRequest"
+            }
           },
           "sources": {
-            "$ref": "#/components/schemas/JsonNullableListEntityIdRequest"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityIdRequest"
+            }
           },
           "library": {
-            "$ref": "#/components/schemas/JsonNullableEntityIdRequest"
-          }
-        }
-      },
-      "JsonNullableInteger": {
-        "type": "object",
-        "properties": {
-          "present": {
-            "type": "boolean"
-          },
-          "undefined": {
-            "type": "boolean"
-          }
-        }
-      },
-      "JsonNullableUUID": {
-        "type": "object",
-        "properties": {
-          "present": {
-            "type": "boolean"
-          },
-          "undefined": {
-            "type": "boolean"
+            "$ref": "#/components/schemas/EntityIdRequest"
           }
         }
       },
@@ -2281,13 +2921,18 @@
         "type": "object",
         "properties": {
           "priority": {
-            "$ref": "#/components/schemas/JsonNullableInteger"
+            "type": "integer",
+            "format": "int32"
           },
           "fileReferenceId": {
-            "$ref": "#/components/schemas/JsonNullableUUID"
+            "type": "string",
+            "format": "uuid"
           },
           "sources": {
-            "$ref": "#/components/schemas/JsonNullableListEntityIdRequest"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityIdRequest"
+            }
           }
         }
       },
@@ -2295,7 +2940,7 @@
         "type": "object",
         "properties": {
           "title": {
-            "$ref": "#/components/schemas/JsonNullableString"
+            "type": "string"
           }
         }
       },
@@ -2303,24 +2948,73 @@
         "type": "object",
         "properties": {
           "title": {
-            "$ref": "#/components/schemas/JsonNullableString"
+            "type": "string"
           },
           "posts": {
-            "$ref": "#/components/schemas/JsonNullableListEntityIdRequest"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityIdRequest"
+            }
           },
           "library": {
-            "$ref": "#/components/schemas/JsonNullableEntityIdRequest"
+            "$ref": "#/components/schemas/EntityIdRequest"
           }
         }
       },
-      "JsonNullableListArtistNickname": {
+      "PatchBookRequest": {
         "type": "object",
         "properties": {
-          "present": {
-            "type": "boolean"
+          "title": {
+            "type": "string"
           },
-          "undefined": {
-            "type": "boolean"
+          "description": {
+            "type": "string"
+          },
+          "cover": {
+            "$ref": "#/components/schemas/EntityIdRequest"
+          },
+          "library": {
+            "$ref": "#/components/schemas/EntityIdRequest"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityIdRequest"
+            }
+          },
+          "artists": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityIdRequest"
+            }
+          }
+        }
+      },
+      "PatchBookChapterRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "book": {
+            "$ref": "#/components/schemas/EntityIdRequest"
+          }
+        }
+      },
+      "PatchBookChapterVersionRequest": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string"
+          },
+          "authorNotesEnd": {
+            "type": "string"
+          },
+          "authorNotesStart": {
+            "type": "string"
+          },
+          "chapter": {
+            "$ref": "#/components/schemas/EntityIdRequest"
           }
         }
       },
@@ -2328,16 +3022,22 @@
         "type": "object",
         "properties": {
           "nicknames": {
-            "$ref": "#/components/schemas/JsonNullableListArtistNickname"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ArtistNickname"
+            }
           },
           "sources": {
-            "$ref": "#/components/schemas/JsonNullableListEntityIdRequest"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityIdRequest"
+            }
           },
           "avatar": {
-            "$ref": "#/components/schemas/JsonNullableEntityIdRequest"
+            "$ref": "#/components/schemas/EntityIdRequest"
           },
           "library": {
-            "$ref": "#/components/schemas/JsonNullableEntityIdRequest"
+            "$ref": "#/components/schemas/EntityIdRequest"
           }
         }
       },
@@ -2563,6 +3263,48 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CollectionDTO"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMetadata"
+          }
+        }
+      },
+      "PagedModelBookDTO": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BookDTO"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMetadata"
+          }
+        }
+      },
+      "PagedModelBookChapterDTO": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BookChapterDTO"
+            }
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageMetadata"
+          }
+        }
+      },
+      "PagedModelBookChapterVersionDTO": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BookChapterVersionDTO"
             }
           },
           "page": {

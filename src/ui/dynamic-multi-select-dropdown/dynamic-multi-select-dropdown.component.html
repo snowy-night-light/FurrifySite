@@ -1,0 +1,43 @@
+<div class="flex flex-col gap-2 w-full">
+    <!-- Dropdown Input -->
+    <ui-dynamic-dropdown
+        #dropdown
+        class="w-full"
+        [dataset]="dataset()"
+        [searchGroup]="searchGroup()"
+        [mapDisplayItem]="mapDisplayItem()"
+        (itemSelected)="onItemSelected($event, dropdown.items())"
+        (itemUnselect)="dropdownInput.value.set('')">
+
+        <ui-input-field
+            #dropdownInput
+            [type]="'text'"
+            [placeholder]="placeholder()"
+            [color]="invalid() ? 'error' : 'default'">
+        </ui-input-field>
+    </ui-dynamic-dropdown>
+
+    @if (selectedItems().length > 0) {
+        <div class="flex flex-wrap gap-2 pt-1">
+            @for (item of selectedItems(); track item.value) {
+                <div class="badge badge-primary gap-1 pl-2 pr-1 h-7 shadow-sm">
+                    @if (item.colorHex) {
+                        <span class="w-2.5 h-2.5 rounded-full shrink-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1)]" [style.background-color]="item.colorHex"></span>
+                    }
+                    @if (item.iconClasses) {
+                        <i [classList]="item.iconClasses.join(' ')"></i>
+                    }
+                    <span class="truncate max-w-50 font-medium text-sm">{{ item.text }}</span>
+                    <button type="button" tabindex="-1" class="rounded-full w-5 h-5 flex items-center justify-center hover:bg-base-100/20 cursor-pointer transition-colors ml-1" (click)="removeItem(item.value)">
+                        <i class="bi bi-x text-lg leading-none"></i>
+                    </button>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@let feedback = this.validationFeedback();
+@if (feedback) {
+    <ui-validation-feedback [feedback]="feedback"></ui-validation-feedback>
+}
