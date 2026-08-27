@@ -1,0 +1,13 @@
+:host ::ng-deep .color-picker-circle::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+:host ::ng-deep .color-picker-circle::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
+}
+
+:host ::ng-deep .color-picker-circle::-moz-color-swatch {
+    border: none;
+    border-radius: 50%;
+}

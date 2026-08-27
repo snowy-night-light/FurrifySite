@@ -1,0 +1,9 @@
+<form class="flex flex-col gap-6 pt-2 pb-4">
+    <ui-label [text]="'app.dashboard.tags.tabs.categories.name' | translate" type="float">
+        <ui-input-field [type]="'text'" [formField]="categoryForm.name" [placeholder]="'app.dashboard.tags.tabs.categories.categoryName' | translate"></ui-input-field>
+    </ui-label>
+
+    <ui-label [text]="'app.dashboard.tags.tabs.categories.hexColor' | translate" type="float">
+        <ui-input-field [type]="'color'" [formField]="categoryForm.hexColor" [placeholder]="'app.dashboard.tags.tabs.categories.hexColorPlaceholder' | translate"></ui-input-field>
+    </ui-label>
+</form>

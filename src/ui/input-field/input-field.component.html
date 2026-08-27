@@ -25,9 +25,20 @@
         <i [class]="['opacity-50', ...iconClass].join(' ')"></i>
     }
 
-    <input class="grow outline-none bg-transparent" [type]="type()" [placeholder]="placeholder()" [autocomplete]="autocomplete()"
+    <input class="grow outline-none bg-transparent" [type]="type() === 'color' ? 'text' : type()" [placeholder]="placeholder()" [autocomplete]="autocomplete()"
            [attr.list]="datasetId()" [disabled]="disabled()" (focus)="focus.emit($event)" (change)="change.emit($event)"
            [value]="value() ?? ''" (input)="onInput($event)" (blur)="onBlur()"/>
+
+    @if (type() === 'color') {
+        <div class="relative h-5 w-5 rounded-full overflow-hidden shrink-0">
+            <input type="color"
+                   class="color-picker-circle w-full h-full p-0 bg-transparent border-0 cursor-pointer"
+                   [value]="value() || '#000000'"
+                   (input)="onInput($event)"
+                   title="Choose your color">
+            <div class="absolute inset-0 pointer-events-none rounded-full shadow-inner border border-base-content/10"></div>
+        </div>
+    }
     @let datalist = this.datalist();
 
     @if (datalist) {

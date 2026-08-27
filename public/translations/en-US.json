@@ -83,12 +83,23 @@
                     "categories": {
                         "title": "Categories",
                         "manageCategories": "Manage categories",
+                        "name": "Name",
+                        "categoryName": "Name",
+                        "hexColor": "Hex color",
+                        "hexColorPlaceholder": "Hex color",
                         "addCategory": "Add category",
-                        "noCategoriesFound": "No categories found. Click \"Add Category\" to create one."
+                        "noCategoriesFound": "No categories found. Click \"Add Category\" to create one.",
+                        "editTagCategoryModal": {
+                            "errors": {
+                                "categoryNameIsRequired": "Category name is required.",
+                                "hexColorInvalidPattern": "Hex color format is invalid."
+                            }
+                        }
                     },
                     "aliases": {
                         "viewTag": "View tag",
                         "edit": "Edit",
+                        "tagAlias": "Tag alias",
                         "title": "Aliases",
                         "editAlias": "Edit alias",
                         "targetTag": "Target tag",

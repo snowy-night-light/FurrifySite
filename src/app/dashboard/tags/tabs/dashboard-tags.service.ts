@@ -7,7 +7,8 @@ import {
     TagCategoryV1RestControllerService,
     TagAliasV1RestControllerService,
     TagDTO, PatchTagRequest, CreateTagRequest,
-    TagAliasDTO, PatchTagAliasRequest, CreateTagAliasRequest
+    TagAliasDTO, PatchTagAliasRequest, CreateTagAliasRequest,
+    TagCategoryDTO, PatchTagCategoryRequest, CreateTagCategoryRequest
 } from '../../../../openapi/generated/storage';
 import {SpecConnector, SpecOperator} from '../../../../store/common/specification';
 import {Observable} from 'rxjs';
@@ -129,9 +130,6 @@ export class DashboardTagsService {
     updateTag(dto: TagDTO): Observable<TagDTO> {
         const request: PatchTagRequest = {
             name: dto.name,
-            library: {
-                id: dto.library?.id
-            },
             category: {
                 id: dto.category?.id
             }
@@ -167,6 +165,34 @@ export class DashboardTagsService {
             return this.aliasesDataSet.updateById(dto.id, request);
         } else {
             throw Error('Cannot update alias without id');
+        }
+    }
+
+    createCategory(dto: TagCategoryDTO): Observable<TagCategoryDTO> {
+        const request: CreateTagCategoryRequest = {
+            name: dto.name!,
+            hexColor: dto.hexColor!,
+            library: {
+                id: dto.library?.id
+            }
+        };
+
+        return this.categoriesDataSet.create(request);
+    }
+
+    updateCategory(dto: TagCategoryDTO): Observable<TagCategoryDTO> {
+        const request: PatchTagCategoryRequest = {
+            name: dto.name,
+            hexColor: dto.hexColor,
+            library: {
+                id: dto.library?.id
+            }
+        };
+
+        if (dto.id) {
+            return this.categoriesDataSet.updateById(dto.id, request);
+        } else {
+            throw Error('Cannot update category without id');
         }
     }
 }
