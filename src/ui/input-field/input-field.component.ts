@@ -15,7 +15,8 @@ export type InputFieldTypes =
     | "tel"
     | "url"
     | "search"
-    | "time";
+    | "time"
+    | "color";
 
 
 export type InputFieldSizes =
