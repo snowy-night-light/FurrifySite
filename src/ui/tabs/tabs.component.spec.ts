@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TabsComponent } from './tabs.component';
 import { ComponentRef } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('TabsComponent', () => {
@@ -11,7 +11,8 @@ describe('TabsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [TabsComponent, TranslateModule.forRoot(), RouterTestingModule]
+            imports: [TabsComponent, RouterTestingModule],
+            providers: [provideTranslateService()]
         }).compileComponents();
 
         fixture = TestBed.createComponent(TabsComponent);
