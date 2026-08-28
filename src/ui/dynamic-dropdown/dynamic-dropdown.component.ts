@@ -86,12 +86,20 @@ export class DynamicDropdownComponent<DTO extends BaseEntity, CREATE_REQ extends
     constructor(private elementRef: ElementRef) {
         effect(() => {
             const inputField = this.inputRef();
+            const isOpen = this.isOpen();
+            if (inputField) {
+                untracked(() => {
+                    inputField.hideValidation.set(isOpen);
+                });
+            }
+        });
+
+        effect(() => {
+            const inputField = this.inputRef();
             if (inputField) {
                 const inputValue = inputField.value();
                 
                 untracked(() => {
-                    inputField.hideValidation.set(this.isOpen());
-                    
                     if (this.lastSearchValue !== inputValue) {
                         if (this.isOpen()) {
                             this.isDebouncing.set(true);
