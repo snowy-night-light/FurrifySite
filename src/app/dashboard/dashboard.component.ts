@@ -1,13 +1,10 @@
-import {Component, computed, inject, OnInit, signal} from '@angular/core';
+import {Component, computed, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {SidebarComponent, SidebarItem} from '../../ui/sidebar/sidebar.component';
-import {EndpointDataSet} from '../../store/common/endpoint/endpoint-data-set';
-import {EndpointDataSource} from '../../store/common/endpoint/endpoint-data-source';
 import {CrudDataSet} from '../../store/common/crud/crud-data-set';
 import {CrudDataSource} from '../../store/common/crud/crud-data-source';
-import {UiToastService} from '../../ui/core/service/ui-toast.service';
-import {LibraryV1RestControllerService, UserStatisticsV1RestControllerService} from '../../openapi/generated/storage';
+import {LibraryV1RestControllerService} from '../../openapi/generated/storage';
 
 @Component({
     selector: 'app-dashboard',
@@ -16,7 +13,6 @@ import {LibraryV1RestControllerService, UserStatisticsV1RestControllerService} f
     styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnInit {
-    private readonly toastService = inject(UiToastService);
     private readonly libraryService = inject(LibraryV1RestControllerService);
 
     librariesDataSet = new CrudDataSet(new CrudDataSource(this.libraryService));
@@ -44,7 +40,7 @@ export class DashboardComponent implements OnInit {
                         {labelKey: 'app.dashboard.sidebar.collections', iconClass: 'bi bi-collection'},
                         {labelKey: 'app.dashboard.sidebar.posts', iconClass: 'bi bi-file-earmark-text'},
                         {labelKey: 'app.dashboard.sidebar.tags', iconClass: 'bi bi-tags', route: ['/dashboard', library.id, 'tags']},
-                        {labelKey: 'app.dashboard.sidebar.artists', iconClass: 'bi bi-palette'},
+                        {labelKey: 'app.dashboard.sidebar.artists', iconClass: 'bi bi-palette', route: ['/dashboard', library.id, 'artists']},
                         {labelKey: 'app.dashboard.sidebar.books', iconClass: 'bi bi-book'},
                         {labelKey: 'app.dashboard.sidebar.brokers', iconClass: 'bi bi-robot', isDisabled: true}
                     ]

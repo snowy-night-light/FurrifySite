@@ -1,0 +1,15 @@
+<div class="flex flex-col gap-6 pt-2 pb-4">
+    <form class="flex flex-col gap-6">
+        <ui-label [text]="'app.dashboard.artists.primaryName' | translate" type="float">
+            <ui-input-field [type]="'text'" [formField]="artistForm.primaryNickname" [placeholder]="'app.dashboard.artists.nicknamePlaceholder' | translate"></ui-input-field>
+        </ui-label>
+    </form>
+
+    <ui-item-list-form
+        [title]="'app.dashboard.artists.otherNicknames' | translate"
+        [placeholder]="'app.dashboard.artists.addNickname' | translate"
+        [emptyText]="'app.dashboard.artists.noOtherNicknames' | translate"
+        [itemValidators]="additionalNicknamesValidators"
+        [(items)]="otherNicknames">
+    </ui-item-list-form>
+</div>
