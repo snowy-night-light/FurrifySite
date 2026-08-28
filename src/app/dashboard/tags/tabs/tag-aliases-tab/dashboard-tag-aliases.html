@@ -1,11 +1,11 @@
 <div class="flex justify-between items-center mb-6">
     <h2 class="text-xl font-bold">{{ 'app.dashboard.tags.tabs.aliases.manageAliases' | translate }}</h2>
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2 refresh-box">
         <ui-refresh-button
             [isRefreshing]="areAliasesFetching()"
             (refresh)="refreshAliases()">
         </ui-refresh-button>
-        <button class="btn btn-primary font-bold" (click)="openAddModal()">
+        <button class="add-alias-btn btn btn-primary font-bold" (click)="openAddModal()">
             <i class="bi bi-plus-lg text-xl"></i> {{ 'app.dashboard.tags.tabs.aliases.addAlias' | translate }}
         </button>
     </div>
@@ -20,7 +20,7 @@
 } @else {
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
         @for (alias of aliasesData?.content; track alias.id) {
-            <div class="card bg-base-100 shadow-sm border border-base-200 hover:shadow-md hover:-translate-y-0.5 transition-all overflow-hidden relative group cursor-pointer">
+            <div class="alias-card card bg-base-100 shadow-sm border border-base-200 hover:shadow-md hover:-translate-y-0.5 transition-all overflow-hidden relative group cursor-pointer">
 
                 <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary"></div>
 
@@ -42,7 +42,7 @@
 
                     <div class="flex gap-1 shrink-0">
                         <button class="btn btn-sm btn-ghost btn-square" [title]="'app.dashboard.tags.tabs.aliases.edit' | translate" (click)="$event.stopPropagation(); openEditModal(alias)">
-                            <i class="bi bi-pencil text-base"></i>
+                            <i class="bi bi-pencil edit-icon text-base"></i>
                         </button>
                         <button class="btn btn-sm btn-ghost btn-square text-error hover:bg-error hover:text-error-content transition-colors"
                                 title="Delete"
@@ -51,7 +51,7 @@
                             @if (deletingAliases().has(alias.id ?? '-1')) {
                                 <span class="loading loading-spinner loading-sm"></span>
                             } @else {
-                                <i class="bi bi-trash text-base"></i>
+                                <i class="bi bi-trash remove-icon text-base"></i>
                             }
                         </button>
                     </div>
