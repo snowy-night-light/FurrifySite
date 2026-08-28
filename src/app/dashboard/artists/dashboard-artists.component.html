@@ -1,0 +1,86 @@
+<ui-modal-dialog #artistDialog
+    [titleKey]="artistToEdit()?.id ? 'app.dashboard.artists.editArtist' : 'app.dashboard.artists.addArtist'"
+    [component]="DashboardArtistEdit"
+    [data]="artistDialogData()"
+    class="edit-artist-dialog"
+    [onSave]="onArtistSave"></ui-modal-dialog>
+
+<div class="w-full flex flex-col gap-6">
+    <div class="flex justify-between items-center w-full mb-2">
+        <h1 class="text-3xl font-bold">{{ 'app.dashboard.sidebar.artists' | translate }}</h1>
+        <div class="flex items-center gap-2 refresh-box">
+            <ui-refresh-button
+                [isRefreshing]="areArtistsFetching()"
+                (refresh)="refreshArtists()">
+            </ui-refresh-button>
+            <button class="add-artist-btn btn btn-primary font-bold" (click)="openAddModal()">
+                <i class="bi bi-plus-lg text-xl"></i> {{ 'app.dashboard.artists.addArtist' | translate }}
+            </button>
+        </div>
+    </div>
+
+    <div class="w-full max-w-lg mx-auto">
+        <ui-search-bar [placeholder]="'app.dashboard.artists.searchArtists' | translate" [query]="currentQuery()" (queryChange)="onQueryChanged($event)"></ui-search-bar>
+    </div>
+
+    <div class="w-full">
+        @let artists = artistsData();
+
+        @if (areArtistsFetching()) {
+            <div class="w-full flex justify-center p-12">
+                <span class="loading loading-spinner w-14 h-14 text-primary"></span>
+            </div>
+        } @else {
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mt-6">
+                @for (artist of artists?.content; track artist.id) {
+                    <div class="artist-card card bg-base-100 shadow-sm border border-base-200 hover:shadow-md hover:-translate-y-0.5 transition-all overflow-hidden cursor-pointer">
+                        <div class="card-body py-4 px-5 flex flex-row items-center gap-4">
+
+                            <div class="avatar" [class.placeholder]="!artist.avatar?.fileReferenceId">
+                                @if (artist.avatar?.fileReferenceId) {
+                                    <div class="w-12 h-12 rounded-full">
+                                        <img [src]="'/api/v1/media/' + artist.avatar?.fileReferenceId + '/file'" alt="Artist Avatar" />
+                                    </div>
+                                } @else {
+                                    <div class="bg-primary text-primary-content w-12 h-12 rounded-full flex items-center justify-center">
+                                        <span class="text-xl uppercase font-bold">{{ getPrimaryNickname(artist).charAt(0) }}</span>
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="flex flex-col overflow-hidden min-w-0" [title]="getPrimaryNickname(artist)">
+                                <span class="font-bold text-base-content truncate text-base">
+                                    {{ getPrimaryNickname(artist) }}
+                                </span>
+                                @if (artist.nicknames && artist.nicknames.length > 1) {
+                                    <span class="text-xs text-base-content/60 truncate mt-0.5">
+                                        +{{ artist.nicknames.length - 1 }} {{ ((artist.nicknames.length === 2) ? 'app.dashboard.artists.nickname' : 'app.dashboard.artists.nicknames' ) | translate }}
+                                    </span>
+                                }
+                            </div>
+
+                            <div class="flex gap-1 shrink-0 ml-auto">
+                                <button class="btn btn-sm btn-ghost btn-square" [title]="'app.dashboard.artists.edit' | translate" (click)="$event.stopPropagation(); openEditModal(artist)">
+                                    <i class="bi bi-pencil edit-icon text-base"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @if (artists) {
+                <div class="mt-24">
+                    <ui-pagination [pageData]="artists" [queryParam]="'page'"></ui-pagination>
+                </div>
+            }
+
+            @if (artists?.content?.length === 0) {
+                <div class="w-full flex flex-col items-center justify-center p-12 text-base-content/50 border-2 border-dashed border-base-300 rounded-2xl">
+                    <i class="bi bi-person-lines-fill text-4xl mb-2"></i>
+                    <p>{{ 'app.dashboard.artists.noArtistsFound' | translate }}</p>
+                </div>
+            }
+        }
+    </div>
+</div>

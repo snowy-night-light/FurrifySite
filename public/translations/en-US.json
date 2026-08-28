@@ -119,6 +119,26 @@
                         }
                     }
                 }
+            },
+            "artists": {
+                "noOtherNicknames": "No other nicknames.",
+                "otherNicknames": "Alternative nicknames",
+                "editArtist": "Edit artist",
+                "searchArtists": "Search artists",
+                "addNickname": "Nickname",
+                "alternativeNicknames": "nicknames",
+                "nickname": "nickname",
+                "nicknames": "nicknames",
+                "addArtist": "Add artist",
+                "primaryName": "Primary nickname",
+                "nicknamePlaceholder": "Nickname",
+                "editArtistModal": {
+                    "errors": {
+                        "requiredNickname": "Nickname is required.",
+                        "tooLongNickname": "Nickname shouldn't exceed 256 characters.",
+                        "invalidNicknameFormat": "Nickname should only contain a-z, 0-9, dots, underscores, hyphens, and spaces between words."
+                    }
+                }
             }
         }
     },

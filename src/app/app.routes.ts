@@ -49,6 +49,10 @@ export const routes: Routes = [
                         loadComponent: () => import('./dashboard/tags/tabs/tag-aliases-tab/dashboard-tag-aliases').then(m => m.DashboardTagAliases)
                     }
                 ]
+            },
+            {
+                path: ':libraryId/artists',
+                loadComponent: () => import('./dashboard/artists/dashboard-artists.component').then(m => m.DashboardArtistsComponent)
             }
         ]
     },
