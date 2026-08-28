@@ -112,7 +112,7 @@
                             "errors": {
                                 "targetTagIsRequired": "Target tag is required.",
                                 "selectTargetTagFromDropdown": "Please select a target tag from the dropdown.",
-                                "invalidPattern": "Tag name should only contain a-z, 0-9 and spaces between words.",
+                                "invalidPattern": "Alias name should only contain a-z, 0-9 and spaces between words.",
                                 "aliasIsRequired": "Alias is required."
                             }
                         }
