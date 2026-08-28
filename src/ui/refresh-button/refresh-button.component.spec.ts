@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RefreshButtonComponent } from './refresh-button.component';
 import { ComponentRef } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService } from '@ngx-translate/core';
 
 describe('RefreshButtonComponent', () => {
     let component: RefreshButtonComponent;
@@ -10,7 +10,8 @@ describe('RefreshButtonComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [RefreshButtonComponent, TranslateModule.forRoot()]
+            imports: [RefreshButtonComponent],
+            providers: [provideTranslateService()]
         }).compileComponents();
 
         fixture = TestBed.createComponent(RefreshButtonComponent);

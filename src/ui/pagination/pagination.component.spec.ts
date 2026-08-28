@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PaginationComponent } from './pagination.component';
 import { ComponentRef } from '@angular/core';
 
+import { provideRouter } from '@angular/router';
+
 describe('PaginationComponent', () => {
     let component: PaginationComponent<any>;
     let fixture: ComponentFixture<PaginationComponent<any>>;
@@ -9,7 +11,8 @@ describe('PaginationComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PaginationComponent]
+            imports: [PaginationComponent],
+            providers: [provideRouter([])]
         }).compileComponents();
 
         fixture = TestBed.createComponent(PaginationComponent);
