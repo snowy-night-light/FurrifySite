@@ -89,6 +89,7 @@
                         "hexColor": "Hex color",
                         "hexColorPlaceholder": "Hex color",
                         "addCategory": "Add category",
+                        "editCategory": "Edit category",
                         "noCategoriesFound": "No categories found. Click \"Add Category\" to create one.",
                         "editTagCategoryModal": {
                             "errors": {

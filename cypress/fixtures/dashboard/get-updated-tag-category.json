@@ -1,0 +1,26 @@
+{
+    "createdAt": "2026-08-28T09:45:27.216469403+02:00",
+    "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+    "hexColor": "#00ff00",
+    "id": "7f000101-a047-1b90-81a0-4754aeb00001",
+    "library": {
+        "artists": null,
+        "books": null,
+        "collections": null,
+        "createdAt": "2026-08-22T23:11:18.242599+02:00",
+        "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+        "id": "7f000101-a02b-16c6-81a0-2b504de20001",
+        "modifiedAt": null,
+        "modifiedBy": null,
+        "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+        "posts": null,
+        "tags": null,
+        "title": "Favourites",
+        "version": 0
+    },
+    "modifiedAt": null,
+    "modifiedBy": null,
+    "name": "updated category",
+    "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+    "version": 0
+}

@@ -183,10 +183,7 @@ export class DashboardTagsService {
     updateCategory(dto: TagCategoryDTO): Observable<TagCategoryDTO> {
         const request: PatchTagCategoryRequest = {
             name: dto.name,
-            hexColor: dto.hexColor,
-            library: {
-                id: dto.library?.id
-            }
+            hexColor: dto.hexColor
         };
 
         if (dto.id) {
