@@ -1,4 +1,4 @@
-<div class="toast">
+<div class="toast" id="toast-popover" popover="manual">
     @for (alert of queue(); track alert.id) {
         <div class="alert max-w-sm shadow-lg" 
              [class.alert-info]="alert.color === 'info'"

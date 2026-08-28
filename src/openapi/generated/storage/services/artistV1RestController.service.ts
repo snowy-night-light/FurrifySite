@@ -61,9 +61,9 @@ export class ArtistV1RestControllerService implements PagedRestService<ArtistDTO
         });
     }
 
-    save(createArtistRequest: CreateArtistRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<ArtistDTO>;
-    save(createArtistRequest: CreateArtistRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<ArtistDTO>>;
-    save(createArtistRequest: CreateArtistRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<ArtistDTO>>;
+    save(createArtistRequest: CreateArtistRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<ArtistDTO>;
+    save(createArtistRequest: CreateArtistRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<ArtistDTO>>;
+    save(createArtistRequest: CreateArtistRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<ArtistDTO>>;
     save(createArtistRequest: CreateArtistRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/artists`;
 
@@ -75,7 +75,7 @@ export class ArtistV1RestControllerService implements PagedRestService<ArtistDTO
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -86,7 +86,6 @@ export class ArtistV1RestControllerService implements PagedRestService<ArtistDTO
             body: createArtistRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -119,9 +118,9 @@ export class ArtistV1RestControllerService implements PagedRestService<ArtistDTO
         });
     }
 
-    patch(id: string, patchArtistRequest: PatchArtistRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<ArtistDTO>;
-    patch(id: string, patchArtistRequest: PatchArtistRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<ArtistDTO>>;
-    patch(id: string, patchArtistRequest: PatchArtistRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<ArtistDTO>>;
+    patch(id: string, patchArtistRequest: PatchArtistRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<ArtistDTO>;
+    patch(id: string, patchArtistRequest: PatchArtistRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<ArtistDTO>>;
+    patch(id: string, patchArtistRequest: PatchArtistRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<ArtistDTO>>;
     patch(id: string, patchArtistRequest: PatchArtistRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/artists/${id}`;
 
@@ -133,7 +132,7 @@ export class ArtistV1RestControllerService implements PagedRestService<ArtistDTO
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -144,7 +143,6 @@ export class ArtistV1RestControllerService implements PagedRestService<ArtistDTO
             body: patchArtistRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

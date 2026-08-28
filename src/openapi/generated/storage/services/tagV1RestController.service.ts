@@ -61,9 +61,9 @@ export class TagV1RestControllerService implements PagedRestService<TagDTO, Crea
         });
     }
 
-    save(createTagRequest: CreateTagRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<TagDTO>;
-    save(createTagRequest: CreateTagRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagDTO>>;
-    save(createTagRequest: CreateTagRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagDTO>>;
+    save(createTagRequest: CreateTagRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<TagDTO>;
+    save(createTagRequest: CreateTagRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<TagDTO>>;
+    save(createTagRequest: CreateTagRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<TagDTO>>;
     save(createTagRequest: CreateTagRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/tags`;
 
@@ -75,7 +75,7 @@ export class TagV1RestControllerService implements PagedRestService<TagDTO, Crea
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -86,7 +86,6 @@ export class TagV1RestControllerService implements PagedRestService<TagDTO, Crea
             body: createTagRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -119,9 +118,9 @@ export class TagV1RestControllerService implements PagedRestService<TagDTO, Crea
         });
     }
 
-    patch(id: string, patchTagRequest: PatchTagRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<TagDTO>;
-    patch(id: string, patchTagRequest: PatchTagRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagDTO>>;
-    patch(id: string, patchTagRequest: PatchTagRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagDTO>>;
+    patch(id: string, patchTagRequest: PatchTagRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<TagDTO>;
+    patch(id: string, patchTagRequest: PatchTagRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<TagDTO>>;
+    patch(id: string, patchTagRequest: PatchTagRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<TagDTO>>;
     patch(id: string, patchTagRequest: PatchTagRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/tags/${id}`;
 
@@ -133,7 +132,7 @@ export class TagV1RestControllerService implements PagedRestService<TagDTO, Crea
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -144,7 +143,6 @@ export class TagV1RestControllerService implements PagedRestService<TagDTO, Crea
             body: patchTagRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

@@ -1,6 +1,6 @@
 import {Component, computed, inject, OnInit, signal, viewChild} from '@angular/core';
 import {combineLatest, Observable, of} from 'rxjs';
-import {catchError, finalize, map} from 'rxjs/operators';
+import {catchError, debounceTime, finalize, map} from 'rxjs/operators';
 import {TranslatePipe} from '@ngx-translate/core';
 import {RefreshButtonComponent} from '../../../../../ui/refresh-button/refresh-button.component';
 import {PaginationComponent} from '../../../../../ui/pagination/pagination.component';
@@ -37,7 +37,9 @@ export class DashboardTagAliases implements OnInit {
         combineLatest([
             this.route.parent!.paramMap,
             this.route.queryParamMap
-        ]).subscribe(([params, queryParams]) => {
+        ]).pipe(
+            debounceTime(0)
+        ).subscribe(([params, queryParams]) => {
             const libraryId = params.get('libraryId');
             const query = queryParams.get('query') || '';
             const page = parseInt(queryParams.get('page') || '0', 10) || 0;

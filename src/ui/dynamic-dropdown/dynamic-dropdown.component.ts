@@ -93,9 +93,11 @@ export class DynamicDropdownComponent<DTO extends BaseEntity, CREATE_REQ extends
                     inputField.hideValidation.set(this.isOpen());
                     
                     if (this.lastSearchValue !== inputValue) {
-                        this.isDebouncing.set(true);
-                        this.items.set([]);
-                        this.searchSubject.next(inputValue || '');
+                        if (this.isOpen()) {
+                            this.isDebouncing.set(true);
+                            this.items.set([]);
+                            this.searchSubject.next(inputValue || '');
+                        }
                         this.lastSearchValue = inputValue;
                     }
                 });
@@ -120,7 +122,6 @@ export class DynamicDropdownComponent<DTO extends BaseEntity, CREATE_REQ extends
 
     ngOnInit(): void {
         this.inputRef().focus.subscribe(() => this.onInputFocus());
-        this.resetAndFetch();
 
         this.searchSubject.pipe(
             debounceTime(300),

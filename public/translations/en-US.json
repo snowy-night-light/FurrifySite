@@ -62,6 +62,7 @@
                         "manageTags": "Manage tags",
                         "addTag": "Add tag",
                         "editTag": "Edit tag",
+                        "edit": "Edit",
                         "selectLibrary": "Select a library...",
                         "selectCategory": "Select a category...",
                         "category": "Category",

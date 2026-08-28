@@ -61,9 +61,9 @@ export class CollectionV1RestControllerService implements PagedRestService<Colle
         });
     }
 
-    save(createCollectionRequest: CreateCollectionRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<CollectionDTO>;
-    save(createCollectionRequest: CreateCollectionRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<CollectionDTO>>;
-    save(createCollectionRequest: CreateCollectionRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<CollectionDTO>>;
+    save(createCollectionRequest: CreateCollectionRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<CollectionDTO>;
+    save(createCollectionRequest: CreateCollectionRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<CollectionDTO>>;
+    save(createCollectionRequest: CreateCollectionRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<CollectionDTO>>;
     save(createCollectionRequest: CreateCollectionRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/collections`;
 
@@ -75,7 +75,7 @@ export class CollectionV1RestControllerService implements PagedRestService<Colle
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -86,7 +86,6 @@ export class CollectionV1RestControllerService implements PagedRestService<Colle
             body: createCollectionRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -119,9 +118,9 @@ export class CollectionV1RestControllerService implements PagedRestService<Colle
         });
     }
 
-    patch(id: string, patchCollectionRequest: PatchCollectionRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<CollectionDTO>;
-    patch(id: string, patchCollectionRequest: PatchCollectionRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<CollectionDTO>>;
-    patch(id: string, patchCollectionRequest: PatchCollectionRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<CollectionDTO>>;
+    patch(id: string, patchCollectionRequest: PatchCollectionRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<CollectionDTO>;
+    patch(id: string, patchCollectionRequest: PatchCollectionRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<CollectionDTO>>;
+    patch(id: string, patchCollectionRequest: PatchCollectionRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<CollectionDTO>>;
     patch(id: string, patchCollectionRequest: PatchCollectionRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/collections/${id}`;
 
@@ -133,7 +132,7 @@ export class CollectionV1RestControllerService implements PagedRestService<Colle
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -144,7 +143,6 @@ export class CollectionV1RestControllerService implements PagedRestService<Colle
             body: patchCollectionRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

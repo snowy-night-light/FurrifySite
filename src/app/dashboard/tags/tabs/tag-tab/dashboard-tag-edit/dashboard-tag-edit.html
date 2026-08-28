@@ -23,14 +23,14 @@
         <div class="flex flex-col gap-1">
             <div class="flex items-center gap-2">
                 <span class="label-text">Aliases</span>
-                <button type="button" class="btn btn-sm btn-outline btn-primary rounded-full" (click)="createAlias()">
+                <button type="button" class="add-alias-btn btn btn-sm btn-outline btn-primary rounded-full" (click)="createAlias()">
                     <i class="bi bi-plus text-base"></i> {{ 'app.dashboard.tags.tabs.aliases.addAlias' | translate }}
                 </button>
             </div>
-            <div class="flex flex-wrap items-center gap-2 mt-1">
+            <div class="flex flex-wrap tag-aliases items-center gap-2 mt-1">
                 @for (alias of aliases(); track alias.id) {
                     <div class="badge badge-primary gap-1 pl-2 pr-1 h-7 shadow-sm cursor-pointer hover:brightness-110 transition-all" (click)="navigateToAlias(alias.alias!)">
-                        <span class="truncate max-w-50 font-medium text-sm">{{ alias.alias }}</span>
+                        <span class="alias-text truncate max-w-50 font-medium text-sm">{{ alias.alias }}</span>
                         @if (removingAliasId() === alias.id) {
                             <span class="loading loading-spinner w-3.5 h-3.5 ml-1"></span>
                         } @else {
@@ -42,7 +42,7 @@
                 }
 
                 @if (aliases().length === 0) {
-                    <span class="text-sm opacity-60">{{ 'app.dashboard.tags.tabs.tags.noAliases' | translate }}</span>
+                    <span class="no-aliases-text text-sm opacity-60">{{ 'app.dashboard.tags.tabs.tags.noAliases' | translate }}</span>
                 }
             </div>
 

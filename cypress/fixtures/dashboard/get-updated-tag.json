@@ -1,0 +1,24 @@
+{
+    "aliases": [],
+    "category": {
+        "createdAt": "2026-08-19T11:03:49.149272+02:00",
+        "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+        "hexColor": "#9EC7fb",
+        "id": "7f000101-a019-1056-81a0-1943319d0007",
+        "library": null,
+        "modifiedAt": null,
+        "modifiedBy": null,
+        "name": "Character",
+        "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+        "version": 0
+    },
+    "createdAt": "2026-08-19T11:02:00.721085+02:00",
+    "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+    "id": "7f000101-a019-1056-81a0-19418a100001",
+    "library": null,
+    "modifiedAt": null,
+    "modifiedBy": null,
+    "name": "applejack2",
+    "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+    "version": 0
+}

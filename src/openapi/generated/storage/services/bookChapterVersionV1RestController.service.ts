@@ -61,9 +61,9 @@ export class BookChapterVersionV1RestControllerService implements PagedRestServi
         });
     }
 
-    save(createBookChapterVersionRequest: CreateBookChapterVersionRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<BookChapterVersionDTO>;
-    save(createBookChapterVersionRequest: CreateBookChapterVersionRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<BookChapterVersionDTO>>;
-    save(createBookChapterVersionRequest: CreateBookChapterVersionRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<BookChapterVersionDTO>>;
+    save(createBookChapterVersionRequest: CreateBookChapterVersionRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<BookChapterVersionDTO>;
+    save(createBookChapterVersionRequest: CreateBookChapterVersionRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<BookChapterVersionDTO>>;
+    save(createBookChapterVersionRequest: CreateBookChapterVersionRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<BookChapterVersionDTO>>;
     save(createBookChapterVersionRequest: CreateBookChapterVersionRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/book/chapters/versions`;
 
@@ -75,7 +75,7 @@ export class BookChapterVersionV1RestControllerService implements PagedRestServi
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -86,7 +86,6 @@ export class BookChapterVersionV1RestControllerService implements PagedRestServi
             body: createBookChapterVersionRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -119,9 +118,9 @@ export class BookChapterVersionV1RestControllerService implements PagedRestServi
         });
     }
 
-    patch(id: string, patchBookChapterVersionRequest: PatchBookChapterVersionRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<BookChapterVersionDTO>;
-    patch(id: string, patchBookChapterVersionRequest: PatchBookChapterVersionRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<BookChapterVersionDTO>>;
-    patch(id: string, patchBookChapterVersionRequest: PatchBookChapterVersionRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<BookChapterVersionDTO>>;
+    patch(id: string, patchBookChapterVersionRequest: PatchBookChapterVersionRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<BookChapterVersionDTO>;
+    patch(id: string, patchBookChapterVersionRequest: PatchBookChapterVersionRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<BookChapterVersionDTO>>;
+    patch(id: string, patchBookChapterVersionRequest: PatchBookChapterVersionRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<BookChapterVersionDTO>>;
     patch(id: string, patchBookChapterVersionRequest: PatchBookChapterVersionRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/book/chapters/versions/${id}`;
 
@@ -133,7 +132,7 @@ export class BookChapterVersionV1RestControllerService implements PagedRestServi
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -144,7 +143,6 @@ export class BookChapterVersionV1RestControllerService implements PagedRestServi
             body: patchBookChapterVersionRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

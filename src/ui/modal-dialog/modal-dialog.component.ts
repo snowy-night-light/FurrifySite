@@ -53,6 +53,7 @@ export class ModalDialogComponent<RETURN_TYPE, DATA> {
 
     handleSave(event: Event) {
         event.stopPropagation();
+        event.preventDefault();
         
         if (!this.componentRef || !this.onSave()) return;
         

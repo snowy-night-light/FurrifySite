@@ -61,9 +61,9 @@ export class LibraryV1RestControllerService implements PagedRestService<LibraryD
         });
     }
 
-    save(createLibraryRequest: CreateLibraryRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<LibraryDTO>;
-    save(createLibraryRequest: CreateLibraryRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<LibraryDTO>>;
-    save(createLibraryRequest: CreateLibraryRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<LibraryDTO>>;
+    save(createLibraryRequest: CreateLibraryRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<LibraryDTO>;
+    save(createLibraryRequest: CreateLibraryRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<LibraryDTO>>;
+    save(createLibraryRequest: CreateLibraryRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<LibraryDTO>>;
     save(createLibraryRequest: CreateLibraryRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/libraries`;
 
@@ -75,7 +75,7 @@ export class LibraryV1RestControllerService implements PagedRestService<LibraryD
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -86,7 +86,6 @@ export class LibraryV1RestControllerService implements PagedRestService<LibraryD
             body: createLibraryRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -119,9 +118,9 @@ export class LibraryV1RestControllerService implements PagedRestService<LibraryD
         });
     }
 
-    patch(id: string, patchLibraryRequest: PatchLibraryRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<LibraryDTO>;
-    patch(id: string, patchLibraryRequest: PatchLibraryRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<LibraryDTO>>;
-    patch(id: string, patchLibraryRequest: PatchLibraryRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<LibraryDTO>>;
+    patch(id: string, patchLibraryRequest: PatchLibraryRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<LibraryDTO>;
+    patch(id: string, patchLibraryRequest: PatchLibraryRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<LibraryDTO>>;
+    patch(id: string, patchLibraryRequest: PatchLibraryRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<LibraryDTO>>;
     patch(id: string, patchLibraryRequest: PatchLibraryRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/libraries/${id}`;
 
@@ -133,7 +132,7 @@ export class LibraryV1RestControllerService implements PagedRestService<LibraryD
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -144,7 +143,6 @@ export class LibraryV1RestControllerService implements PagedRestService<LibraryD
             body: patchLibraryRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

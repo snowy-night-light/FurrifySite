@@ -61,9 +61,9 @@ export class BookV1RestControllerService implements PagedRestService<BookDTO, Cr
         });
     }
 
-    save(createBookRequest: CreateBookRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<BookDTO>;
-    save(createBookRequest: CreateBookRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<BookDTO>>;
-    save(createBookRequest: CreateBookRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<BookDTO>>;
+    save(createBookRequest: CreateBookRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<BookDTO>;
+    save(createBookRequest: CreateBookRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<BookDTO>>;
+    save(createBookRequest: CreateBookRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<BookDTO>>;
     save(createBookRequest: CreateBookRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/books`;
 
@@ -75,7 +75,7 @@ export class BookV1RestControllerService implements PagedRestService<BookDTO, Cr
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -86,7 +86,6 @@ export class BookV1RestControllerService implements PagedRestService<BookDTO, Cr
             body: createBookRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -119,9 +118,9 @@ export class BookV1RestControllerService implements PagedRestService<BookDTO, Cr
         });
     }
 
-    patch(id: string, patchBookRequest: PatchBookRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<BookDTO>;
-    patch(id: string, patchBookRequest: PatchBookRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<BookDTO>>;
-    patch(id: string, patchBookRequest: PatchBookRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<BookDTO>>;
+    patch(id: string, patchBookRequest: PatchBookRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<BookDTO>;
+    patch(id: string, patchBookRequest: PatchBookRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<BookDTO>>;
+    patch(id: string, patchBookRequest: PatchBookRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<BookDTO>>;
     patch(id: string, patchBookRequest: PatchBookRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/books/${id}`;
 
@@ -133,7 +132,7 @@ export class BookV1RestControllerService implements PagedRestService<BookDTO, Cr
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -144,7 +143,6 @@ export class BookV1RestControllerService implements PagedRestService<BookDTO, Cr
             body: patchBookRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

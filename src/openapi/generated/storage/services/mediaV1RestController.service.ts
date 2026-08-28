@@ -61,9 +61,9 @@ export class MediaV1RestControllerService implements PagedRestService<MediaDTO, 
         });
     }
 
-    save(createMediaRequest: CreateMediaRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<MediaDTO>;
-    save(createMediaRequest: CreateMediaRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<MediaDTO>>;
-    save(createMediaRequest: CreateMediaRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<MediaDTO>>;
+    save(createMediaRequest: CreateMediaRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<MediaDTO>;
+    save(createMediaRequest: CreateMediaRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<MediaDTO>>;
+    save(createMediaRequest: CreateMediaRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<MediaDTO>>;
     save(createMediaRequest: CreateMediaRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/media`;
 
@@ -75,7 +75,7 @@ export class MediaV1RestControllerService implements PagedRestService<MediaDTO, 
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -86,7 +86,6 @@ export class MediaV1RestControllerService implements PagedRestService<MediaDTO, 
             body: createMediaRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -119,9 +118,9 @@ export class MediaV1RestControllerService implements PagedRestService<MediaDTO, 
         });
     }
 
-    patch(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<MediaDTO>;
-    patch(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<MediaDTO>>;
-    patch(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<MediaDTO>>;
+    patch(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<MediaDTO>;
+    patch(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<MediaDTO>>;
+    patch(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<MediaDTO>>;
     patch(id: string, patchMediaRequest: PatchMediaRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/media/${id}`;
 
@@ -133,7 +132,7 @@ export class MediaV1RestControllerService implements PagedRestService<MediaDTO, 
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -144,7 +143,6 @@ export class MediaV1RestControllerService implements PagedRestService<MediaDTO, 
             body: patchMediaRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

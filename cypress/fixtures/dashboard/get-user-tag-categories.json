@@ -1,0 +1,41 @@
+{
+    "content": [
+        {
+            "createdAt": "2026-08-19T11:03:49.149272+02:00",
+            "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+            "hexColor": "#9EC7fb",
+            "id": "7f000101-a019-1056-81a0-1943319d0007",
+            "library": null,
+            "modifiedAt": null,
+            "modifiedBy": null,
+            "name": "Character",
+            "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+            "version": 0
+        }
+    ],
+    "empty": false,
+    "first": true,
+    "last": true,
+    "number": 0,
+    "numberOfElements": 1,
+    "pageable": {
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 50,
+        "paged": true,
+        "sort": {
+            "empty": true,
+            "sorted": false,
+            "unsorted": true
+        },
+        "unpaged": false
+    },
+    "size": 50,
+    "sort": {
+        "empty": true,
+        "sorted": false,
+        "unsorted": true
+    },
+    "totalElements": 1,
+    "totalPages": 1
+}

@@ -61,9 +61,9 @@ export class AttachmentFileV1RestControllerService implements PagedRestService<A
         });
     }
 
-    save(requestBody: CreateAttachmentFileRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<AttachmentFileDTO>;
-    save(requestBody: CreateAttachmentFileRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<AttachmentFileDTO>>;
-    save(requestBody: CreateAttachmentFileRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<AttachmentFileDTO>>;
+    save(requestBody: CreateAttachmentFileRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<AttachmentFileDTO>;
+    save(requestBody: CreateAttachmentFileRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<AttachmentFileDTO>>;
+    save(requestBody: CreateAttachmentFileRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<AttachmentFileDTO>>;
     save(requestBody: CreateAttachmentFileRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/files`;
 
@@ -75,7 +75,7 @@ export class AttachmentFileV1RestControllerService implements PagedRestService<A
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -86,7 +86,6 @@ export class AttachmentFileV1RestControllerService implements PagedRestService<A
             body: requestBody,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -119,9 +118,9 @@ export class AttachmentFileV1RestControllerService implements PagedRestService<A
         });
     }
 
-    patch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<AttachmentFileDTO>;
-    patch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<AttachmentFileDTO>>;
-    patch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<AttachmentFileDTO>>;
+    patch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<AttachmentFileDTO>;
+    patch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<AttachmentFileDTO>>;
+    patch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<AttachmentFileDTO>>;
     patch(id: string, requestBody: PatchAttachmentFileRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/files/${id}`;
 
@@ -133,7 +132,7 @@ export class AttachmentFileV1RestControllerService implements PagedRestService<A
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -144,7 +143,6 @@ export class AttachmentFileV1RestControllerService implements PagedRestService<A
             body: requestBody,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
