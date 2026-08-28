@@ -9,7 +9,7 @@
                 @let displayItem = mapDisplayItem()(item);
 
                 <li>
-                    <a class="flex items-center gap-3 w-full" (mousedown)="selectItem(displayItem.value)">
+                    <button type="button" class="flex items-center gap-3 w-full" (click)="selectItem(displayItem.value)">
                         @if (displayItem.colorHex) {
                             <span class="w-3.5 h-3.5 rounded-full shrink-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)]" [style.background-color]="displayItem.colorHex"></span>
                         }
@@ -17,7 +17,7 @@
                             <i [classList]="displayItem.iconClasses.join(' ')"></i>
                         }
                         <span class="truncate">{{ displayItem.text }}</span>
-                    </a>
+                    </button>
                 </li>
             }
 

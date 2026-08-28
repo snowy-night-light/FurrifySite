@@ -61,9 +61,9 @@ export class TagAliasV1RestControllerService implements PagedRestService<TagAlia
         });
     }
 
-    save(createTagAliasRequest: CreateTagAliasRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<TagAliasDTO>;
-    save(createTagAliasRequest: CreateTagAliasRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagAliasDTO>>;
-    save(createTagAliasRequest: CreateTagAliasRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagAliasDTO>>;
+    save(createTagAliasRequest: CreateTagAliasRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<TagAliasDTO>;
+    save(createTagAliasRequest: CreateTagAliasRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<TagAliasDTO>>;
+    save(createTagAliasRequest: CreateTagAliasRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<TagAliasDTO>>;
     save(createTagAliasRequest: CreateTagAliasRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/tags/aliases`;
 
@@ -75,7 +75,7 @@ export class TagAliasV1RestControllerService implements PagedRestService<TagAlia
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -86,7 +86,6 @@ export class TagAliasV1RestControllerService implements PagedRestService<TagAlia
             body: createTagAliasRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -119,9 +118,9 @@ export class TagAliasV1RestControllerService implements PagedRestService<TagAlia
         });
     }
 
-    patch(id: string, patchTagAliasRequest: PatchTagAliasRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<TagAliasDTO>;
-    patch(id: string, patchTagAliasRequest: PatchTagAliasRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagAliasDTO>>;
-    patch(id: string, patchTagAliasRequest: PatchTagAliasRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagAliasDTO>>;
+    patch(id: string, patchTagAliasRequest: PatchTagAliasRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<TagAliasDTO>;
+    patch(id: string, patchTagAliasRequest: PatchTagAliasRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<TagAliasDTO>>;
+    patch(id: string, patchTagAliasRequest: PatchTagAliasRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<TagAliasDTO>>;
     patch(id: string, patchTagAliasRequest: PatchTagAliasRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/tags/aliases/${id}`;
 
@@ -133,7 +132,7 @@ export class TagAliasV1RestControllerService implements PagedRestService<TagAlia
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -144,7 +143,6 @@ export class TagAliasV1RestControllerService implements PagedRestService<TagAlia
             body: patchTagAliasRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

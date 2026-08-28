@@ -1,0 +1,12 @@
+.toast {
+    z-index: 99999;
+}
+
+.toast[popover] {
+    margin: 0;
+    border: none;
+    background: transparent;
+    overflow: visible;
+    padding: 1rem;
+    inset: auto 0 0 auto; /* bottom right */
+}

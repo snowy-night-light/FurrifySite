@@ -61,9 +61,9 @@ export class SourceV1RestControllerService implements PagedRestService<SourceDTO
         });
     }
 
-    save(createSourceRequest: CreateSourceRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<SourceDTO>;
-    save(createSourceRequest: CreateSourceRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<SourceDTO>>;
-    save(createSourceRequest: CreateSourceRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<SourceDTO>>;
+    save(createSourceRequest: CreateSourceRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<SourceDTO>;
+    save(createSourceRequest: CreateSourceRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<SourceDTO>>;
+    save(createSourceRequest: CreateSourceRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<SourceDTO>>;
     save(createSourceRequest: CreateSourceRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/sources`;
 
@@ -75,7 +75,7 @@ export class SourceV1RestControllerService implements PagedRestService<SourceDTO
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -86,7 +86,6 @@ export class SourceV1RestControllerService implements PagedRestService<SourceDTO
             body: createSourceRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -119,9 +118,9 @@ export class SourceV1RestControllerService implements PagedRestService<SourceDTO
         });
     }
 
-    patch(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<SourceDTO>;
-    patch(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<SourceDTO>>;
-    patch(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<SourceDTO>>;
+    patch(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<SourceDTO>;
+    patch(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<SourceDTO>>;
+    patch(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<SourceDTO>>;
     patch(id: string, patchSourceRequest: PatchSourceRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/sources/${id}`;
 
@@ -133,7 +132,7 @@ export class SourceV1RestControllerService implements PagedRestService<SourceDTO
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -144,7 +143,6 @@ export class SourceV1RestControllerService implements PagedRestService<SourceDTO
             body: patchSourceRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

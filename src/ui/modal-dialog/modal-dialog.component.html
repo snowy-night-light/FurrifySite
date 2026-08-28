@@ -10,10 +10,10 @@
 
         <div class="modal-action">
             <form method="dialog" class="flex w-full">
-                <button (click)="onClose()?.()" [disabled]="isSaving()" class="btn btn-soft btn-error mr-auto">{{ 'ui.modal.close' | translate }}</button>
+                <button (click)="onClose()?.()" [disabled]="isSaving()" class="modal-cancel-btn btn btn-soft btn-error mr-auto">{{ 'ui.modal.close' | translate }}</button>
 
                 @if (onSave()) {
-                    <button class="btn btn-primary btn-secondary" [disabled]="isSaving() || (componentRef?.instance?.isValid === false)" (click)="handleSave($event)">
+                    <button class="modal-save-btn btn btn-primary btn-secondary" [disabled]="isSaving() || (componentRef?.instance?.isValid === false)" (click)="handleSave($event)">
                         @if (isSaving()) {
                             <span class="loading loading-spinner"></span>
                         } @else {

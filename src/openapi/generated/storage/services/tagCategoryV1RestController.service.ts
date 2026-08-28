@@ -61,9 +61,9 @@ export class TagCategoryV1RestControllerService implements PagedRestService<TagC
         });
     }
 
-    save(createTagCategoryRequest: CreateTagCategoryRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<TagCategoryDTO>;
-    save(createTagCategoryRequest: CreateTagCategoryRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagCategoryDTO>>;
-    save(createTagCategoryRequest: CreateTagCategoryRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagCategoryDTO>>;
+    save(createTagCategoryRequest: CreateTagCategoryRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<TagCategoryDTO>;
+    save(createTagCategoryRequest: CreateTagCategoryRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<TagCategoryDTO>>;
+    save(createTagCategoryRequest: CreateTagCategoryRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<TagCategoryDTO>>;
     save(createTagCategoryRequest: CreateTagCategoryRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/tags/categories`;
 
@@ -75,7 +75,7 @@ export class TagCategoryV1RestControllerService implements PagedRestService<TagC
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -86,7 +86,6 @@ export class TagCategoryV1RestControllerService implements PagedRestService<TagC
             body: createTagCategoryRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -119,9 +118,9 @@ export class TagCategoryV1RestControllerService implements PagedRestService<TagC
         });
     }
 
-    patch(id: string, patchTagCategoryRequest: PatchTagCategoryRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<TagCategoryDTO>;
-    patch(id: string, patchTagCategoryRequest: PatchTagCategoryRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<TagCategoryDTO>>;
-    patch(id: string, patchTagCategoryRequest: PatchTagCategoryRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<TagCategoryDTO>>;
+    patch(id: string, patchTagCategoryRequest: PatchTagCategoryRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<TagCategoryDTO>;
+    patch(id: string, patchTagCategoryRequest: PatchTagCategoryRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<TagCategoryDTO>>;
+    patch(id: string, patchTagCategoryRequest: PatchTagCategoryRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<TagCategoryDTO>>;
     patch(id: string, patchTagCategoryRequest: PatchTagCategoryRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/tags/categories/${id}`;
 
@@ -133,7 +132,7 @@ export class TagCategoryV1RestControllerService implements PagedRestService<TagC
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -144,7 +143,6 @@ export class TagCategoryV1RestControllerService implements PagedRestService<TagC
             body: patchTagCategoryRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

@@ -61,9 +61,9 @@ export class PostV1RestControllerService implements PagedRestService<PostDTO, Cr
         });
     }
 
-    save(createPostRequest: CreatePostRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<PostDTO>;
-    save(createPostRequest: CreatePostRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<PostDTO>>;
-    save(createPostRequest: CreatePostRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<PostDTO>>;
+    save(createPostRequest: CreatePostRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<PostDTO>;
+    save(createPostRequest: CreatePostRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PostDTO>>;
+    save(createPostRequest: CreatePostRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PostDTO>>;
     save(createPostRequest: CreatePostRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/posts`;
 
@@ -75,7 +75,7 @@ export class PostV1RestControllerService implements PagedRestService<PostDTO, Cr
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -86,7 +86,6 @@ export class PostV1RestControllerService implements PagedRestService<PostDTO, Cr
             body: createPostRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)
@@ -119,9 +118,9 @@ export class PostV1RestControllerService implements PagedRestService<PostDTO, Cr
         });
     }
 
-    patch(id: string, patchPostRequest: PatchPostRequest, observe?: 'body', options?: RequestOptions<'blob'>): Observable<PostDTO>;
-    patch(id: string, patchPostRequest: PatchPostRequest, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<PostDTO>>;
-    patch(id: string, patchPostRequest: PatchPostRequest, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<PostDTO>>;
+    patch(id: string, patchPostRequest: PatchPostRequest, observe?: 'body', options?: RequestOptions<'json'>): Observable<PostDTO>;
+    patch(id: string, patchPostRequest: PatchPostRequest, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<PostDTO>>;
+    patch(id: string, patchPostRequest: PatchPostRequest, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<PostDTO>>;
     patch(id: string, patchPostRequest: PatchPostRequest, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any> {
         const url = `${this.basePath}/v1/posts/${id}`;
 
@@ -133,7 +132,7 @@ export class PostV1RestControllerService implements PagedRestService<PostDTO, Cr
         }
         // Advertise the response content type declared in the spec
         if (!headers.has('Accept')) {
-            headers = headers.set('Accept', '*/*');
+            headers = headers.set('Accept', 'application/json');
         }
         // Set Content-Type for JSON requests if not already set
         if (!headers.has('Content-Type')) {
@@ -144,7 +143,6 @@ export class PostV1RestControllerService implements PagedRestService<PostDTO, Cr
             body: patchPostRequest,
             observe,
             headers,
-            responseType: 'blob',
             reportProgress: options?.reportProgress,
             withCredentials: options?.withCredentials,
             context: this.createContextWithClientId(options?.context)

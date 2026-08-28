@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
     selector: 'ui-refresh-button',
     imports: [CommonModule],
     template: `
-        <button class="btn btn-ghost btn-circle" (keydown.enter)="onRefresh()" (click)="onRefresh()" [disabled]="isRefreshing()" aria-label="Refresh">
+        <button class="btn btn-ghost btn-circle refresh-btn" (keydown.enter)="onRefresh()" (click)="onRefresh()" [disabled]="isRefreshing()" aria-label="Refresh">
             <i class="bi bi-arrow-clockwise text-xl inline-block transition-transform duration-700 ease-in-out"
                [style.transform]="'rotate(' + refreshRotation() + 'deg)'"></i>
         </button>

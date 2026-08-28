@@ -15,9 +15,9 @@ export interface PagedRestService<DTO extends BaseEntity, CREATE_REQ extends Cre
     getAllPaged(pageable: Pageable, spec?: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<Page<DTO>>>;
     getAllPaged(pageable: Pageable, spec?: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any>;
 
-    save(requestBody: CREATE_REQ, observe?: 'body', options?: RequestOptions<'blob'>): Observable<DTO>;
-    save(requestBody: CREATE_REQ, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<DTO>>;
-    save(requestBody: CREATE_REQ, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<DTO>>;
+    save(requestBody: CREATE_REQ, observe?: 'body', options?: RequestOptions<'json'>): Observable<DTO>;
+    save(requestBody: CREATE_REQ, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<DTO>>;
+    save(requestBody: CREATE_REQ, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<DTO>>;
     save(requestBody: CREATE_REQ, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any>;
 
     getById(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<DTO>;
@@ -25,9 +25,9 @@ export interface PagedRestService<DTO extends BaseEntity, CREATE_REQ extends Cre
     getById(id: string, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<DTO>>;
     getById(id: string, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any>;
 
-    patch(id: string, requestBody: PATCH_REQ, observe?: 'body', options?: RequestOptions<'blob'>): Observable<DTO>;
-    patch(id: string, requestBody: PATCH_REQ, observe?: 'response', options?: RequestOptions<'blob'>): Observable<HttpResponse<DTO>>;
-    patch(id: string, requestBody: PATCH_REQ, observe?: 'events', options?: RequestOptions<'blob'>): Observable<HttpEvent<DTO>>;
+    patch(id: string, requestBody: PATCH_REQ, observe?: 'body', options?: RequestOptions<'json'>): Observable<DTO>;
+    patch(id: string, requestBody: PATCH_REQ, observe?: 'response', options?: RequestOptions<'json'>): Observable<HttpResponse<DTO>>;
+    patch(id: string, requestBody: PATCH_REQ, observe?: 'events', options?: RequestOptions<'json'>): Observable<HttpEvent<DTO>>;
     patch(id: string, requestBody: PATCH_REQ, observe?: 'body' | 'events' | 'response', options?: RequestOptions<'arraybuffer' | 'blob' | 'json' | 'text'>): Observable<any>;
 
     delete(id: string, observe?: 'body', options?: RequestOptions<'json'>): Observable<any>;

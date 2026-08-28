@@ -1,0 +1,131 @@
+{
+    "content": [
+        {
+            "alias": "twily",
+            "createdAt": "2026-08-23T16:22:50.682826+02:00",
+            "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+            "id": "7f000101-a02f-109d-81a0-2f00b5390000",
+            "modifiedAt": null,
+            "modifiedBy": null,
+            "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+            "targetTag": {
+                "aliases": null,
+                "category": {
+                    "createdAt": "2026-08-19T11:03:49.149272+02:00",
+                    "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+                    "hexColor": "#9EC7fb",
+                    "id": "7f000101-a019-1056-81a0-1943319d0007",
+                    "library": null,
+                    "modifiedAt": null,
+                    "modifiedBy": null,
+                    "name": "Character",
+                    "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+                    "version": 0
+                },
+                "createdAt": "2026-08-19T11:02:07.872079+02:00",
+                "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+                "id": "7f000101-a019-1056-81a0-1941a5ff0002",
+                "library": null,
+                "modifiedAt": null,
+                "modifiedBy": null,
+                "name": "twilight sparkle",
+                "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+                "version": 0
+            },
+            "version": 0
+        },
+        {
+            "alias": "twi",
+            "createdAt": "2026-08-23T16:22:55.881697+02:00",
+            "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+            "id": "7f000101-a02f-109d-81a0-2f00c9890001",
+            "modifiedAt": null,
+            "modifiedBy": null,
+            "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+            "targetTag": {
+                "aliases": null,
+                "category": {
+                    "createdAt": "2026-08-19T11:03:49.149272+02:00",
+                    "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+                    "hexColor": "#9EC7fb",
+                    "id": "7f000101-a019-1056-81a0-1943319d0007",
+                    "library": null,
+                    "modifiedAt": null,
+                    "modifiedBy": null,
+                    "name": "Character",
+                    "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+                    "version": 0
+                },
+                "createdAt": "2026-08-19T11:02:07.872079+02:00",
+                "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+                "id": "7f000101-a019-1056-81a0-1941a5ff0002",
+                "library": null,
+                "modifiedAt": null,
+                "modifiedBy": null,
+                "name": "twilight sparkle",
+                "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+                "version": 0
+            },
+            "version": 0
+        },
+        {
+            "alias": "twiii",
+            "createdAt": "2026-08-27T14:19:03.39921+02:00",
+            "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+            "id": "7f000101-a043-172f-81a0-4328d0650000",
+            "modifiedAt": null,
+            "modifiedBy": null,
+            "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+            "targetTag": {
+                "aliases": null,
+                "category": {
+                    "createdAt": "2026-08-19T11:03:49.149272+02:00",
+                    "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+                    "hexColor": "#9EC7fb",
+                    "id": "7f000101-a019-1056-81a0-1943319d0007",
+                    "library": null,
+                    "modifiedAt": null,
+                    "modifiedBy": null,
+                    "name": "Character",
+                    "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+                    "version": 0
+                },
+                "createdAt": "2026-08-19T11:02:07.872079+02:00",
+                "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+                "id": "7f000101-a019-1056-81a0-1941a5ff0002",
+                "library": null,
+                "modifiedAt": null,
+                "modifiedBy": null,
+                "name": "twilight sparkle",
+                "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+                "version": 0
+            },
+            "version": 0
+        }
+    ],
+    "empty": false,
+    "first": true,
+    "last": true,
+    "number": 0,
+    "numberOfElements": 3,
+    "pageable": {
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 10,
+        "paged": true,
+        "sort": {
+            "empty": true,
+            "sorted": false,
+            "unsorted": true
+        },
+        "unpaged": false
+    },
+    "size": 10,
+    "sort": {
+        "empty": true,
+        "sorted": false,
+        "unsorted": true
+    },
+    "totalElements": 3,
+    "totalPages": 1
+}
