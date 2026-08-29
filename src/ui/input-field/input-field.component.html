@@ -2,22 +2,24 @@
 @let color = this.color();
 
 <label class="flex items-center gap-3 w-full transition-all focus-within:outline-none!" [ngClass]="{
-                'input input-bordered border-2 px-5': bordered(),
-                'input-xs': size === 'xs',
-                'input-sm': size === 'sm',
-                'input-md': size === 'md',
-                'input-lg': size === 'lg',
-                'input-xl': size === 'xl',
-                'focus-within:input-neutral': color === 'neutral',
-                'focus-within:input-primary': color === 'primary',
-                'focus-within:input-secondary': color === 'secondary',
-                'focus-within:input-accent': color === 'accent',
-                'focus-within:input-info': color === 'info',
-                'focus-within:input-success': color === 'success',
-                'focus-within:input-warning': color === 'warning',
-                'focus-within:input-ghost': color === 'transparent',
-                'input-error': (color === 'error') || invalid(),
-                'rounded-full': rounded()
+                'input': type() !== 'file',
+                'px-5': type() !== 'file',
+                'input-bordered border-2': bordered() && type() !== 'file',
+                'input-xs': size === 'xs' && type() !== 'file',
+                'input-sm': size === 'sm' && type() !== 'file',
+                'input-md': size === 'md' && type() !== 'file',
+                'input-lg': size === 'lg' && type() !== 'file',
+                'input-xl': size === 'xl' && type() !== 'file',
+                'focus-within:input-neutral': color === 'neutral' && type() !== 'file',
+                'focus-within:input-primary': color === 'primary' && type() !== 'file',
+                'focus-within:input-secondary': color === 'secondary' && type() !== 'file',
+                'focus-within:input-accent': color === 'accent' && type() !== 'file',
+                'focus-within:input-info': color === 'info' && type() !== 'file',
+                'focus-within:input-success': color === 'success' && type() !== 'file',
+                'focus-within:input-warning': color === 'warning' && type() !== 'file',
+                'focus-within:input-ghost': color === 'transparent' && type() !== 'file',
+                'input-error': ((color === 'error') || invalid()) && type() !== 'file',
+                'rounded-full': rounded() && type() !== 'file'
            }">
     @let iconClass = this.iconClass();
 
@@ -25,9 +27,18 @@
         <i [class]="['opacity-50', ...iconClass].join(' ')"></i>
     }
 
-    <input class="grow outline-none bg-transparent" [type]="type() === 'color' ? 'text' : type()" [placeholder]="placeholder()" [autocomplete]="autocomplete()"
-           [attr.list]="datasetId()" [disabled]="disabled()" (focus)="focus.emit($event)" (change)="change.emit($event)"
-           [value]="value() ?? ''" (input)="onInput($event)" (blur)="onBlur()"/>
+    @if (type() !== 'file') {
+        <input class="grow outline-none bg-transparent" [type]="type() === 'color' ? 'text' : type()" [placeholder]="placeholder()" [autocomplete]="autocomplete()"
+               [attr.list]="datasetId()" [disabled]="disabled()" (focus)="focus.emit($event)" (change)="change.emit($event)"
+               [value]="value() ?? ''" (input)="onInput($event)" (blur)="onBlur()"/>
+    } @else {
+        <input type="file" class="grow outline-none bg-transparent w-full text-sm text-base-content/70 cursor-pointer
+               file:mr-4 file:py-2 file:px-6
+               file:rounded-full file:border file:border-base-content/20 file:font-semibold hover:file:bg-base-content/10 file:transition-colors" [placeholder]="placeholder()"
+               [disabled]="disabled()" (focus)="focus.emit($event)" (change)="change.emit($event)"
+               [accept]="accept()" [multiple]="multiple()"
+               (input)="onInput($event)" (blur)="onBlur()"/>
+    }
 
     @if (type() === 'color') {
         <div class="relative h-5 w-5 rounded-full overflow-hidden shrink-0">

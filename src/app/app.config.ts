@@ -2,8 +2,7 @@ import {ApplicationConfig, provideBrowserGlobalErrorListeners} from '@angular/co
 import {provideRouter} from '@angular/router';
 import {provideTranslateService} from '@ngx-translate/core';
 import {provideTranslateHttpLoader} from '@ngx-translate/http-loader';
-import {provideHttpClient, withInterceptors} from '@angular/common/http';
-
+import {HttpInterceptorFn, provideHttpClient, withInterceptors} from '@angular/common/http';
 import {routes} from './app.routes';
 import {
     provideKeycloak,
@@ -15,11 +14,19 @@ import {
     IncludeBearerTokenCondition,
     includeBearerTokenInterceptor
 } from 'keycloak-angular';
-
 import {environment} from '../environments/environment';
 import {provideStorageClient} from '../openapi/generated/storage';
 import {provideAttachmentClient} from '../openapi/generated/attachment';
 
+const multipartFormDataInterceptor: HttpInterceptorFn = (req, next) => {
+    if (req.body instanceof FormData) {
+        const modifiedReq = req.clone({
+            headers: req.headers.delete('Content-Type')
+        });
+        return next(modifiedReq);
+    }
+    return next(req);
+};
 
 const urlCondition = createInterceptorCondition<IncludeBearerTokenCondition>({
     urlPattern: /^(https?:\/\/(localhost:8080|.*\.furrify\.site))(\/.*)?$/i,
@@ -31,7 +38,7 @@ const interceptors = isCypress ? [] : [includeBearerTokenInterceptor];
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideHttpClient(withInterceptors(interceptors)),
+        provideHttpClient(withInterceptors([...interceptors, multipartFormDataInterceptor])),
         provideTranslateService({
             loader: provideTranslateHttpLoader({prefix: '/translations/', suffix: '.json'}),
             fallbackLang: 'en-US',

@@ -38,8 +38,8 @@
 
                             <div class="avatar" [class.placeholder]="!artist.avatar?.fileReferenceId">
                                 @if (artist.avatar?.fileReferenceId) {
-                                    <div class="w-12 h-12 rounded-full">
-                                        <img [src]="'/api/v1/media/' + artist.avatar?.fileReferenceId + '/file'" alt="Artist Avatar" />
+                                    <div class="w-12 h-12 rounded-full overflow-hidden">
+                                        <img [ngSrc]="environment.cdnUrl + '/' + artist.avatar?.fileReferenceId + '/thumbnail.jpg'" alt="Artist Avatar" width="48" height="48" />
                                     </div>
                                 } @else {
                                     <div class="bg-primary text-primary-content w-12 h-12 rounded-full flex items-center justify-center">
@@ -62,6 +62,16 @@
                             <div class="flex gap-1 shrink-0 ml-auto">
                                 <button class="btn btn-sm btn-ghost btn-square" [title]="'app.dashboard.artists.edit' | translate" (click)="$event.stopPropagation(); openEditModal(artist)">
                                     <i class="bi bi-pencil edit-icon text-base"></i>
+                                </button>
+                                <button class="btn btn-sm btn-ghost btn-square text-error hover:bg-error/10"
+                                        [title]="'app.dashboard.artists.delete' | translate"
+                                        [disabled]="deletingArtists().has(artist.id ?? '-1')"
+                                        (click)="$event.stopPropagation(); deleteArtist(artist)">
+                                    @if (deletingArtists().has(artist.id ?? '-1')) {
+                                        <span class="loading loading-spinner loading-sm"></span>
+                                    } @else {
+                                        <i class="bi bi-trash delete-icon text-base"></i>
+                                    }
                                 </button>
                             </div>
                         </div>

@@ -16,7 +16,8 @@ export type InputFieldTypes =
     | "url"
     | "search"
     | "time"
-    | "color";
+    | "color"
+    | "file";
 
 
 export type InputFieldSizes =
@@ -59,6 +60,8 @@ export class InputFieldComponent extends UiFormControl {
     iconClass = input<string[]>([]);
     datalist = input<string[]>([]);
     autocomplete = input<boolean>(false);
+    accept = input<string | undefined>(undefined);
+    multiple = input<boolean>(false);
 
     focus = output<FocusEvent>();
     change = output<Event>();
