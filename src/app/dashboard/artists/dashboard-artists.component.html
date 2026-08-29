@@ -38,9 +38,13 @@
 
                             <div class="avatar" [class.placeholder]="!artist.avatar?.fileReferenceId">
                                 @if (artist.avatar?.fileReferenceId) {
-                                    <div class="w-12 h-12 rounded-full overflow-hidden">
-                                        <img [ngSrc]="environment.cdnUrl + '/' + artist.avatar?.fileReferenceId + '/thumbnail.jpg'" alt="Artist Avatar" width="48" height="48" />
-                                    </div>
+                                    @if (dashboardArtistsService.getAttachmentThumbnailUri(artist.avatar?.fileReferenceId!) | async; as thumbnailUri) {
+                                        <div class="w-12 h-12 rounded-full overflow-hidden">
+                                            <img [ngSrc]="environment.cdnUrl + thumbnailUri" alt="Artist Avatar" width="48" height="48" />
+                                        </div>
+                                    } @else {
+                                        <div class="w-12 h-12 rounded-full bg-base-300 animate-pulse"></div>
+                                    }
                                 } @else {
                                     <div class="bg-primary text-primary-content w-12 h-12 rounded-full flex items-center justify-center">
                                         <span class="text-xl uppercase font-bold">{{ getPrimaryNickname(artist).charAt(0) }}</span>

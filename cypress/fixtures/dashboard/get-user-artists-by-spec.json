@@ -1,0 +1,72 @@
+{
+    "content": [
+        {
+            "avatar": {
+                "createdAt": "2026-08-29T19:13:14.423868+02:00",
+                "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+                "fileReferenceId": "7f000101-a04e-1173-81a0-4e82dbfc0000",
+                "id": "7f000101-a04e-1178-81a0-4e82ddb60000",
+                "modifiedAt": null,
+                "modifiedBy": null,
+                "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+                "priority": 0,
+                "sources": null,
+                "version": 0
+            },
+            "createdAt": "2026-08-29T19:13:14.506651+02:00",
+            "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+            "id": "7f000101-a04e-1178-81a0-4e82de0a0001",
+            "library": {
+                "artists": null,
+                "books": null,
+                "collections": null,
+                "createdAt": "2026-08-22T23:11:18.242599+02:00",
+                "createdBy": "8619f350-7307-4c54-92dc-258177db8a44",
+                "id": "7f000101-a02b-16c6-81a0-2b504de20001",
+                "modifiedAt": null,
+                "modifiedBy": null,
+                "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+                "posts": null,
+                "tags": null,
+                "title": "Favourites",
+                "version": 0
+            },
+            "modifiedAt": null,
+            "modifiedBy": null,
+            "nicknames": [
+                {
+                    "nickname": "Snowy",
+                    "priority": 10
+                }
+            ],
+            "ownerId": "8619f350-7307-4c54-92dc-258177db8a44",
+            "sources": null,
+            "version": 0
+        }
+    ],
+    "empty": false,
+    "first": true,
+    "last": true,
+    "number": 0,
+    "numberOfElements": 1,
+    "pageable": {
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 50,
+        "paged": true,
+        "sort": {
+            "empty": true,
+            "sorted": false,
+            "unsorted": true
+        },
+        "unpaged": false
+    },
+    "size": 50,
+    "sort": {
+        "empty": true,
+        "sorted": false,
+        "unsorted": true
+    },
+    "totalElements": 1,
+    "totalPages": 1
+}
