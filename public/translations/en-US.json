@@ -127,9 +127,12 @@
                 "searchArtists": "Search artists",
                 "addNickname": "Nickname",
                 "alternativeNicknames": "nicknames",
+                "noArtistsFound": "No aliases found. Click \"Add Artist\" to create one.",
                 "nickname": "nickname",
                 "nicknames": "nicknames",
+                "addAlternativeNickname": "Alternative nickname",
                 "addArtist": "Add artist",
+                "avatar": "Avatar",
                 "primaryName": "Primary nickname",
                 "nicknamePlaceholder": "Nickname",
                 "editArtistModal": {

@@ -1,5 +1,28 @@
 <div class="flex flex-col gap-6 pt-2 pb-4">
     <form class="flex flex-col gap-6">
+        <div class="flex flex-col gap-2">
+            <span class="label-text text-base font-semibold ml-1">{{ 'app.dashboard.artists.avatar' | translate }}</span>
+            <div class="flex items-center gap-4">
+                <div class="avatar" [class.placeholder]="!avatarPreviewUrl() && !data().data.avatar?.fileReferenceId">
+                    @if (avatarPreviewUrl()) {
+                        <div class="w-16 h-16 rounded-full overflow-hidden">
+                            <img [src]="avatarPreviewUrl()" alt="Avatar" class="w-full h-full object-cover" />
+                        </div>
+                    } @else if (data().data.avatar?.fileReferenceId) {
+                        <div class="w-16 h-16 rounded-full overflow-hidden">
+                            <img [ngSrc]="environment.cdnUrl + '/' + data().data.avatar?.fileReferenceId + '/thumbnail.jpg'" alt="Avatar" width="64" height="64" />
+                        </div>
+                    } @else {
+                        <div class="bg-primary text-primary-content w-16 h-16 rounded-full flex items-center justify-center">
+                            <span class="text-3xl uppercase font-bold">{{ artistModel().primaryNickname ? artistModel().primaryNickname.charAt(0) : '?' }}</span>
+                        </div>
+                    }
+                </div>
+
+                <ui-input-field [type]="'file'" accept="image/*" class="flex-1" (change)="onAvatarSelected($event)"></ui-input-field>
+            </div>
+        </div>
+
         <ui-label [text]="'app.dashboard.artists.primaryName' | translate" type="float">
             <ui-input-field [type]="'text'" [formField]="artistForm.primaryNickname" [placeholder]="'app.dashboard.artists.nicknamePlaceholder' | translate"></ui-input-field>
         </ui-label>
@@ -7,7 +30,7 @@
 
     <ui-item-list-form
         [title]="'app.dashboard.artists.otherNicknames' | translate"
-        [placeholder]="'app.dashboard.artists.addNickname' | translate"
+        [placeholder]="'app.dashboard.artists.addAlternativeNickname' | translate"
         [emptyText]="'app.dashboard.artists.noOtherNicknames' | translate"
         [itemValidators]="additionalNicknamesValidators"
         [(items)]="otherNicknames">

@@ -4,4 +4,5 @@ export const environment = {
     keycloakRealm: 'furrify',
     keycloakClientId: 'furrifysite',
     gatewayUrl: 'https://ws.furrify.site',
+    cdnUrl: 'https://ws.furrify.site',
 };

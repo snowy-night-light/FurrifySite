@@ -1,4 +1,5 @@
 import {Component, input, signal, OnInit, computed} from '@angular/core';
+import {NgOptimizedImage} from '@angular/common';
 import {ModalComponent} from '../../../../ui/core/interface/modal-component.interface';
 import {ArtistDTO, ArtistNickname} from '../../../../openapi/generated/storage';
 import {InputFieldComponent} from '../../../../ui/input-field/input-field.component';
@@ -7,6 +8,7 @@ import {form, FormField, required, pattern, maxLength} from '@angular/forms/sign
 import {TranslatePipe} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
 import {ItemListFormComponent} from '../../../../ui/item-list-form/item-list-form.component';
+import {environment} from '../../../../environments/environment';
 
 export interface EditArtistFormModel {
     primaryNickname: string;
@@ -20,7 +22,8 @@ export interface EditArtistFormModel {
         FormField,
         TranslatePipe,
         FormsModule,
-        ItemListFormComponent
+        ItemListFormComponent,
+        NgOptimizedImage
     ],
     templateUrl: './dashboard-artist-edit.component.html',
     styleUrl: './dashboard-artist-edit.component.css',
@@ -42,7 +45,7 @@ export class DashboardArtistEditComponent implements ModalComponent<ArtistDTO>, 
     additionalNicknamesValidators = [
         (value: string) => {
             if (value && value.trim().length > this.nicknameMaxLength) {
-                return { message: 'app.dashboard.artists.editArtistModal.errors.tooLongNickname' };
+                return { message: this.translatePipe.transform('app.dashboard.artists.editArtistModal.errors.tooLongNickname') };
             }
             return null;
         },
@@ -56,8 +59,8 @@ export class DashboardArtistEditComponent implements ModalComponent<ArtistDTO>, 
     ];
 
     artistForm = form(this.artistModel, (schemaPath) => {
-        required(schemaPath.primaryNickname, {message: 'app.dashboard.artists.editArtistModal.errors.requiredNickname'});
-        maxLength(schemaPath.primaryNickname, this.nicknameMaxLength, {message: 'app.dashboard.artists.editArtistModal.errors.tooLongNickname'});
+        required(schemaPath.primaryNickname, {message: this.translatePipe.transform('app.dashboard.artists.editArtistModal.errors.requiredNickname')});
+        maxLength(schemaPath.primaryNickname, this.nicknameMaxLength, {message: this.translatePipe.transform('app.dashboard.artists.editArtistModal.errors.tooLongNickname')});
         pattern(schemaPath.primaryNickname, new RegExp(this.nicknamePattern), {message: this.translatePipe.transform('app.dashboard.artists.editArtistModal.errors.invalidNicknameFormat')});
     });
 
@@ -85,6 +88,21 @@ export class DashboardArtistEditComponent implements ModalComponent<ArtistDTO>, 
         return this.artistForm().valid();
     }
 
+    avatarFile = signal<File | null>(null);
+    avatarPreviewUrl = computed(() => {
+        const file = this.avatarFile();
+        return file ? URL.createObjectURL(file) : null;
+    });
+
+    onAvatarSelected(event: Event) {
+        const input = event.target as HTMLInputElement;
+        if (input.files && input.files.length > 0) {
+            this.avatarFile.set(input.files[0]);
+        } else {
+            this.avatarFile.set(null);
+        }
+    }
+
     onSaveReturnValue(): ArtistDTO {
         const primary: ArtistNickname = {
             nickname: this.artistModel().primaryNickname,
@@ -98,7 +116,10 @@ export class DashboardArtistEditComponent implements ModalComponent<ArtistDTO>, 
 
         return {
             ...this.data().data,
-            nicknames: [primary, ...others]
-        } as ArtistDTO;
+            nicknames: [primary, ...others],
+            _avatarFile: this.avatarFile()
+        } as ArtistDTO & { _avatarFile?: File | null };
     }
+
+    protected readonly environment = environment;
 }

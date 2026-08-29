@@ -7,7 +7,7 @@
         <ui-label [text]="placeholder()" type="float" class="flex-1">
             <ui-input-field [type]="'text'" [placeholder]="placeholder()" [formField]="inputForm.newItem"></ui-input-field>
         </ui-label>
-        <button type="submit" class="btn btn-primary h-[3rem] min-h-[3rem] w-12 min-w-12"
+        <button type="submit" class="btn btn-primary h-10 min-h-10 w-10 min-w-10"
                 [disabled]="!inputForm().valid() || !inputModel().newItem.trim()">
             <i class="bi bi-plus-lg text-lg"></i>
         </button>

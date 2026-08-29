@@ -10,6 +10,8 @@ import {debounceTime, map, catchError} from 'rxjs/operators';
 import {ArtistDTO} from '../../../openapi/generated/storage';
 import {ModalDialogComponent} from '../../../ui/modal-dialog/modal-dialog.component';
 import {DashboardArtistEditComponent} from './dashboard-artist-edit/dashboard-artist-edit.component';
+import {environment} from '../../../environments/environment';
+import {NgOptimizedImage} from '@angular/common';
 
 @Component({
     selector: 'app-dashboard-artists',
@@ -18,7 +20,8 @@ import {DashboardArtistEditComponent} from './dashboard-artist-edit/dashboard-ar
         SearchBarComponent,
         RefreshButtonComponent,
         PaginationComponent,
-        ModalDialogComponent
+        ModalDialogComponent,
+        NgOptimizedImage
     ],
     templateUrl: './dashboard-artists.component.html',
     styleUrl: './dashboard-artists.component.css',
@@ -34,6 +37,12 @@ export class DashboardArtistsComponent implements OnInit {
 
     currentQuery = signal<string>('');
     currentLibraryId = signal<string | undefined>(undefined);
+
+    artistToEdit = signal<ArtistDTO | null>(null);
+    artistDialogData = computed(() => this.artistToEdit() ? { data: this.artistToEdit()! } : undefined);
+    artistDialog = viewChild<ModalDialogComponent<ArtistDTO, { data: ArtistDTO }>>('artistDialog');
+
+    protected readonly DashboardArtistEdit = DashboardArtistEditComponent;
 
     ngOnInit() {
         combineLatest([
@@ -70,12 +79,6 @@ export class DashboardArtistsComponent implements OnInit {
         });
     }
 
-    artistToEdit = signal<ArtistDTO | null>(null);
-    artistDialogData = computed(() => this.artistToEdit() ? { data: this.artistToEdit()! } : undefined);
-    artistDialog = viewChild<ModalDialogComponent<ArtistDTO, { data: ArtistDTO }>>('artistDialog');
-
-    protected readonly DashboardArtistEdit = DashboardArtistEditComponent;
-
     refreshArtists() {
         const libraryId = this.currentLibraryId();
         if (libraryId) {
@@ -87,7 +90,7 @@ export class DashboardArtistsComponent implements OnInit {
     openAddModal() {
         this.artistToEdit.set({
             library: this.currentLibraryId() ? { id: this.currentLibraryId() } : undefined
-        } as ArtistDTO);
+        });
         setTimeout(() => this.artistDialog()?.openModal());
     }
 
@@ -100,12 +103,25 @@ export class DashboardArtistsComponent implements OnInit {
         const func: Observable<ArtistDTO> = (dto.id) ? this.dashboardArtistsService.updateArtist(dto) : this.dashboardArtistsService.createArtist(dto);
 
         return func.pipe(
-            map(() => {
-                this.refreshArtists();
-                return true;
-            }),
+            map(() => true),
             catchError(() => of(false))
         );
+    }
+
+    deletingArtists = signal<Set<string>>(new Set());
+
+    deleteArtist(artist: ArtistDTO) {
+        if (artist.id) {
+            this.deletingArtists.update(set => { set.add(artist.id!); return new Set(set); });
+            this.dashboardArtistsService.deleteArtist(artist.id).subscribe({
+                next: () => {
+                    this.deletingArtists.update(set => { set.delete(artist.id!); return new Set(set); });
+                },
+                error: () => {
+                    this.deletingArtists.update(set => { set.delete(artist.id!); return new Set(set); });
+                }
+            });
+        }
     }
 
     getPrimaryNickname(artist: ArtistDTO): string {
@@ -117,4 +133,6 @@ export class DashboardArtistsComponent implements OnInit {
         const sorted = [...artist.nicknames].sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0));
         return sorted[0].nickname;
     }
+
+    protected readonly environment = environment;
 }
