@@ -11,7 +11,8 @@ import {
     AttachmentFileV1RestControllerService
 } from '../../../openapi/generated/attachment';
 import {SpecConnector, SpecOperator} from '../../../store/common/specification';
-import {Observable, from, firstValueFrom} from 'rxjs';
+import {Observable, from, firstValueFrom, of} from 'rxjs';
+import {map, catchError, shareReplay} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -28,6 +29,19 @@ export class DashboardArtistsService {
     // Cache File instances to their created media IDs to skip re-uploading if creation fails later
     private readonly attachmentCache = new Map<File, string>();
     private readonly avatarCache = new Map<File, string>();
+    private readonly thumbnailCache = new Map<string, Observable<string | undefined>>();
+
+    getAttachmentThumbnailUri(fileReferenceId: string): Observable<string | undefined> {
+        if (!this.thumbnailCache.has(fileReferenceId)) {
+            const obs = this.attachmentDataSet.getById(fileReferenceId).pipe(
+                map(att => att.thumbnailUri),
+                catchError(() => of(undefined)),
+                shareReplay(1)
+            );
+            this.thumbnailCache.set(fileReferenceId, obs);
+        }
+        return this.thumbnailCache.get(fileReferenceId)!;
+    }
 
     fetchArtists(query: string, libraryId: string) {
         this.artistsDataSet.setSpecification({

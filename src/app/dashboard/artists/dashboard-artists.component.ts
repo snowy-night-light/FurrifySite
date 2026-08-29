@@ -11,7 +11,7 @@ import {ArtistDTO} from '../../../openapi/generated/storage';
 import {ModalDialogComponent} from '../../../ui/modal-dialog/modal-dialog.component';
 import {DashboardArtistEditComponent} from './dashboard-artist-edit/dashboard-artist-edit.component';
 import {environment} from '../../../environments/environment';
-import {NgOptimizedImage} from '@angular/common';
+import {NgOptimizedImage, AsyncPipe} from '@angular/common';
 
 @Component({
     selector: 'app-dashboard-artists',
@@ -21,7 +21,8 @@ import {NgOptimizedImage} from '@angular/common';
         RefreshButtonComponent,
         PaginationComponent,
         ModalDialogComponent,
-        NgOptimizedImage
+        NgOptimizedImage,
+        AsyncPipe
     ],
     templateUrl: './dashboard-artists.component.html',
     styleUrl: './dashboard-artists.component.css',
@@ -29,7 +30,7 @@ import {NgOptimizedImage} from '@angular/common';
 export class DashboardArtistsComponent implements OnInit {
     private readonly router = inject(Router);
     private readonly route = inject(ActivatedRoute);
-    private readonly dashboardArtistsService = inject(DashboardArtistsService);
+    protected readonly dashboardArtistsService = inject(DashboardArtistsService);
 
     areArtistsFetching = computed(() => this.dashboardArtistsService.artistsDataSet.getIsFetchingSignal()());
     artistsData = computed(() => this.dashboardArtistsService.artistsDataSet.getPageSignal()());

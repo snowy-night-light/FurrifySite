@@ -1,4 +1,4 @@
-import {Component, input, signal, OnInit, computed} from '@angular/core';
+import {Component, input, signal, OnInit, computed, inject} from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
 import {ModalComponent} from '../../../../ui/core/interface/modal-component.interface';
 import {ArtistDTO, ArtistNickname} from '../../../../openapi/generated/storage';
@@ -9,6 +9,8 @@ import {TranslatePipe} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
 import {ItemListFormComponent} from '../../../../ui/item-list-form/item-list-form.component';
 import {environment} from '../../../../environments/environment';
+import {AsyncPipe} from '@angular/common';
+import {DashboardArtistsService} from '../dashboard-artists.service';
 
 export interface EditArtistFormModel {
     primaryNickname: string;
@@ -23,7 +25,8 @@ export interface EditArtistFormModel {
         TranslatePipe,
         FormsModule,
         ItemListFormComponent,
-        NgOptimizedImage
+        NgOptimizedImage,
+        AsyncPipe
     ],
     templateUrl: './dashboard-artist-edit.component.html',
     styleUrl: './dashboard-artist-edit.component.css',
@@ -120,6 +123,8 @@ export class DashboardArtistEditComponent implements ModalComponent<ArtistDTO>, 
             _avatarFile: this.avatarFile()
         } as ArtistDTO & { _avatarFile?: File | null };
     }
+
+    protected readonly dashboardArtistsService = inject(DashboardArtistsService);
 
     protected readonly environment = environment;
 }
