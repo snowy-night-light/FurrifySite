@@ -39,7 +39,7 @@
     "@angular/compiler-cli": "^22.1.0",
     "@tailwindcss/postcss": "^4.3.3",
     "autoprefixer": "^10.5.4",
-    "cypress": "^15.21.0",
+    "cypress": "^16.0.0",
     "daisyui": "^5.7.20",
     "jsdom": "^30.0.1",
     "postcss": "^8.5.26",
