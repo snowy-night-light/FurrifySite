@@ -42,7 +42,7 @@
     "cypress": "^16.0.0",
     "daisyui": "^5.7.37",
     "jsdom": "^30.0.1",
-    "postcss": "^8.5.26",
+    "postcss": "^8.5.28",
     "prettier": "^3.8.1",
     "sass": "^1.104.0",
     "tailwindcss": "^4.3.3",
