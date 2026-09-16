@@ -47,7 +47,7 @@
     "sass": "^1.104.0",
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
-    "vitest": "^4.0.8"
+    "vitest": "^5.0.0"
   },
   "allowScripts": {
     "@parcel/watcher@2.6.0": true,
